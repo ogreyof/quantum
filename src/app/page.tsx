@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { LandingPage } from "@/components/quantum/landing-page";
 import { BottomNavigation } from "@/components/quantum/bottom-navigation";
 import { QuickStart } from "@/components/quantum/quick-start";
 import { ProgressStats } from "@/components/quantum/progress-stats";
@@ -12,27 +11,14 @@ import { OnboardingFlow, OnboardingAnswers } from "@/components/quantum/onboardi
 import { SettingsPage } from "@/components/quantum/settings-page";
 import { NotificationSystem } from "@/components/quantum/notification-system";
 import { mockPrograms, mockPlans, mockSounds, mockUserProgress } from "@/lib/mock-data";
-import { Bell, Search, Zap, Settings, ArrowLeft } from "lucide-react";
+import { Bell, Search, Zap, Settings } from "lucide-react";
 
 export default function QuantumExperience() {
-  const [showLanding, setShowLanding] = useState(true);
   const [activeTab, setActiveTab] = useState('home');
   const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [userOnboarded, setUserOnboarded] = useState(true);
-
-  const handleEnterApp = () => {
-    setShowLanding(false);
-  };
-
-  const handleBackToLanding = () => {
-    setShowLanding(true);
-    setActiveTab('home');
-    setSelectedProgram(null);
-    setShowOnboarding(false);
-    setShowSettings(false);
-  };
+  const [userOnboarded, setUserOnboarded] = useState(true); // Simular usuário já onboardado
 
   const handleProgramSelect = (programId: string) => {
     setSelectedProgram(programId);
@@ -41,22 +27,19 @@ export default function QuantumExperience() {
   const handleProgramComplete = () => {
     console.log('Programa completado!');
     setSelectedProgram(null);
+    // Aqui seria implementada a lógica de pontuação e progresso
   };
 
   const handleOnboardingComplete = (answers: OnboardingAnswers) => {
     console.log('Onboarding completado:', answers);
     setShowOnboarding(false);
     setUserOnboarded(true);
+    // Aqui seria implementada a lógica de personalização baseada nas respostas
   };
 
   const currentProgram = selectedProgram 
     ? mockPrograms.find(p => p.id === selectedProgram)
     : null;
-
-  // Mostrar landing page
-  if (showLanding) {
-    return <LandingPage onEnterApp={handleEnterApp} />;
-  }
 
   // Mostrar onboarding se usuário não foi onboardado
   if (!userOnboarded && showOnboarding) {
@@ -86,17 +69,9 @@ export default function QuantumExperience() {
           <div className="space-y-6">
             {/* Header */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <button 
-                  onClick={handleBackToLanding}
-                  className="p-2 bg-quantum-secondary rounded-full"
-                >
-                  <ArrowLeft size={20} className="text-gray-400" />
-                </button>
-                <div>
-                  <h1 className="text-2xl font-bold text-white">Olá, Maria! 👋</h1>
-                  <p className="text-gray-400">Pronta para sua sessão de hoje?</p>
-                </div>
+              <div>
+                <h1 className="text-2xl font-bold text-white">Olá, Maria! 👋</h1>
+                <p className="text-gray-400">Pronta para sua sessão de hoje?</p>
               </div>
               <div className="flex gap-3">
                 <button className="p-2 bg-quantum-secondary rounded-full">
@@ -257,12 +232,6 @@ export default function QuantumExperience() {
                 className="w-full quantum-card text-left"
               >
                 <span className="text-quantum-accent">Refazer Quiz de Personalização</span>
-              </button>
-              <button 
-                onClick={handleBackToLanding}
-                className="w-full quantum-card text-left"
-              >
-                <span className="text-quantum-accent">Voltar à Página Inicial</span>
               </button>
               <button className="w-full quantum-card text-left">
                 <span className="text-red-400">Sair</span>
