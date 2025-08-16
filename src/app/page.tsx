@@ -6,16 +6,61 @@ import { QuickStart } from "@/components/quantum/quick-start";
 import { ProgressStats } from "@/components/quantum/progress-stats";
 import { ProgramCard } from "@/components/quantum/program-card";
 import { SoundPlayer } from "@/components/quantum/sound-player";
+import { ProgramPlayer } from "@/components/quantum/program-player";
+import { OnboardingFlow, OnboardingAnswers } from "@/components/quantum/onboarding-flow";
+import { SettingsPage } from "@/components/quantum/settings-page";
+import { NotificationSystem } from "@/components/quantum/notification-system";
 import { mockPrograms, mockPlans, mockSounds, mockUserProgress } from "@/lib/mock-data";
-import { Bell, Search, Zap } from "lucide-react";
+import { Bell, Search, Zap, Settings } from "lucide-react";
 
 export default function QuantumExperience() {
   const [activeTab, setActiveTab] = useState('home');
+  const [selectedProgram, setSelectedProgram] = useState<string | null>(null);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [userOnboarded, setUserOnboarded] = useState(true); // Simular usuário já onboardado
 
   const handleProgramSelect = (programId: string) => {
-    console.log('Programa selecionado:', programId);
-    // Aqui seria implementada a navegação para o player do programa
+    setSelectedProgram(programId);
   };
+
+  const handleProgramComplete = () => {
+    console.log('Programa completado!');
+    setSelectedProgram(null);
+    // Aqui seria implementada a lógica de pontuação e progresso
+  };
+
+  const handleOnboardingComplete = (answers: OnboardingAnswers) => {
+    console.log('Onboarding completado:', answers);
+    setShowOnboarding(false);
+    setUserOnboarded(true);
+    // Aqui seria implementada a lógica de personalização baseada nas respostas
+  };
+
+  const currentProgram = selectedProgram 
+    ? mockPrograms.find(p => p.id === selectedProgram)
+    : null;
+
+  // Mostrar onboarding se usuário não foi onboardado
+  if (!userOnboarded && showOnboarding) {
+    return <OnboardingFlow onComplete={handleOnboardingComplete} />;
+  }
+
+  // Mostrar player se programa selecionado
+  if (currentProgram) {
+    return (
+      <ProgramPlayer 
+        program={currentProgram}
+        onClose={() => setSelectedProgram(null)}
+        onComplete={handleProgramComplete}
+      />
+    );
+  }
+
+  // Mostrar configurações
+  if (showSettings) {
+    return <SettingsPage onClose={() => setShowSettings(false)} />;
+  }
 
   const renderContent = () => {
     switch (activeTab) {
@@ -32,9 +77,14 @@ export default function QuantumExperience() {
                 <button className="p-2 bg-quantum-secondary rounded-full">
                   <Search size={20} className="text-gray-400" />
                 </button>
-                <button className="p-2 bg-quantum-secondary rounded-full relative">
-                  <Bell size={20} className="text-gray-400" />
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-quantum-accent rounded-full"></div>
+                <div className="relative">
+                  <NotificationSystem />
+                </div>
+                <button 
+                  onClick={() => setShowSettings(true)}
+                  className="p-2 bg-quantum-secondary rounded-full"
+                >
+                  <Settings size={20} className="text-gray-400" />
                 </button>
               </div>
             </div>
@@ -49,6 +99,24 @@ export default function QuantumExperience() {
                 </div>
               </div>
             </div>
+
+            {/* Onboarding CTA para novos usuários */}
+            {!userOnboarded && (
+              <div className="quantum-card border-2 border-quantum-primary">
+                <div className="text-center space-y-3">
+                  <h3 className="font-bold text-white">Personalize sua experiência</h3>
+                  <p className="text-gray-400 text-sm">
+                    Responda algumas perguntas para receber recomendações personalizadas
+                  </p>
+                  <button 
+                    onClick={() => setShowOnboarding(true)}
+                    className="quantum-button w-full"
+                  >
+                    Começar Quiz
+                  </button>
+                </div>
+              </div>
+            )}
 
             <QuickStart onProgramSelect={handleProgramSelect} />
             <ProgressStats progress={mockUserProgress} />
@@ -144,7 +212,10 @@ export default function QuantumExperience() {
             <ProgressStats progress={mockUserProgress} />
 
             <div className="space-y-3">
-              <button className="w-full quantum-card text-left">
+              <button 
+                onClick={() => setShowSettings(true)}
+                className="w-full quantum-card text-left"
+              >
                 <span className="text-white">Configurações</span>
               </button>
               <button className="w-full quantum-card text-left">
@@ -155,6 +226,12 @@ export default function QuantumExperience() {
               </button>
               <button className="w-full quantum-card text-left">
                 <span className="text-white">Suporte</span>
+              </button>
+              <button 
+                onClick={() => setShowOnboarding(true)}
+                className="w-full quantum-card text-left"
+              >
+                <span className="text-quantum-accent">Refazer Quiz de Personalização</span>
               </button>
               <button className="w-full quantum-card text-left">
                 <span className="text-red-400">Sair</span>
