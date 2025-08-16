@@ -10,8 +10,12 @@ import { ProgramPlayer } from "@/components/quantum/program-player";
 import { OnboardingFlow, OnboardingAnswers } from "@/components/quantum/onboarding-flow";
 import { SettingsPage } from "@/components/quantum/settings-page";
 import { NotificationSystem } from "@/components/quantum/notification-system";
+import { AchievementSystem } from "@/components/quantum/achievement-system";
+import { CouponSystem } from "@/components/quantum/coupon-system";
+import { AdvancedAnalytics } from "@/components/quantum/advanced-analytics";
+import { CommunityFeatures } from "@/components/quantum/community-features";
 import { mockPrograms, mockPlans, mockSounds, mockUserProgress } from "@/lib/mock-data";
-import { Search, Zap, Settings } from "lucide-react";
+import { Search, Zap, Settings, Trophy, Gift, BarChart3, Users } from "lucide-react";
 
 export default function QuantumApp() {
   const [activeTab, setActiveTab] = useState('home');
@@ -213,6 +217,41 @@ export default function QuantumApp() {
 
             <ProgressStats progress={mockUserProgress} />
 
+            {/* Quick Access Cards */}
+            <div className="grid grid-cols-2 gap-3">
+              <button 
+                onClick={() => setActiveTab('achievements')}
+                className="quantum-card text-center hover:scale-105 transition-transform"
+              >
+                <Trophy size={24} className="text-yellow-400 mx-auto mb-2" />
+                <span className="text-white text-sm font-medium">Conquistas</span>
+              </button>
+              
+              <button 
+                onClick={() => setActiveTab('coupons')}
+                className="quantum-card text-center hover:scale-105 transition-transform"
+              >
+                <Gift size={24} className="text-green-400 mx-auto mb-2" />
+                <span className="text-white text-sm font-medium">Cupons</span>
+              </button>
+              
+              <button 
+                onClick={() => setActiveTab('analytics')}
+                className="quantum-card text-center hover:scale-105 transition-transform"
+              >
+                <BarChart3 size={24} className="text-blue-400 mx-auto mb-2" />
+                <span className="text-white text-sm font-medium">Analytics</span>
+              </button>
+              
+              <button 
+                onClick={() => setActiveTab('community')}
+                className="quantum-card text-center hover:scale-105 transition-transform"
+              >
+                <Users size={24} className="text-purple-400 mx-auto mb-2" />
+                <span className="text-white text-sm font-medium">Comunidade</span>
+              </button>
+            </div>
+
             <div className="space-y-3">
               <button 
                 onClick={() => setShowSettings(true)}
@@ -241,6 +280,18 @@ export default function QuantumApp() {
             </div>
           </div>
         );
+
+      case 'achievements':
+        return <AchievementSystem />;
+
+      case 'coupons':
+        return <CouponSystem userPoints={mockUserProgress.points} />;
+
+      case 'analytics':
+        return <AdvancedAnalytics />;
+
+      case 'community':
+        return <CommunityFeatures />;
 
       default:
         return null;
