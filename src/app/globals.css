@@ -4,31 +4,38 @@
 
 @layer base {
   :root {
-    --background: 15 18 32; /* #0F1220 */
-    --foreground: 255 255 255;
-    --card: 26 31 53; /* #1A1F35 */
-    --card-foreground: 255 255 255;
-    --popover: 26 31 53;
-    --popover-foreground: 255 255 255;
-    --primary: 123 97 255; /* #7B61FF */
+    --background: 255 255 255; /* Branco para landing */
+    --foreground: 17 24 39; /* Cinza escuro */
+    --card: 255 255 255;
+    --card-foreground: 17 24 39;
+    --popover: 255 255 255;
+    --popover-foreground: 17 24 39;
+    --primary: 147 51 234; /* Roxo */
     --primary-foreground: 255 255 255;
-    --secondary: 42 47 69; /* #2A2F45 */
+    --secondary: 59 130 246; /* Azul */
     --secondary-foreground: 255 255 255;
-    --muted: 42 47 69;
-    --muted-foreground: 156 163 175;
-    --accent: 18 214 223; /* #12D6DF */
-    --accent-foreground: 15 18 32;
+    --muted: 243 244 246;
+    --muted-foreground: 107 114 128;
+    --accent: 59 130 246; /* Azul */
+    --accent-foreground: 255 255 255;
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
-    --border: 42 47 69;
-    --input: 42 47 69;
-    --ring: 123 97 255;
-    --chart-1: 123 97 255;
-    --chart-2: 18 214 223;
+    --border: 229 231 235;
+    --input: 243 244 246;
+    --ring: 147 51 234;
+    --chart-1: 147 51 234;
+    --chart-2: 59 130 246;
     --chart-3: 168 85 247;
     --chart-4: 34 197 94;
     --chart-5: 251 191 36;
     --radius: 0.75rem;
+
+    /* Quantum App Colors (para manter compatibilidade) */
+    --quantum-dark: 15 18 32;
+    --quantum-primary: 147 51 234; /* Roxo */
+    --quantum-accent: 59 130 246; /* Azul */
+    --quantum-secondary: 26 31 53;
+    --quantum-muted: 42 47 69;
   }
 }
 
@@ -36,8 +43,9 @@
   * {
     @apply border-border;
   }
+  
   body {
-    @apply bg-quantum-dark text-white font-sans;
+    @apply bg-background text-foreground font-sans;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   
@@ -47,32 +55,59 @@
   }
   
   ::-webkit-scrollbar-track {
-    @apply bg-quantum-secondary;
+    @apply bg-gray-100;
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-quantum-primary rounded-full;
+    @apply bg-purple-400 rounded-full;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-quantum-accent;
+    @apply bg-purple-600;
+  }
+
+  /* Para o app (fundo escuro) */
+  .quantum-app {
+    @apply bg-quantum-dark text-white;
+  }
+  
+  .quantum-app ::-webkit-scrollbar-track {
+    background: rgb(var(--quantum-secondary));
+  }
+  
+  .quantum-app ::-webkit-scrollbar-thumb {
+    background: rgb(var(--quantum-primary));
   }
 }
 
 @layer components {
   .quantum-gradient {
-    background: linear-gradient(135deg, #7B61FF 0%, #12D6DF 100%);
+    background: linear-gradient(135deg, rgb(var(--quantum-primary)) 0%, rgb(var(--quantum-accent)) 100%);
   }
   
   .quantum-card {
-    @apply bg-quantum-secondary border border-quantum-muted rounded-xl p-4 backdrop-blur-sm;
+    background: rgb(var(--quantum-secondary));
+    border: 1px solid rgb(var(--quantum-muted));
+    @apply rounded-xl p-4 backdrop-blur-sm;
   }
   
   .quantum-button {
-    @apply bg-quantum-primary hover:bg-quantum-primary/80 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 hover:scale-105;
+    background: rgb(var(--quantum-primary));
+    @apply hover:opacity-80 text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 hover:scale-105;
   }
   
   .quantum-button-outline {
-    @apply border border-quantum-primary text-quantum-primary hover:bg-quantum-primary hover:text-white font-medium py-3 px-6 rounded-xl transition-all duration-200;
+    border: 1px solid rgb(var(--quantum-primary));
+    color: rgb(var(--quantum-primary));
+    @apply hover:bg-purple-600 hover:text-white font-medium py-3 px-6 rounded-xl transition-all duration-200;
+  }
+
+  /* Landing page specific styles */
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  }
+  
+  .glow-effect:hover {
+    box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
   }
 }
