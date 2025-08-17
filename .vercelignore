@@ -1,37 +1,47 @@
-# Supabase Edge Functions (não necessário no deploy Vercel)
-supabase/
-supabase/functions/
-
-# Arquivos de ambiente local
-.env.local
-.env.development
-.env.test
-.env*.local
-
-# Arquivos de sistema
-.git/
-.DS_Store
-*.log
+# Dependencies
+node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Dependências
-node_modules/
+# Testing
+coverage
+.nyc_output
 
-# Arquivos de build/cache locais
+# Next.js
 .next/
 out/
-dist/
-build/
-coverage/
 
-# Arquivos temporários
-*.tmp
-*.temp
-.cache/
-.turbo/
+# Production
+build
+dist
 
-# Arquivos de desenvolvimento
-.eslintcache
-.tsbuildinfo 
+# Misc
+.DS_Store
+*.tsbuildinfo
+
+# Debug
+*.log
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode
+.idea
+
+# OS
+Thumbs.db
+
+# Supabase
+supabase/.branches
+supabase/.temp
+supabase/functions/_utils
+
+# Docs
+README.md
+AI_RULES.md
