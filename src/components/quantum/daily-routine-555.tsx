@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Play, Pause, SkipForward, CheckCircle, Clock, X } from "lucide-react";
+import { Play, Pause, SkipForward, CheckCircle, Clock, X, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DailyRoutine555Props {
@@ -17,6 +17,7 @@ interface RoutineBlock {
   description: string;
   ponteira: string;
   instructions: string[];
+  audioGuide?: string;
 }
 
 export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine555Props) {
@@ -31,12 +32,13 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
         id: 1,
         title: "Cervical/Tensão",
         duration: 300, // 5 minutos em segundos
-        description: "Alívio de tensões cervicais",
-        ponteira: "Localizada",
+        description: "Alívio de tensões cervicais e pescoço",
+        ponteira: "Ponteira Localizada",
         instructions: [
           "Posicione a ponteira localizada na base do pescoço",
-          "Movimentos circulares suaves",
-          "Foque nos pontos de maior tensão"
+          "Movimentos circulares suaves nos pontos tensos",
+          "Foque nas áreas de maior rigidez",
+          "Respire profundamente durante a aplicação"
         ]
       }
     ];
@@ -49,12 +51,13 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
           id: 2,
           title: "Drenagem Facial",
           duration: 300,
-          description: "Redução de inchaço facial",
-          ponteira: "Drenagem",
+          description: "Redução de inchaço e melhora do contorno facial",
+          ponteira: "Ponteira de Drenagem",
           instructions: [
             "Use a ponteira de drenagem no rosto",
             "Movimentos ascendentes do queixo às têmporas",
-            "Pressão leve e constante"
+            "Pressão leve e constante",
+            "Trabalhe toda a área facial uniformemente"
           ]
         };
         break;
@@ -64,11 +67,12 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
           title: "Fortalecimento Capilar",
           duration: 300,
           description: "Estimulação dos folículos capilares",
-          ponteira: "Capilar/Facial",
+          ponteira: "Ponteira Capilar/Facial",
           instructions: [
             "Ponteira capilar no couro cabeludo",
             "Movimentos circulares da testa à nuca",
-            "Estimule toda a área capilar"
+            "Estimule toda a área capilar",
+            "Pressão moderada para ativar circulação"
           ]
         };
         break;
@@ -77,12 +81,13 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
           id: 2,
           title: "Pernas e Pés",
           duration: 300,
-          description: "Alívio para pernas pesadas",
-          ponteira: "Profunda",
+          description: "Alívio para pernas pesadas e fascite plantar",
+          ponteira: "Ponteira Profunda",
           instructions: [
             "Ponteira profunda nas panturrilhas",
             "Movimentos ascendentes dos pés aos joelhos",
-            "Foque na sola dos pés se houver fascite"
+            "Foque na sola dos pés se houver fascite",
+            "Pressão firme para melhorar circulação"
           ]
         };
         break;
@@ -91,12 +96,13 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
           id: 2,
           title: "Cervical Avançado",
           duration: 300,
-          description: "Variação cervical profunda",
-          ponteira: "Localizada",
+          description: "Variação cervical para músculos trapézio",
+          ponteira: "Ponteira Localizada",
           instructions: [
             "Ponteira localizada nos ombros",
             "Trabalhe os músculos trapézio",
-            "Movimentos mais profundos"
+            "Movimentos mais profundos",
+            "Alterne entre os dois lados"
           ]
         };
     }
@@ -105,13 +111,15 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
       id: 3,
       title: "Relax Guiado",
       duration: 300,
-      description: "Relaxamento com respiração",
-      ponteira: "Livre",
+      description: "Relaxamento com respiração guiada",
+      ponteira: "Áudio + Respiração",
       instructions: [
-        "Posição confortável",
-        "Respiração profunda e lenta",
-        "Foque na sensação de relaxamento"
-      ]
+        "Posição confortável, olhos fechados",
+        "Respiração profunda: inspire 4 segundos",
+        "Segure o ar por 4 segundos",
+        "Expire lentamente por 6 segundos"
+      ],
+      audioGuide: "Respire fundo... inspire... segure... expire lentamente..."
     };
 
     return [baseBlocks[0], secondBlock, thirdBlock];
@@ -153,7 +161,7 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
       setCurrentTime(0);
       setIsPlaying(false);
     } else {
-      // Rotina completa
+      // Rotina completa - registrar streak e medalhas
       onComplete();
     }
   };
@@ -172,7 +180,7 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
         <div className="flex items-center justify-between p-4 border-b border-quantum-muted">
           <div>
             <h1 className="text-lg font-bold text-white">Rotina Diária 5-5-5</h1>
-            <p className="text-sm text-gray-400">15 minutos de bem-estar</p>
+            <p className="text-sm text-gray-400">15 minutos de bem-estar personalizado</p>
           </div>
           <button 
             onClick={onClose}
@@ -184,7 +192,7 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
 
         {/* Progress Blocks */}
         <div className="p-4 border-b border-quantum-muted">
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-3">
             {routineBlocks.map((block, index) => (
               <div
                 key={block.id}
@@ -199,21 +207,21 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
               />
             ))}
           </div>
-          <div className="flex justify-between text-xs text-gray-400 mt-2">
+          <div className="flex justify-between text-xs text-gray-400">
             <span>Bloco {currentBlock + 1} de {routineBlocks.length}</span>
             <span>{completedBlocks.length}/{routineBlocks.length} completos</span>
           </div>
         </div>
 
         {/* Current Block */}
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 overflow-y-auto">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-white mb-2">
               {currentRoutineBlock.title}
             </h2>
             <p className="text-gray-400 mb-1">{currentRoutineBlock.description}</p>
             <p className="text-quantum-accent text-sm font-medium">
-              Ponteira: {currentRoutineBlock.ponteira}
+              {currentRoutineBlock.ponteira}
             </p>
           </div>
 
@@ -269,6 +277,19 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
             </ul>
           </div>
 
+          {/* Audio Guide for Relax Block */}
+          {currentRoutineBlock.audioGuide && isPlaying && (
+            <div className="quantum-card mb-6 border-2 border-green-500/30">
+              <div className="text-center">
+                <div className="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <span className="text-green-400 text-xs">🎵</span>
+                </div>
+                <p className="text-green-400 text-sm font-medium">Áudio Guiado Ativo</p>
+                <p className="text-gray-300 text-xs mt-1">{currentRoutineBlock.audioGuide}</p>
+              </div>
+            </div>
+          )}
+
           {/* Controls */}
           <div className="flex items-center justify-center gap-6">
             <button 
@@ -305,8 +326,8 @@ export function DailyRoutine555({ userFocus, onComplete, onClose }: DailyRoutine
                 onClick={onComplete}
                 className="flex items-center gap-2 px-6 py-3 bg-green-500 rounded-xl text-white font-medium"
               >
+                <Star size={20} />
                 Finalizar Rotina
-                <CheckCircle size={20} />
               </button>
             )}
           </div>
