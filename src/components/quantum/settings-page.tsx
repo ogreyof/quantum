@@ -19,12 +19,41 @@ interface SettingsPageProps {
   onClose: () => void;
 }
 
+// Interfaces específicas para cada tipo de item
+interface BaseSettingsItem {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  label: string;
+  subtitle: string;
+}
+
+interface ActionSettingsItem extends BaseSettingsItem {
+  action: () => void;
+  badge?: string;
+  toggle?: never;
+}
+
+interface ToggleSettingsItem extends BaseSettingsItem {
+  toggle: {
+    value: boolean;
+    onChange: (value: boolean) => void;
+  };
+  action?: never;
+  badge?: never;
+}
+
+type SettingsItem = ActionSettingsItem | ToggleSettingsItem;
+
+interface SettingsGroup {
+  title: string;
+  items: SettingsItem[];
+}
+
 export function SettingsPage({ onClose }: SettingsPageProps) {
   const [notifications, setNotifications] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
 
-  const settingsGroups = [
+  const settingsGroups: SettingsGroup[] = [
     {
       title: "Conta",
       items: [
@@ -160,7 +189,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
                                 <span className="font-medium text-white">{item.label}</span>
-                                {item.badge && (
+                                {'badge' in item && item.badge && (
                                   <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">
                                     {item.badge}
                                   </span>
@@ -170,7 +199,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
                             </div>
                           </div>
                           
-                          {item.toggle ? (
+                          {'toggle' in item && item.toggle ? (
                             <button
                               onClick={() => item.toggle!.onChange(!item.toggle!.value)}
                               className={cn(
@@ -187,7 +216,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
                             </button>
                           ) : (
                             <button 
-                              onClick={item.action}
+                              onClick={'action' in item ? item.action : undefined}
                               className="p-1"
                             >
                               <ChevronRight size={16} className="text-gray-400" />
