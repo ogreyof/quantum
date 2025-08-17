@@ -27,18 +27,17 @@ interface BaseSettingsItem {
 }
 
 interface ActionSettingsItem extends BaseSettingsItem {
+  type: 'action';
   action: () => void;
   badge?: string;
-  toggle?: never;
 }
 
 interface ToggleSettingsItem extends BaseSettingsItem {
+  type: 'toggle';
   toggle: {
     value: boolean;
     onChange: (value: boolean) => void;
   };
-  action?: never;
-  badge?: never;
 }
 
 type SettingsItem = ActionSettingsItem | ToggleSettingsItem;
@@ -58,12 +57,14 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
       title: "Conta",
       items: [
         {
+          type: 'action',
           icon: User,
           label: "Perfil",
           subtitle: "Editar informações pessoais",
           action: () => console.log("Abrir perfil")
         },
         {
+          type: 'action',
           icon: CreditCard,
           label: "Assinatura",
           subtitle: "Gerenciar plano e pagamento",
@@ -76,6 +77,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
       title: "Preferências",
       items: [
         {
+          type: 'toggle',
           icon: Bell,
           label: "Notificações",
           subtitle: "Lembretes e atualizações",
@@ -85,6 +87,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
           }
         },
         {
+          type: 'toggle',
           icon: Volume2,
           label: "Som",
           subtitle: "Efeitos sonoros do app",
@@ -94,6 +97,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
           }
         },
         {
+          type: 'toggle',
           icon: Moon,
           label: "Modo Escuro",
           subtitle: "Aparência do aplicativo",
@@ -108,12 +112,14 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
       title: "Dados",
       items: [
         {
+          type: 'action',
           icon: Download,
           label: "Exportar Dados",
           subtitle: "Baixar histórico de sessões",
           action: () => console.log("Exportar dados")
         },
         {
+          type: 'action',
           icon: Shield,
           label: "Privacidade",
           subtitle: "Política de privacidade e LGPD",
@@ -125,6 +131,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
       title: "Suporte",
       items: [
         {
+          type: 'action',
           icon: HelpCircle,
           label: "Ajuda",
           subtitle: "FAQ e tutoriais",
@@ -189,7 +196,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
                             <div className="flex-1">
                               <div className="flex items-center gap-2">
                                 <span className="font-medium text-white">{item.label}</span>
-                                {'badge' in item && item.badge && (
+                                {item.type === 'action' && item.badge && (
                                   <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">
                                     {item.badge}
                                   </span>
@@ -199,9 +206,9 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
                             </div>
                           </div>
                           
-                          {'toggle' in item && item.toggle ? (
+                          {item.type === 'toggle' ? (
                             <button
-                              onClick={() => item.toggle!.onChange(!item.toggle!.value)}
+                              onClick={() => item.toggle.onChange(!item.toggle.value)}
                               className={cn(
                                 "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
                                 item.toggle.value ? "bg-quantum-primary" : "bg-quantum-muted"
@@ -216,7 +223,7 @@ export function SettingsPage({ onClose }: SettingsPageProps) {
                             </button>
                           ) : (
                             <button 
-                              onClick={'action' in item ? item.action : undefined}
+                              onClick={item.action}
                               className="p-1"
                             >
                               <ChevronRight size={16} className="text-gray-400" />
