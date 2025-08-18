@@ -24,7 +24,7 @@ export default function Home() {
         return (
           <HomePage 
             onAction={handleButtonClick} 
-            onNavigate={navig ateToCategory} 
+            onNavigate={navigateToCategory} 
           />
         );
       
