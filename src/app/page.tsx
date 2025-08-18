@@ -207,8 +207,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {renderCurrentView()}
+      {/* Conteúdo principal */}
+      <div className="pb-24">
+        {renderCurrentView()}
+      </div>
 
+      {/* Barra de navegação sempre visível (exceto durante sessões) */}
       {appState === 'navigation' && (
         <BottomNavigation 
           currentCategory={currentCategory}
@@ -217,7 +221,8 @@ export default function Home() {
         />
       )}
 
-      <div className="pb-20">
+      {/* Made with Lasy */}
+      <div className="pb-4">
         <MadeWithLasy />
       </div>
     </div>
