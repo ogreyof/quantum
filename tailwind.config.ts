@@ -10,14 +10,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Quantum Experience Branding
-        quantum: {
-          dark: "#0F1220",
-          primary: "#7B61FF",
-          accent: "#12D6DF",
-          secondary: "#1A1F35",
-          muted: "#2A2F45",
-        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -91,19 +83,10 @@ export default {
             height: "0",
           },
         },
-        "pulse-glow": {
-          "0%, 100%": {
-            boxShadow: "0 0 20px rgba(123, 97, 255, 0.3)",
-          },
-          "50%": {
-            boxShadow: "0 0 30px rgba(123, 97, 255, 0.6)",
-          },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
       },
     },
   },

@@ -1,46 +1,15 @@
-import Link from 'next/link';
+import { MadeWithLasy } from "@/components/made-with-lasy";
 
-export default function HomePage() {
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md mx-auto text-center p-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">
-          Quantum Experience
-        </h1>
-        <p className="text-gray-600 mb-8">
-          Escolha sua experiência
+    <div className="grid grid-rows-[1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-1 items-center sm:items-start">
+        <h1 className="text-4xl font-bold mb-4">Bem Vindo ao Seu Novo App</h1>
+        <p className="text-xl text-gray-600">
+          Hora de transformar ideias em realidade!
         </p>
-        
-        <div className="space-y-4">
-          <Link 
-            href="/landing"
-            className="block w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:opacity-90 transition-opacity"
-          >
-            Página de Vendas
-          </Link>
-          
-          <Link 
-            href="/app"
-            className="block w-full border-2 border-purple-600 text-purple-600 py-3 px-6 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
-          >
-            Aplicativo
-          </Link>
-          
-          <Link 
-            href="/admin"
-            className="block w-full bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
-          >
-            Admin
-          </Link>
-          
-          <Link 
-            href="/seller"
-            className="block w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
-          >
-            Vendedor
-          </Link>
-        </div>
-      </div>
+      </main>
+      <MadeWithLasy />
     </div>
   );
 }
