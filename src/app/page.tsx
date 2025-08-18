@@ -10,7 +10,7 @@ import {
   User, 
   Calendar, 
   Music, 
-  Home,
+  Home as HomeIcon,
   Search,
   Bell,
   Settings,
@@ -208,7 +208,7 @@ export default function Home() {
             className="flex flex-col items-center gap-1 text-purple-500 hover:bg-purple-500/20"
             onClick={() => handleButtonClick('home')}
           >
-            <Home className="h-5 w-5" />
+            <HomeIcon className="h-5 w-5" />
             <span className="text-xs">Início</span>
           </Button>
           <Button 
