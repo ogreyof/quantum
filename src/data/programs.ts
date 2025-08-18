@@ -1,6 +1,7 @@
 import { 
   Target, Shield, Activity, Zap, Moon, Brain, Clock, Sparkles, 
-  Smile, Star, Award, Dumbbell, Heart, TrendingUp 
+  Smile, Star, Award, Dumbbell, Heart, TrendingUp, Scissors,
+  Flame, Users, Coffee
 } from "lucide-react";
 import { Program, QuickStartProgram, CategoryInfo } from "@/types";
 
@@ -54,10 +55,31 @@ export const mainCategories: CategoryInfo[] = [
     color: 'text-blue-500'
   },
   {
-    id: 'performance',
-    title: 'Performance & Recuperação',
-    subtitle: 'Atletas, pós-treino',
-    icon: Dumbbell,
+    id: 'drenagem',
+    title: 'Drenagem & Circulação',
+    subtitle: 'Pernas, linfática, varizes',
+    icon: Heart,
+    color: 'text-cyan-400'
+  },
+  {
+    id: 'sono',
+    title: 'Sono & Relaxamento',
+    subtitle: 'Ansiedade, estresse, descanso',
+    icon: Moon,
+    color: 'text-purple-600'
+  },
+  {
+    id: 'estetica',
+    title: 'Estética Facial',
+    subtitle: 'Papada, rugas, rejuvenescimento',
+    icon: Sparkles,
+    color: 'text-blue-500'
+  },
+  {
+    id: 'cabelos',
+    title: 'Cabelos',
+    subtitle: 'Fortalecimento, queda, crescimento',
+    icon: Scissors,
     color: 'text-cyan-400'
   },
   {
@@ -66,6 +88,20 @@ export const mainCategories: CategoryInfo[] = [
     subtitle: 'Queima localizada, firmeza',
     icon: TrendingUp,
     color: 'text-purple-600'
+  },
+  {
+    id: 'performance',
+    title: 'Performance & Recuperação',
+    subtitle: 'Atletas, pós-treino',
+    icon: Dumbbell,
+    color: 'text-blue-500'
+  },
+  {
+    id: 'bem-estar',
+    title: 'Bem-Estar Geral',
+    subtitle: 'Energia, foco, disposição',
+    icon: Coffee,
+    color: 'text-cyan-400'
   }
 ];
 
@@ -115,6 +151,44 @@ export const programsByCategory: Record<string, Program[]> = {
       icon: TrendingUp,
       difficulty: 'Avançado',
       category: 'coluna'
+    }
+  ],
+  articulacoes: [
+    {
+      id: 'artrite',
+      title: 'Artrite',
+      duration: '18min',
+      description: 'Reduz inflamação e melhora mobilidade articular',
+      icon: Activity,
+      difficulty: 'Intermediário',
+      category: 'articulacoes'
+    },
+    {
+      id: 'artrose',
+      title: 'Artrose',
+      duration: '22min',
+      description: 'Fortalece cartilagem e reduz dor nas articulações',
+      icon: Shield,
+      difficulty: 'Intermediário',
+      category: 'articulacoes'
+    },
+    {
+      id: 'reumatismo',
+      title: 'Reumatismo Leve',
+      duration: '16min',
+      description: 'Alívio de dores reumáticas e melhora da flexibilidade',
+      icon: Heart,
+      difficulty: 'Iniciante',
+      category: 'articulacoes'
+    },
+    {
+      id: 'rigidez-articular',
+      title: 'Rigidez Articular',
+      duration: '20min',
+      description: 'Aumenta amplitude de movimento e flexibilidade',
+      icon: Zap,
+      difficulty: 'Iniciante',
+      category: 'articulacoes'
     }
   ],
   drenagem: [
@@ -229,6 +303,100 @@ export const programsByCategory: Record<string, Program[]> = {
       icon: Award,
       difficulty: 'Avançado',
       category: 'estetica'
+    },
+    {
+      id: 'linhas-expressao',
+      title: 'Linhas de Expressão',
+      duration: '10min',
+      description: 'Suaviza rugas e linhas de expressão',
+      icon: Sparkles,
+      difficulty: 'Intermediário',
+      category: 'estetica'
+    }
+  ],
+  cabelos: [
+    {
+      id: 'fortalecimento-foliculos',
+      title: 'Fortalecimento dos Folículos',
+      duration: '15min',
+      description: 'Estimula folículos capilares e fortalece raízes',
+      icon: Scissors,
+      difficulty: 'Iniciante',
+      category: 'cabelos'
+    },
+    {
+      id: 'circulacao-couro-cabeludo',
+      title: 'Circulação do Couro Cabeludo',
+      duration: '12min',
+      description: 'Melhora circulação sanguínea no couro cabeludo',
+      icon: Heart,
+      difficulty: 'Iniciante',
+      category: 'cabelos'
+    },
+    {
+      id: 'prevencao-queda',
+      title: 'Prevenção de Queda',
+      duration: '18min',
+      description: 'Programa completo para prevenir queda de cabelo',
+      icon: Shield,
+      difficulty: 'Intermediário',
+      category: 'cabelos'
+    },
+    {
+      id: 'crescimento-capilar',
+      title: 'Estímulo ao Crescimento',
+      duration: '20min',
+      description: 'Acelera crescimento e densidade capilar',
+      icon: TrendingUp,
+      difficulty: 'Intermediário',
+      category: 'cabelos'
+    }
+  ],
+  emagrecimento: [
+    {
+      id: 'abdomen-definido',
+      title: 'Abdômen Definido',
+      duration: '25min',
+      description: 'Queima gordura localizada e tonifica abdômen',
+      icon: Target,
+      difficulty: 'Intermediário',
+      category: 'emagrecimento'
+    },
+    {
+      id: 'queima-pernas',
+      title: 'Queima Localizada - Pernas',
+      duration: '20min',
+      description: 'Reduz medidas e tonifica pernas e glúteos',
+      icon: Flame,
+      difficulty: 'Iniciante',
+      category: 'emagrecimento'
+    },
+    {
+      id: 'queima-bracos',
+      title: 'Queima Localizada - Braços',
+      duration: '18min',
+      description: 'Tonifica e define músculos dos braços',
+      icon: Dumbbell,
+      difficulty: 'Iniciante',
+      category: 'emagrecimento'
+    },
+    {
+      id: 'firmeza-pele',
+      title: 'Firmeza da Pele',
+      duration: '22min',
+      description: 'Estimula colágeno e firma a pele',
+      icon: Sparkles,
+      difficulty: 'Intermediário',
+      category: 'emagrecimento'
+    },
+    {
+      id: 'estimulo-muscular',
+      title: 'Estímulo Muscular',
+      duration: '30min',
+      description: 'Fortalece e define músculos de forma passiva',
+      icon: Activity,
+      difficulty: 'Avançado',
+      category: 'emagrecimento'
     }
   ],
   performance: [
@@ -267,6 +435,62 @@ export const programsByCategory: Record<string, Program[]> = {
       icon: Zap,
       difficulty: 'Iniciante',
       category: 'performance'
+    },
+    {
+      id: 'alongamento-guiado',
+      title: 'Alongamento Guiado',
+      duration: '20min',
+      description: 'Sessão completa de alongamento para atletas',
+      icon: Users,
+      difficulty: 'Intermediário',
+      category: 'performance'
+    }
+  ],
+  'bem-estar': [
+    {
+      id: 'energia-dia',
+      title: 'Energia no Dia',
+      duration: '5min',
+      description: 'Sessão rápida para aumentar disposição',
+      icon: Coffee,
+      difficulty: 'Iniciante',
+      category: 'bem-estar'
+    },
+    {
+      id: 'foco-mental',
+      title: 'Foco Mental',
+      duration: '8min',
+      description: 'Melhora concentração e clareza mental',
+      icon: Brain,
+      difficulty: 'Iniciante',
+      category: 'bem-estar'
+    },
+    {
+      id: 'combate-estresse',
+      title: 'Combate ao Estresse',
+      duration: '12min',
+      description: 'Reduz tensão e promove bem-estar geral',
+      icon: Heart,
+      difficulty: 'Iniciante',
+      category: 'bem-estar'
+    },
+    {
+      id: 'disposicao-matinal',
+      title: 'Disposição Matinal',
+      duration: '6min',
+      description: 'Desperta o corpo e mente para o dia',
+      icon: Star,
+      difficulty: 'Iniciante',
+      category: 'bem-estar'
+    },
+    {
+      id: 'equilibrio-emocional',
+      title: 'Equilíbrio Emocional',
+      duration: '15min',
+      description: 'Harmoniza emoções e promove tranquilidade',
+      icon: Moon,
+      difficulty: 'Intermediário',
+      category: 'bem-estar'
     }
   ]
 };

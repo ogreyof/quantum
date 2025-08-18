@@ -39,6 +39,17 @@ export default function Home() {
           />
         );
       
+      case 'articulacoes':
+        return (
+          <CategoryView
+            title="Articulações & Mobilidade"
+            subtitle="Artrite, artrose e rigidez articular"
+            programs={programsByCategory.articulacoes}
+            onBack={navigateToHome}
+            onStartProgram={handleStartProgram}
+          />
+        );
+      
       case 'drenagem':
         return (
           <CategoryView
@@ -72,12 +83,56 @@ export default function Home() {
           />
         );
       
+      case 'cabelos':
+        return (
+          <CategoryView
+            title="Cabelos"
+            subtitle="Fortalecimento e crescimento capilar"
+            programs={programsByCategory.cabelos}
+            onBack={navigateToHome}
+            onStartProgram={handleStartProgram}
+          />
+        );
+      
+      case 'emagrecimento':
+        return (
+          <CategoryView
+            title="Emagrecimento & Tonificação"
+            subtitle="Queima localizada e firmeza da pele"
+            programs={programsByCategory.emagrecimento}
+            onBack={navigateToHome}
+            onStartProgram={handleStartProgram}
+          />
+        );
+      
       case 'performance':
         return (
           <CategoryView
             title="Performance & Recuperação"
             subtitle="Maximize seu desempenho atlético"
             programs={programsByCategory.performance}
+            onBack={navigateToHome}
+            onStartProgram={handleStartProgram}
+          />
+        );
+      
+      case 'bem-estar':
+        return (
+          <CategoryView
+            title="Bem-Estar Geral"
+            subtitle="Energia, foco e disposição diária"
+            programs={programsByCategory['bem-estar']}
+            onBack={navigateToHome}
+            onStartProgram={handleStartProgram}
+          />
+        );
+      
+      case 'planos':
+        return (
+          <CategoryView
+            title="Planos Guiados"
+            subtitle="Programas estruturados de 7, 15 e 30 dias"
+            programs={[]} // Implementar planos futuramente
             onBack={navigateToHome}
             onStartProgram={handleStartProgram}
           />
