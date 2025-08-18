@@ -18,6 +18,11 @@ import {
 } from "lucide-react";
 
 export default function Home() {
+  const handleButtonClick = (action: string) => {
+    console.log(`Ação: ${action}`);
+    // Aqui você pode adicionar lógica específica para cada ação
+  };
+
   return (
     <div className="min-h-screen bg-black text-ice-white">
       {/* Header */}
@@ -32,16 +37,30 @@ export default function Home() {
         </div>
         
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="relative">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="relative"
+            onClick={() => handleButtonClick('search')}
+          >
             <Search className="h-5 w-5 text-ice-white" />
           </Button>
-          <Button variant="ghost" size="icon" className="relative">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="relative"
+            onClick={() => handleButtonClick('notifications')}
+          >
             <Bell className="h-5 w-5 text-ice-white" />
             <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-turquoise text-black text-xs p-0 flex items-center justify-center">
               2
             </Badge>
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={() => handleButtonClick('settings')}
+          >
             <Settings className="h-5 w-5 text-ice-white" />
           </Button>
         </div>
@@ -79,7 +98,10 @@ export default function Home() {
                   <p className="text-sm text-gray-600">10min</p>
                 </div>
               </div>
-              <Button className="w-full btn-futuristic">
+              <Button 
+                className="w-full btn-futuristic"
+                onClick={() => handleButtonClick('cervical')}
+              >
                 <Play className="h-4 w-4 mr-2" />
                 Começar agora
               </Button>
@@ -96,7 +118,10 @@ export default function Home() {
                   <p className="text-sm text-gray-600">15min</p>
                 </div>
               </div>
-              <Button className="w-full btn-futuristic">
+              <Button 
+                className="w-full btn-futuristic"
+                onClick={() => handleButtonClick('drenagem')}
+              >
                 <Play className="h-4 w-4 mr-2" />
                 Começar agora
               </Button>
@@ -113,7 +138,10 @@ export default function Home() {
                   <p className="text-sm text-gray-600">12min</p>
                 </div>
               </div>
-              <Button className="w-full btn-futuristic">
+              <Button 
+                className="w-full btn-futuristic"
+                onClick={() => handleButtonClick('sono')}
+              >
                 <Play className="h-4 w-4 mr-2" />
                 Começar agora
               </Button>
@@ -130,7 +158,10 @@ export default function Home() {
                   <p className="text-sm text-gray-600">8min</p>
                 </div>
               </div>
-              <Button className="w-full btn-futuristic">
+              <Button 
+                className="w-full btn-futuristic"
+                onClick={() => handleButtonClick('relax')}
+              >
                 <Play className="h-4 w-4 mr-2" />
                 Começar agora
               </Button>
@@ -172,23 +203,43 @@ export default function Home() {
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-black border-t border-neon-purple/20 p-4">
         <div className="flex justify-around items-center max-w-md mx-auto">
-          <Button variant="ghost" className="flex flex-col items-center gap-1 text-neon-purple">
+          <Button 
+            variant="ghost" 
+            className="flex flex-col items-center gap-1 text-neon-purple"
+            onClick={() => handleButtonClick('home')}
+          >
             <Home className="h-5 w-5" />
             <span className="text-xs">Início</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col items-center gap-1 text-ice-white/60">
+          <Button 
+            variant="ghost" 
+            className="flex flex-col items-center gap-1 text-ice-white/60"
+            onClick={() => handleButtonClick('programs')}
+          >
             <Play className="h-5 w-5" />
             <span className="text-xs">Programas</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col items-center gap-1 text-ice-white/60">
+          <Button 
+            variant="ghost" 
+            className="flex flex-col items-center gap-1 text-ice-white/60"
+            onClick={() => handleButtonClick('plans')}
+          >
             <Calendar className="h-5 w-5" />
             <span className="text-xs">Planos</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col items-center gap-1 text-ice-white/60">
+          <Button 
+            variant="ghost" 
+            className="flex flex-col items-center gap-1 text-ice-white/60"
+            onClick={() => handleButtonClick('sounds')}
+          >
             <Music className="h-5 w-5" />
             <span className="text-xs">Sons</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col items-center gap-1 text-ice-white/60">
+          <Button 
+            variant="ghost" 
+            className="flex flex-col items-center gap-1 text-ice-white/60"
+            onClick={() => handleButtonClick('profile')}
+          >
             <User className="h-5 w-5" />
             <span className="text-xs">Perfil</span>
           </Button>
