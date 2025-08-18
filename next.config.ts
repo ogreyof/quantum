@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Configurações essenciais para Vercel
+  // Configuração essencial para Vercel
   output: "standalone",
   
-  // Configurações de imagem
+  // Configurações de imagem otimizadas
   images: {
     remotePatterns: [
       {
@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
     unoptimized: false,
   },
 
-  // Configurações de webpack simplificadas
+  // Configurações de webpack simplificadas para Vercel
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -32,13 +32,13 @@ const nextConfig: NextConfig = {
     return config;
   },
 
-  // ESLint e TypeScript para produção
+  // Configurações para produção na Vercel
   eslint: {
-    ignoreDuringBuilds: true, // Ignorar durante build para evitar falhas
+    ignoreDuringBuilds: false, // Ativar ESLint para produção
   },
 
   typescript: {
-    ignoreBuildErrors: true, // Ignorar erros de TS durante build
+    ignoreBuildErrors: false, // Ativar verificação TypeScript
   },
 
   // Otimizações de compilação
@@ -47,6 +47,36 @@ const nextConfig: NextConfig = {
   // Configurações experimentais mínimas
   experimental: {
     optimizePackageImports: ["lucide-react"],
+  },
+
+  // Configurações de redirecionamento
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/landing',
+        permanent: false,
+      },
+    ];
+  },
+
+  // Headers de segurança
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+    ];
   },
 };
 
