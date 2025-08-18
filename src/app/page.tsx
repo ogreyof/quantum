@@ -1,30 +1,98 @@
 "use client";
 
+import { useState } from "react";
 import { MadeWithLasy } from "@/components/made-with-lasy";
 import { HomePage } from "@/components/home/HomePage";
 import { CategoryView } from "@/components/categories/CategoryView";
+import { PlansView } from "@/components/plans/PlansView";
+import { SessionView } from "@/components/session/SessionView";
+import { CompletionView } from "@/components/session/CompletionView";
 import { BottomNavigation } from "@/components/shared/BottomNavigation";
 import { useNavigation } from "@/hooks/useNavigation";
 import { programsByCategory } from "@/data/programs";
 
+type AppState = 'navigation' | 'session' | 'completion';
+
 export default function Home() {
   const { currentCategory, navigateToCategory, navigateToHome } = useNavigation();
+  const [appState, setAppState] = useState<AppState>('navigation');
+  const [currentSession, setCurrentSession] = useState<{title: string, duration: string} | null>(null);
 
   const handleButtonClick = (action: string) => {
     console.log(`Ação: ${action}`);
   };
 
   const handleStartProgram = (programId: string) => {
-    console.log(`Iniciando programa: ${programId}`);
+    // Encontrar o programa nos dados
+    const allPrograms = Object.values(programsByCategory).flat();
+    const program = allPrograms.find(p => p.id === programId);
+    
+    if (program) {
+      setCurrentSession({
+        title: program.title,
+        duration: program.duration
+      });
+      setAppState('session');
+    }
+  };
+
+  const handleStartPlan = (planId: string) => {
+    console.log(`Iniciando plano: ${planId}`);
+    // Aqui você pode implementar a lógica para iniciar um plano guiado
+  };
+
+  const handleSessionComplete = () => {
+    setAppState('completion');
+  };
+
+  const handleBackToNavigation = () => {
+    setAppState('navigation');
+    setCurrentSession(null);
+  };
+
+  const handleBackToHome = () => {
+    setAppState('navigation');
+    setCurrentSession(null);
+    navigateToHome();
   };
 
   const renderCurrentView = () => {
+    if (appState === 'session' && currentSession) {
+      return (
+        <SessionView
+          programTitle={currentSession.title}
+          duration={currentSession.duration}
+          onBack={handleBackToNavigation}
+          onComplete={handleSessionComplete}
+        />
+      );
+    }
+
+    if (appState === 'completion' && currentSession) {
+      return (
+        <CompletionView
+          programTitle={currentSession.title}
+          onBack={handleBackToNavigation}
+          onHome={handleBackToHome}
+        />
+      );
+    }
+
+    // Navegação normal
     switch (currentCategory) {
       case 'home':
         return (
           <HomePage 
             onAction={handleButtonClick} 
             onNavigate={navigateToCategory} 
+          />
+        );
+      
+      case 'planos':
+        return (
+          <PlansView
+            onBack={navigateToHome}
+            onStartPlan={handleStartPlan}
           />
         );
       
@@ -127,17 +195,6 @@ export default function Home() {
           />
         );
       
-      case 'planos':
-        return (
-          <CategoryView
-            title="Planos Guiados"
-            subtitle="Programas estruturados de 7, 15 e 30 dias"
-            programs={[]} // Implementar planos futuramente
-            onBack={navigateToHome}
-            onStartProgram={handleStartProgram}
-          />
-        );
-      
       default:
         return (
           <HomePage 
@@ -152,11 +209,13 @@ export default function Home() {
     <div className="min-h-screen bg-black text-white">
       {renderCurrentView()}
 
-      <BottomNavigation 
-        currentCategory={currentCategory}
-        onNavigate={navigateToCategory}
-        onAction={handleButtonClick}
-      />
+      {appState === 'navigation' && (
+        <BottomNavigation 
+          currentCategory={currentCategory}
+          onNavigate={navigateToCategory}
+          onAction={handleButtonClick}
+        />
+      )}
 
       <div className="pb-20">
         <MadeWithLasy />
