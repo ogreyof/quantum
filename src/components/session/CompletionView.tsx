@@ -15,14 +15,15 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
   const [rating, setRating] = useState<number>(0);
 
   const feelings = [
-    { id: 'relaxed', label: 'Mais Relaxado', icon: Heart, color: 'text-purple-600' },
-    { id: 'energized', label: 'Mais Energia', icon: Zap, color: 'text-blue-500' },
-    { id: 'happy', label: 'Mais Feliz', icon: Smile, color: 'text-cyan-400' },
-    { id: 'pain-relief', label: 'Menos Dor', icon: Star, color: 'text-purple-600' }
+    { id: 'relaxed', label: 'Mais Relaxado', icon: Heart, color: 'text-primary' },
+    { id: 'energized', label: 'Mais Energia', icon: Zap, color: 'text-accent' },
+    { id: 'happy', label: 'Mais Feliz', icon: Smile, color: 'text-primary' },
+    { id: 'pain-relief', label: 'Menos Dor', icon: Star, color: 'text-accent' }
   ];
 
   const handleSubmit = () => {
     console.log('Avaliação:', { rating, feeling: selectedFeeling });
+    // Salvar avaliação e atualizar progresso do usuário
     onHome();
   };
 
@@ -36,7 +37,7 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
       
       <div className="p-6 space-y-6">
         {/* Celebração */}
-        <Card className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 border-0 text-white">
+        <Card className="bg-gradient-quantum border-0 text-white">
           <CardContent className="p-8 text-center">
             <div className="text-4xl mb-4">🏆</div>
             <h2 className="text-2xl font-bold mb-2">Excelente trabalho!</h2>
@@ -45,9 +46,9 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
         </Card>
 
         {/* Avaliação por Estrelas */}
-        <Card className="bg-gray-100 border border-purple-500/30 rounded-2xl">
+        <Card className="card-quantum">
           <CardContent className="p-6">
-            <h3 className="font-bold text-black mb-4 text-center">⭐ Como foi sua experiência?</h3>
+            <h3 className="font-bold mb-4 text-center">⭐ Como foi sua experiência?</h3>
             <div className="flex justify-center gap-2 mb-4">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Button
@@ -58,21 +59,21 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
                   onClick={() => setRating(star)}
                 >
                   <Star 
-                    className={`h-8 w-8 ${star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} 
+                    className={`h-8 w-8 ${star <= rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted-foreground'}`} 
                   />
                 </Button>
               ))}
             </div>
-            <p className="text-center text-sm text-gray-600">
+            <p className="text-center text-sm text-muted-foreground">
               {rating > 0 && `${rating} de 5 estrelas`}
             </p>
           </CardContent>
         </Card>
 
         {/* Como se sente */}
-        <Card className="bg-gray-100 border border-purple-500/30 rounded-2xl">
+        <Card className="card-quantum">
           <CardContent className="p-6">
-            <h3 className="font-bold text-black mb-4 text-center">💭 Como você se sente agora?</h3>
+            <h3 className="font-bold mb-4 text-center">💭 Como você se sente agora?</h3>
             <div className="grid grid-cols-2 gap-3">
               {feelings.map((feeling) => {
                 const IconComponent = feeling.icon;
@@ -82,8 +83,8 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
                     variant={selectedFeeling === feeling.id ? "default" : "outline"}
                     className={`h-auto p-4 flex flex-col items-center gap-2 ${
                       selectedFeeling === feeling.id 
-                        ? 'bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white' 
-                        : 'bg-white text-black hover:bg-gray-50'
+                        ? 'bg-gradient-quantum text-white' 
+                        : 'hover:bg-muted'
                     }`}
                     onClick={() => setSelectedFeeling(feeling.id)}
                   >
@@ -97,21 +98,21 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
         </Card>
 
         {/* Estatísticas */}
-        <Card className="bg-gray-100 border border-purple-500/30 rounded-2xl">
+        <Card className="card-quantum">
           <CardContent className="p-6">
-            <h3 className="font-bold text-black mb-4 text-center">📊 Seu Progresso</h3>
+            <h3 className="font-bold mb-4 text-center">📊 Seu Progresso</h3>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold text-purple-600">6</div>
-                <p className="text-xs text-gray-600">Sequência</p>
+                <div className="text-2xl font-bold text-primary">6</div>
+                <p className="text-xs text-muted-foreground">Sequência</p>
               </div>
               <div>
-                <div className="text-2xl font-bold text-blue-500">260</div>
-                <p className="text-xs text-gray-600">Min. Totais</p>
+                <div className="text-2xl font-bold text-accent">260</div>
+                <p className="text-xs text-muted-foreground">Min. Totais</p>
               </div>
               <div>
-                <div className="text-2xl font-bold text-cyan-400">12</div>
-                <p className="text-xs text-gray-600">Sessões</p>
+                <div className="text-2xl font-bold text-primary">13</div>
+                <p className="text-xs text-muted-foreground">Sessões</p>
               </div>
             </div>
           </CardContent>
@@ -120,7 +121,7 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
         {/* Botões de Ação */}
         <div className="space-y-3">
           <Button 
-            className="w-full bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 text-white font-semibold rounded-xl py-3"
+            className="w-full btn-quantum py-3"
             onClick={handleSubmit}
             disabled={rating === 0 || selectedFeeling === ''}
           >
@@ -129,7 +130,7 @@ export const CompletionView = ({ programTitle, onBack, onHome }: CompletionViewP
           
           <Button 
             variant="outline" 
-            className="w-full border-purple-500/30 text-white hover:bg-purple-500/20"
+            className="w-full"
             onClick={onHome}
           >
             Voltar ao Início

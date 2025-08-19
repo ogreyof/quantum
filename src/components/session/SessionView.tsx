@@ -61,7 +61,7 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
       
       <div className="p-6 space-y-6">
         {/* Timer Principal */}
-        <Card className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 border-0 text-white">
+        <Card className="bg-gradient-quantum border-0 text-white">
           <CardContent className="p-8 text-center">
             <div className="text-6xl font-bold mb-4">
               {formatTime(totalSeconds - currentTime)}
@@ -72,7 +72,7 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
 
         {/* Barra de Progresso */}
         <div className="space-y-2">
-          <div className="flex justify-between text-sm text-gray-400">
+          <div className="flex justify-between text-sm text-muted-foreground">
             <span>{formatTime(currentTime)}</span>
             <span>{formatTime(totalSeconds)}</span>
           </div>
@@ -84,15 +84,15 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
           <Button
             variant="ghost"
             size="icon"
-            className="h-12 w-12 hover:bg-purple-500/20"
+            className="h-12 w-12 hover:bg-primary/20"
             onClick={handleRestart}
           >
-            <RotateCcw className="h-6 w-6 text-white" />
+            <RotateCcw className="h-6 w-6" />
           </Button>
 
           <Button
             size="icon"
-            className="h-16 w-16 bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 hover:scale-110 transition-transform duration-200"
+            className="h-16 w-16 bg-gradient-quantum hover:scale-110 transition-transform duration-200"
             onClick={handlePlayPause}
           >
             {isPlaying ? (
@@ -105,33 +105,49 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
           <Button
             variant="ghost"
             size="icon"
-            className="h-12 w-12 hover:bg-purple-500/20"
+            className="h-12 w-12 hover:bg-primary/20"
             onClick={() => setIsMuted(!isMuted)}
           >
             {isMuted ? (
-              <VolumeX className="h-6 w-6 text-white" />
+              <VolumeX className="h-6 w-6" />
             ) : (
-              <Volume2 className="h-6 w-6 text-white" />
+              <Volume2 className="h-6 w-6" />
             )}
           </Button>
         </div>
 
         {/* Instruções */}
-        <Card className="bg-gray-100 border border-purple-500/30 rounded-2xl">
+        <Card className="card-quantum">
           <CardContent className="p-6">
-            <h3 className="font-bold text-black mb-4">📋 Instruções da Sessão:</h3>
-            <div className="space-y-3 text-sm text-gray-700">
+            <h3 className="font-bold mb-4">📋 Instruções da Sessão:</h3>
+            <div className="space-y-3 text-sm">
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-purple-600 text-white rounded-full flex items-center justify-center text-xs font-bold">1</div>
+                <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">1</div>
                 <p>Posicione o massageador na área indicada</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold">2</div>
+                <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">2</div>
                 <p>Ajuste a intensidade conforme seu conforto</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-6 h-6 bg-cyan-400 text-white rounded-full flex items-center justify-center text-xs font-bold">3</div>
+                <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">3</div>
                 <p>Relaxe e respire profundamente durante a sessão</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Nota de Segurança */}
+        <Card className="card-quantum border-accent/30">
+          <CardContent className="p-4">
+            <div className="flex items-start gap-2">
+              <div className="text-accent">⚠️</div>
+              <div className="text-sm">
+                <p className="font-semibold text-accent mb-1">Nota de Segurança:</p>
+                <p className="text-muted-foreground">
+                  Este programa promove bem-estar e relaxamento. Não substitui tratamento médico. 
+                  Interrompa se sentir desconforto.
+                </p>
               </div>
             </div>
           </CardContent>
@@ -139,7 +155,7 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
 
         {/* Status */}
         <div className="text-center">
-          <p className="text-gray-400">
+          <p className="text-muted-foreground">
             {isPlaying ? "🟢 Sessão em andamento..." : "⏸️ Sessão pausada"}
           </p>
         </div>

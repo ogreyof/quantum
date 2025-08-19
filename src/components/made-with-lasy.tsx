@@ -5,7 +5,7 @@ export const MadeWithLasy = () => {
         href="https://www.lasy.ai/"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm text-ice-white/60 hover:text-neon-purple transition-colors duration-300"
+        className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
       >
         Made with Lasy
       </a>

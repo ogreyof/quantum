@@ -1,30 +1,159 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MadeWithLasy } from "@/components/made-with-lasy";
 import { HomePage } from "@/components/home/HomePage";
 import { CategoryView } from "@/components/categories/CategoryView";
 import { PlansView } from "@/components/plans/PlansView";
 import { SessionView } from "@/components/session/SessionView";
 import { CompletionView } from "@/components/session/CompletionView";
+import { SoundsView } from "@/components/sounds/SoundsView";
+import { ProfileView } from "@/components/profile/ProfileView";
 import { BottomNavigation } from "@/components/shared/BottomNavigation";
+import { LoginScreen } from "@/components/auth/LoginScreen";
+import { RegisterScreen } from "@/components/auth/RegisterScreen";
+import { ForgotPasswordScreen } from "@/components/auth/ForgotPasswordScreen";
+import { QuizFlow } from "@/components/quiz/QuizFlow";
+import { QuizResults } from "@/components/quiz/QuizResults";
 import { useNavigation } from "@/hooks/useNavigation";
 import { programsByCategory } from "@/data/programs";
+import { corePrograms } from "@/data/programs-complete";
+import { QuizResponse, QuizRecommendations, UserProfile } from "@/types/quiz";
 
-type AppState = 'navigation' | 'session' | 'completion';
+type AppState = 'auth' | 'quiz' | 'quiz-results' | 'navigation' | 'session' | 'completion';
+type AuthState = 'login' | 'register' | 'forgot-password';
 
 export default function Home() {
   const { currentCategory, navigateToCategory, navigateToHome } = useNavigation();
-  const [appState, setAppState] = useState<AppState>('navigation');
+  const [appState, setAppState] = useState<AppState>('auth');
+  const [authState, setAuthState] = useState<AuthState>('login');
   const [currentSession, setCurrentSession] = useState<{title: string, duration: string} | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [quizRecommendations, setQuizRecommendations] = useState<QuizRecommendations | null>(null);
+
+  // Verificar se usuário já está logado e se completou o quiz
+  useEffect(() => {
+    const savedUser = localStorage.getItem('quantum-user');
+    const savedQuiz = localStorage.getItem('quantum-quiz-completed');
+    
+    if (savedUser) {
+      const user = JSON.parse(savedUser);
+      setUserProfile(user);
+      
+      if (savedQuiz) {
+        setAppState('navigation');
+      } else {
+        setAppState('quiz');
+      }
+    } else {
+      setAppState('auth');
+    }
+  }, []);
+
+  const handleLogin = async (email: string, password: string) => {
+    // Simular login - em produção seria uma chamada à API
+    const mockUser: UserProfile = {
+      id: '1',
+      name: 'Maria Silva',
+      email: email,
+      objetivo: '',
+      regioes: [],
+      escalaDor: 0,
+      condicoes: [],
+      aparelhos: [],
+      tempoDisponivel: '',
+      preferenciaSom: [],
+      horarioPreferido: '',
+      contraindicacoes: false,
+      lgpdConsent: false,
+      completedAt: new Date(),
+      recommendations: {
+        planoRecomendado: { id: '', title: '', duration: '', description: '' },
+        programasRapidos: [],
+        playlistSons: [],
+        horarioNotificacao: ''
+      },
+      progress: {
+        totalMinutes: 245,
+        streak: 5,
+        completedSessions: 12,
+        level: 3,
+        points: 1250
+      },
+      preferences: {
+        theme: 'night',
+        notifications: true
+      }
+    };
+
+    localStorage.setItem('quantum-user', JSON.stringify(mockUser));
+    setUserProfile(mockUser);
+    
+    // Verificar se já completou o quiz
+    const savedQuiz = localStorage.getItem('quantum-quiz-completed');
+    if (savedQuiz) {
+      setAppState('navigation');
+    } else {
+      setAppState('quiz');
+    }
+  };
+
+  const handleRegister = async (name: string, email: string, password: string) => {
+    // Simular registro - em produção seria uma chamada à API
+    await handleLogin(email, password);
+  };
+
+  const handleForgotPassword = async (email: string) => {
+    // Simular envio de email - em produção seria uma chamada à API
+    console.log('Email de recuperação enviado para:', email);
+  };
+
+  const handleQuizComplete = (response: QuizResponse, recommendations: QuizRecommendations) => {
+    // Salvar respostas do quiz e recomendações
+    localStorage.setItem('quantum-quiz-completed', 'true');
+    localStorage.setItem('quantum-quiz-response', JSON.stringify(response));
+    localStorage.setItem('quantum-recommendations', JSON.stringify(recommendations));
+    
+    // Atualizar perfil do usuário
+    if (userProfile) {
+      const updatedProfile = {
+        ...userProfile,
+        ...response,
+        recommendations
+      };
+      setUserProfile(updatedProfile);
+      localStorage.setItem('quantum-user', JSON.stringify(updatedProfile));
+    }
+    
+    setQuizRecommendations(recommendations);
+    setAppState('quiz-results');
+  };
+
+  const handleQuizResultsContinue = () => {
+    setAppState('navigation');
+    navigateToHome();
+  };
 
   const handleButtonClick = (action: string) => {
-    console.log(`Ação: ${action}`);
+    switch (action) {
+      case 'sounds':
+        navigateToCategory('sons' as any);
+        break;
+      case 'profile':
+        navigateToCategory('perfil' as any);
+        break;
+      case 'programs':
+        // Mostrar modal ou navegar para categorias
+        console.log('Mostrar programas');
+        break;
+      default:
+        console.log(`Ação: ${action}`);
+    }
   };
 
   const handleStartProgram = (programId: string) => {
     // Encontrar o programa nos dados
-    const allPrograms = Object.values(programsByCategory).flat();
+    const allPrograms = [...Object.values(programsByCategory).flat(), ...corePrograms];
     const program = allPrograms.find(p => p.id === programId);
     
     if (program) {
@@ -38,7 +167,7 @@ export default function Home() {
 
   const handleStartPlan = (planId: string) => {
     console.log(`Iniciando plano: ${planId}`);
-    // Aqui você pode implementar a lógica para iniciar um plano guiado
+    // Implementar lógica para iniciar um plano guiado
   };
 
   const handleSessionComplete = () => {
@@ -56,35 +185,96 @@ export default function Home() {
     navigateToHome();
   };
 
-  const renderCurrentView = () => {
-    if (appState === 'session' && currentSession) {
-      return (
+  const handleLogout = () => {
+    localStorage.removeItem('quantum-user');
+    localStorage.removeItem('quantum-quiz-completed');
+    localStorage.removeItem('quantum-quiz-response');
+    localStorage.removeItem('quantum-recommendations');
+    setUserProfile(null);
+    setQuizRecommendations(null);
+    setAppState('auth');
+    setAuthState('login');
+  };
+
+  // Renderizar telas de autenticação
+  if (appState === 'auth') {
+    switch (authState) {
+      case 'login':
+        return (
+          <LoginScreen
+            onLogin={handleLogin}
+            onRegister={() => setAuthState('register')}
+            onForgotPassword={() => setAuthState('forgot-password')}
+          />
+        );
+      case 'register':
+        return (
+          <RegisterScreen
+            onRegister={handleRegister}
+            onBackToLogin={() => setAuthState('login')}
+          />
+        );
+      case 'forgot-password':
+        return (
+          <ForgotPasswordScreen
+            onSendReset={handleForgotPassword}
+            onBackToLogin={() => setAuthState('login')}
+          />
+        );
+    }
+  }
+
+  // Renderizar quiz obrigatório
+  if (appState === 'quiz') {
+    return <QuizFlow onComplete={handleQuizComplete} />;
+  }
+
+  // Renderizar resultados do quiz
+  if (appState === 'quiz-results') {
+    return (
+      <QuizResults
+        recommendations={quizRecommendations!}
+        onContinue={handleQuizResultsContinue}
+      />
+    );
+  }
+
+  // Renderizar sessão ativa
+  if (appState === 'session' && currentSession) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
         <SessionView
           programTitle={currentSession.title}
           duration={currentSession.duration}
           onBack={handleBackToNavigation}
           onComplete={handleSessionComplete}
         />
-      );
-    }
+      </div>
+    );
+  }
 
-    if (appState === 'completion' && currentSession) {
-      return (
+  // Renderizar tela de conclusão
+  if (appState === 'completion' && currentSession) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
         <CompletionView
           programTitle={currentSession.title}
           onBack={handleBackToNavigation}
           onHome={handleBackToHome}
         />
-      );
-    }
+      </div>
+    );
+  }
 
-    // Navegação normal
+  const renderCurrentView = () => {
     switch (currentCategory) {
       case 'home':
         return (
           <HomePage 
             onAction={handleButtonClick} 
-            onNavigate={navigateToCategory} 
+            onNavigate={navigateToCategory}
+            userProgress={userProfile?.progress}
+            quickStartRecommendations={quizRecommendations?.programasRapidos}
           />
         );
       
@@ -93,6 +283,27 @@ export default function Home() {
           <PlansView
             onBack={navigateToHome}
             onStartPlan={handleStartPlan}
+          />
+        );
+      
+      case 'sons' as any:
+        return (
+          <SoundsView onBack={navigateToHome} />
+        );
+      
+      case 'perfil' as any:
+        return (
+          <ProfileView 
+            userProfile={userProfile!}
+            onBack={navigateToHome}
+            onLogout={handleLogout}
+            onUpdateProfile={(updates) => {
+              if (userProfile) {
+                const updatedProfile = { ...userProfile, ...updates };
+                setUserProfile(updatedProfile);
+                localStorage.setItem('quantum-user', JSON.stringify(updatedProfile));
+              }
+            }}
           />
         );
       
@@ -199,27 +410,27 @@ export default function Home() {
         return (
           <HomePage 
             onAction={handleButtonClick} 
-            onNavigate={navigateToCategory} 
+            onNavigate={navigateToCategory}
+            userProgress={userProfile?.progress}
+            quickStartRecommendations={quizRecommendations?.programasRapidos}
           />
         );
     }
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Conteúdo principal */}
       <div className="pb-24">
         {renderCurrentView()}
       </div>
 
-      {/* Barra de navegação sempre visível (exceto durante sessões) */}
-      {appState === 'navigation' && (
-        <BottomNavigation 
-          currentCategory={currentCategory}
-          onNavigate={navigateToCategory}
-          onAction={handleButtonClick}
-        />
-      )}
+      {/* Barra de navegação sempre visível */}
+      <BottomNavigation 
+        currentCategory={currentCategory}
+        onNavigate={navigateToCategory}
+        onAction={handleButtonClick}
+      />
 
       {/* Made with Lasy */}
       <div className="pb-4">
