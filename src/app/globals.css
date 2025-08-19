@@ -4,42 +4,75 @@
 
 @layer base {
   :root {
-    /* Nova Paleta Futurista */
-    --background: 0 0% 0%; /* Preto profundo */
-    --foreground: 0 0% 96%; /* Branco gelo */
+    /* Tema Noite (padrão) */
+    --background: #0B0E1A;
+    --foreground: #F5F7FF;
     
-    --card: 0 0% 96%; /* Branco gelo para cards */
-    --card-foreground: 0 0% 0%; /* Texto preto nos cards */
+    --card: #0F1220;
+    --card-foreground: #F5F7FF;
     
-    --popover: 0 0% 0%;
-    --popover-foreground: 0 0% 96%;
+    --popover: #0F1220;
+    --popover-foreground: #F5F7FF;
     
-    --primary: 258 100% 62%; /* Roxo neon #7D3CFF */
-    --primary-foreground: 0 0% 96%;
+    --primary: #7B61FF;
+    --primary-foreground: #F5F7FF;
     
-    --secondary: 213 100% 56%; /* Azul elétrico #2979FF */
-    --secondary-foreground: 0 0% 96%;
+    --secondary: #1A1F2E;
+    --secondary-foreground: #B9C0FF;
     
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
+    --muted: #1A1F2E;
+    --muted-foreground: #B9C0FF;
     
-    --accent: 187 100% 50%; /* Turquesa #00E5FF */
-    --accent-foreground: 0 0% 0%;
+    --accent: #12D6DF;
+    --accent-foreground: #0F1220;
     
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: #EF4444;
+    --destructive-foreground: #F5F7FF;
     
-    --border: 258 100% 62% / 0.2; /* Borda roxa suave */
-    --input: 0 0% 10%;
-    --ring: 258 100% 62%;
+    --border: rgba(123, 97, 255, 0.2);
+    --input: #1A1F2E;
+    --ring: #7B61FF;
     
-    --radius: 1rem; /* Bordas mais arredondadas */
+    --radius: 1rem;
     
-    /* Cores customizadas */
-    --neon-purple: 258 100% 62%;
-    --electric-blue: 213 100% 56%;
-    --turquoise: 187 100% 50%;
-    --ice-white: 0 0% 96%;
+    /* Cores customizadas Quantum */
+    --quantum-gradient: linear-gradient(135deg, #7B61FF 0%, #12D6DF 100%);
+    --quantum-gradient-subtle: linear-gradient(135deg, rgba(123, 97, 255, 0.1) 0%, rgba(18, 214, 223, 0.1) 100%);
+  }
+
+  /* Tema Claro */
+  .theme-light {
+    --background: #F7F9FF;
+    --foreground: #0F1220;
+    
+    --card: #FFFFFF;
+    --card-foreground: #0F1220;
+    
+    --popover: #FFFFFF;
+    --popover-foreground: #0F1220;
+    
+    --primary: #6C4DFF;
+    --primary-foreground: #F7F9FF;
+    
+    --secondary: #F1F3F9;
+    --secondary-foreground: #4A4F6A;
+    
+    --muted: #F1F3F9;
+    --muted-foreground: #4A4F6A;
+    
+    --accent: #0FBED8;
+    --accent-foreground: #FFFFFF;
+    
+    --destructive: #DC2626;
+    --destructive-foreground: #F7F9FF;
+    
+    --border: rgba(108, 77, 255, 0.2);
+    --input: #F1F3F9;
+    --ring: #6C4DFF;
+    
+    /* Cores customizadas Quantum - Tema Claro */
+    --quantum-gradient: linear-gradient(135deg, #6C4DFF 0%, #0FBED8 100%);
+    --quantum-gradient-subtle: linear-gradient(135deg, rgba(108, 77, 255, 0.1) 0%, rgba(15, 190, 216, 0.1) 100%);
   }
 }
 
@@ -49,79 +82,107 @@
   }
   
   body {
-    @apply bg-black text-ice-white font-sans;
-    background: #000000;
-    color: #F5F5F5;
+    @apply bg-background text-foreground font-sans;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
-  /* Gradiente principal */
-  .gradient-primary {
-    background: linear-gradient(135deg, #7D3CFF 0%, #2979FF 50%, #00E5FF 100%);
+  /* Gradientes Quantum */
+  .gradient-quantum {
+    background: var(--quantum-gradient);
   }
   
-  .gradient-primary-subtle {
-    background: linear-gradient(135deg, rgba(125, 60, 255, 0.1) 0%, rgba(41, 121, 255, 0.1) 50%, rgba(0, 229, 255, 0.1) 100%);
+  .gradient-quantum-subtle {
+    background: var(--quantum-gradient-subtle);
   }
   
-  /* Efeitos neon */
-  .neon-border {
-    border: 1px solid rgba(125, 60, 255, 0.3);
-    box-shadow: 0 0 10px rgba(125, 60, 255, 0.2);
+  /* Efeitos visuais */
+  .quantum-glow {
+    box-shadow: 0 0 20px rgba(123, 97, 255, 0.3);
   }
   
-  .neon-glow {
-    box-shadow: 0 0 20px rgba(125, 60, 255, 0.4);
+  .theme-light .quantum-glow {
+    box-shadow: 0 0 20px rgba(108, 77, 255, 0.3);
   }
   
-  /* Animações futuristas */
-  .pulse-neon {
-    animation: pulse-neon 2s ease-in-out infinite alternate;
-  }
-  
-  @keyframes pulse-neon {
-    from {
-      box-shadow: 0 0 10px rgba(125, 60, 255, 0.2);
-    }
-    to {
-      box-shadow: 0 0 20px rgba(125, 60, 255, 0.6);
-    }
+  .quantum-border {
+    border: 1px solid var(--border);
   }
   
   /* Cards premium */
-  .card-premium {
-    background: #F5F5F5;
-    border: 1px solid rgba(125, 60, 255, 0.3);
-    border-radius: 1rem;
+  .card-quantum {
+    background: hsl(var(--card));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
   }
   
-  /* Botões futuristas */
-  .btn-futuristic {
-    background: linear-gradient(135deg, #7D3CFF 0%, #2979FF 50%, #00E5FF 100%);
+  .card-quantum:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(123, 97, 255, 0.2);
+  }
+  
+  .theme-light .card-quantum:hover {
+    box-shadow: 0 8px 30px rgba(108, 77, 255, 0.2);
+  }
+  
+  /* Botões Quantum */
+  .btn-quantum {
+    background: var(--quantum-gradient);
     border: none;
-    border-radius: 0.75rem;
-    color: #F5F5F5;
+    border-radius: calc(var(--radius) - 4px);
+    color: white;
     font-weight: 600;
     transition: all 0.3s ease;
   }
   
-  .btn-futuristic:hover {
+  .btn-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(125, 60, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(123, 97, 255, 0.4);
+  }
+  
+  /* Animações */
+  .pulse-quantum {
+    animation: pulse-quantum 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulse-quantum {
+    from {
+      box-shadow: 0 0 10px rgba(123, 97, 255, 0.3);
+    }
+    to {
+      box-shadow: 0 0 20px rgba(123, 97, 255, 0.6);
+    }
+  }
+  
+  .theme-light .pulse-quantum {
+    animation: pulse-quantum-light 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pulse-quantum-light {
+    from {
+      box-shadow: 0 0 10px rgba(108, 77, 255, 0.3);
+    }
+    to {
+      box-shadow: 0 0 20px rgba(108, 77, 255, 0.6);
+    }
   }
 }
 
-/* Cores customizadas para Tailwind */
-@layer utilities {
-  .text-ice-white { color: #F5F5F5; }
-  .text-neon-purple { color: #7D3CFF; }
-  .text-electric-blue { color: #2979FF; }
-  .text-turquoise { color: #00E5FF; }
-  
-  .bg-ice-white { background-color: #F5F5F5; }
-  .bg-neon-purple { background-color: #7D3CFF; }
-  .bg-electric-blue { background-color: #2979FF; }
-  .bg-turquoise { background-color: #00E5FF; }
-  
-  .border-neon-purple { border-color: rgba(125, 60, 255, 0.3); }
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent));
 }

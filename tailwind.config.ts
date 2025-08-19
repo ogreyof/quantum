@@ -44,11 +44,21 @@ export default {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         
-        // Cores customizadas da identidade visual
-        'ice-white': '#F5F5F5',
-        'neon-purple': '#7D3CFF',
-        'electric-blue': '#2979FF',
-        'turquoise': '#00E5FF',
+        // Cores específicas Quantum
+        'quantum': {
+          'night-bg': '#0B0E1A',
+          'night-card': '#0F1220',
+          'night-text': '#F5F7FF',
+          'night-muted': '#B9C0FF',
+          'night-primary': '#7B61FF',
+          'night-accent': '#12D6DF',
+          'light-bg': '#F7F9FF',
+          'light-card': '#FFFFFF',
+          'light-text': '#0F1220',
+          'light-muted': '#4A4F6A',
+          'light-primary': '#6C4DFF',
+          'light-accent': '#0FBED8',
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -72,23 +82,32 @@ export default {
             height: "0",
           },
         },
-        "pulse-neon": {
+        "pulse-quantum": {
           "0%, 100%": {
-            boxShadow: "0 0 10px rgba(125, 60, 255, 0.2)",
+            boxShadow: "0 0 10px rgba(123, 97, 255, 0.3)",
           },
           "50%": {
-            boxShadow: "0 0 20px rgba(125, 60, 255, 0.6)",
+            boxShadow: "0 0 20px rgba(123, 97, 255, 0.6)",
+          },
+        },
+        "pulse-quantum-light": {
+          "0%, 100%": {
+            boxShadow: "0 0 10px rgba(108, 77, 255, 0.3)",
+          },
+          "50%": {
+            boxShadow: "0 0 20px rgba(108, 77, 255, 0.6)",
           },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-neon": "pulse-neon 2s ease-in-out infinite alternate",
+        "pulse-quantum": "pulse-quantum 2s ease-in-out infinite alternate",
+        "pulse-quantum-light": "pulse-quantum-light 2s ease-in-out infinite alternate",
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #7D3CFF 0%, #2979FF 50%, #00E5FF 100%)',
-        'gradient-primary-subtle': 'linear-gradient(135deg, rgba(125, 60, 255, 0.1) 0%, rgba(41, 121, 255, 0.1) 50%, rgba(0, 229, 255, 0.1) 100%)',
+        'gradient-quantum': 'var(--quantum-gradient)',
+        'gradient-quantum-subtle': 'var(--quantum-gradient-subtle)',
       },
     },
   },
