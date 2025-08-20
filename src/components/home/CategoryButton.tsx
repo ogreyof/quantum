@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { CategoryInfo, Category } from "@/types";
 
@@ -6,13 +8,18 @@ interface CategoryButtonProps {
   onNavigate: (category: Category) => void;
 }
 
-export const CategoryButton = ({ category, onNavigate }: CategoryButtonProps) => {
+export const CategoryButton = (props: CategoryButtonProps) => {
+  const { category, onNavigate } = props;
   const IconComponent = category.icon;
+
+  const handleClick = () => {
+    onNavigate(category.id);
+  };
 
   return (
     <Button 
       className="w-full bg-gray-100 text-black hover:bg-gray-200 rounded-xl p-4 h-auto justify-start"
-      onClick={() => onNavigate(category.id)}
+      onClick={handleClick}
     >
       <IconComponent className={`h-6 w-6 ${category.color} mr-3`} />
       <div className="text-left">
