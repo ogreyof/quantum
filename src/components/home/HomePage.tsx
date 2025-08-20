@@ -36,7 +36,7 @@ export const HomePage = ({
   return (
     <>
       <Header onAction={onAction} />
-      <StreakCard streak={userProgress?.streak || 5} />
+      <StreakCard />
       
       {/* Início Rápido Personalizado */}
       <div className="px-6 pb-6">
