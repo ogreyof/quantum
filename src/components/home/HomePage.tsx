@@ -1,3 +1,5 @@
+"use client";
+
 import { Header } from "./Header";
 import { StreakCard } from "./StreakCard";
 import { QuickStartCard } from "./QuickStartCard";
@@ -24,25 +26,34 @@ interface HomePageProps {
   }>;
 }
 
-export const HomePage = (props: HomePageProps) => {
-  const { onAction, onNavigate, userProgress, quickStartRecommendations } = props;
+export const HomePage = ({ 
+  onAction, 
+  onNavigate, 
+  userProgress,
+  quickStartRecommendations 
+}: HomePageProps) => {
   const displayPrograms = quickStartRecommendations || quickStartPrograms;
+
+  const handleProgramStart = (programId: string) => {
+    onAction(programId);
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header onAction={onAction} />
+      
       <StreakCard streak={userProgress?.streak} />
       
       <div className="px-6 pb-6">
         <h2 className="text-xl font-bold mb-4 text-white">
-          {quickStartRecommendations ? "Recomendado para Você" : "Início Rápido"}
+          {quickStartRecommendations ? 'Recomendado para Você' : 'Início Rápido'}
         </h2>
         <div className="grid grid-cols-2 gap-4">
           {displayPrograms.slice(0, 4).map((program) => (
             <QuickStartCard 
               key={program.id} 
               program={program} 
-              onStart={onAction}
+              onStart={handleProgramStart}
               onNavigate={onNavigate}
             />
           ))}
