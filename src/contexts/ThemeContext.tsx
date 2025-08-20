@@ -64,7 +64,7 @@ export const ThemeProvider = ({ children, defaultTheme = 'night' }: ThemeProvide
   };
 
   const value: ThemeContextType = {
-    theme: themes[themeName],
+    theme: themes[themeName] as Theme,
     themeName,
     toggleTheme,
     setTheme,
