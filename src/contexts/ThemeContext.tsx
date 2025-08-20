@@ -1,7 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { themes, ThemeName, Theme } from '@/lib/themes';
+import { themes, ThemeName } from '@/lib/themes';
+
+// Definindo o tipo Theme como union type
+type Theme = typeof themes[ThemeName];
 
 interface ThemeContextType {
   theme: Theme;
@@ -15,7 +18,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };

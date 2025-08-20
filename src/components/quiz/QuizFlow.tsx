@@ -175,7 +175,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
     return <QuizWelcome onStart={() => setCurrentStep(1)} />;
   }
 
-  // Valor seguro para escalaDor
+  // Valor seguro para escalaDor - garantindo que nunca seja undefined
   const escalaDorValue = responses.escalaDor ?? 0;
 
   return (
