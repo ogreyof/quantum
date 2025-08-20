@@ -4,75 +4,75 @@
 
 @layer base {
   :root {
-    /* Tema Noite (padrão) */
-    --background: #0B0E1A;
-    --foreground: #F5F7FF;
+    /* Tema Noite (padrão) - Cores ajustadas para roxo-azul-ciano */
+    --background: #0A0A0F;
+    --foreground: #FFFFFF;
     
-    --card: #0F1220;
-    --card-foreground: #F5F7FF;
+    --card: #FFFFFF;
+    --card-foreground: #000000;
     
-    --popover: #0F1220;
-    --popover-foreground: #F5F7FF;
+    --popover: #1A1A2E;
+    --popover-foreground: #FFFFFF;
     
-    --primary: #7B61FF;
-    --primary-foreground: #F5F7FF;
+    --primary: #8B5CF6;
+    --primary-foreground: #FFFFFF;
     
-    --secondary: #1A1F2E;
-    --secondary-foreground: #B9C0FF;
+    --secondary: #1A1A2E;
+    --secondary-foreground: #E5E7EB;
     
-    --muted: #1A1F2E;
-    --muted-foreground: #B9C0FF;
+    --muted: #374151;
+    --muted-foreground: #9CA3AF;
     
-    --accent: #12D6DF;
-    --accent-foreground: #0F1220;
+    --accent: #06B6D4;
+    --accent-foreground: #FFFFFF;
     
     --destructive: #EF4444;
-    --destructive-foreground: #F5F7FF;
+    --destructive-foreground: #FFFFFF;
     
-    --border: rgba(123, 97, 255, 0.2);
-    --input: #1A1F2E;
-    --ring: #7B61FF;
+    --border: rgba(139, 92, 246, 0.2);
+    --input: #1F2937;
+    --ring: #8B5CF6;
     
     --radius: 1rem;
     
-    /* Cores customizadas Quantum */
-    --quantum-gradient: linear-gradient(135deg, #7B61FF 0%, #12D6DF 100%);
-    --quantum-gradient-subtle: linear-gradient(135deg, rgba(123, 97, 255, 0.1) 0%, rgba(18, 214, 223, 0.1) 100%);
+    /* Cores customizadas Quantum - Roxo-Azul-Ciano */
+    --quantum-gradient: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%);
+    --quantum-gradient-subtle: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%);
   }
 
   /* Tema Claro */
   .theme-light {
-    --background: #F7F9FF;
-    --foreground: #0F1220;
+    --background: #F8FAFC;
+    --foreground: #0F172A;
     
     --card: #FFFFFF;
-    --card-foreground: #0F1220;
+    --card-foreground: #0F172A;
     
     --popover: #FFFFFF;
-    --popover-foreground: #0F1220;
+    --popover-foreground: #0F172A;
     
-    --primary: #6C4DFF;
-    --primary-foreground: #F7F9FF;
+    --primary: #7C3AED;
+    --primary-foreground: #FFFFFF;
     
-    --secondary: #F1F3F9;
-    --secondary-foreground: #4A4F6A;
+    --secondary: #F1F5F9;
+    --secondary-foreground: #475569;
     
-    --muted: #F1F3F9;
-    --muted-foreground: #4A4F6A;
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
     
-    --accent: #0FBED8;
+    --accent: #0891B2;
     --accent-foreground: #FFFFFF;
     
     --destructive: #DC2626;
-    --destructive-foreground: #F7F9FF;
+    --destructive-foreground: #FFFFFF;
     
-    --border: rgba(108, 77, 255, 0.2);
-    --input: #F1F3F9;
-    --ring: #6C4DFF;
+    --border: rgba(124, 58, 237, 0.2);
+    --input: #F1F5F9;
+    --ring: #7C3AED;
     
     /* Cores customizadas Quantum - Tema Claro */
-    --quantum-gradient: linear-gradient(135deg, #6C4DFF 0%, #0FBED8 100%);
-    --quantum-gradient-subtle: linear-gradient(135deg, rgba(108, 77, 255, 0.1) 0%, rgba(15, 190, 216, 0.1) 100%);
+    --quantum-gradient: linear-gradient(135deg, #7C3AED 0%, #2563EB 50%, #0891B2 100%);
+    --quantum-gradient-subtle: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(37, 99, 235, 0.1) 50%, rgba(8, 145, 178, 0.1) 100%);
   }
 }
 
@@ -97,11 +97,11 @@
   
   /* Efeitos visuais */
   .quantum-glow {
-    box-shadow: 0 0 20px rgba(123, 97, 255, 0.3);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
   }
   
   .theme-light .quantum-glow {
-    box-shadow: 0 0 20px rgba(108, 77, 255, 0.3);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
   }
   
   .quantum-border {
@@ -119,11 +119,11 @@
   
   .card-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(123, 97, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
   }
   
   .theme-light .card-quantum:hover {
-    box-shadow: 0 8px 30px rgba(108, 77, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.2);
   }
   
   /* Botões Quantum */
@@ -138,7 +138,7 @@
   
   .btn-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(123, 97, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
   }
   
   /* Animações */
@@ -148,10 +148,10 @@
   
   @keyframes pulse-quantum {
     from {
-      box-shadow: 0 0 10px rgba(123, 97, 255, 0.3);
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
     }
     to {
-      box-shadow: 0 0 20px rgba(123, 97, 255, 0.6);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
     }
   }
   
@@ -161,10 +161,10 @@
   
   @keyframes pulse-quantum-light {
     from {
-      box-shadow: 0 0 10px rgba(108, 77, 255, 0.3);
+      box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
     }
     to {
-      box-shadow: 0 0 20px rgba(108, 77, 255, 0.6);
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
     }
   }
 }

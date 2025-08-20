@@ -44,20 +44,20 @@ export default {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         
-        // Cores específicas Quantum
+        // Cores específicas Quantum - Roxo-Azul-Ciano
         'quantum': {
-          'night-bg': '#0B0E1A',
-          'night-card': '#0F1220',
-          'night-text': '#F5F7FF',
-          'night-muted': '#B9C0FF',
-          'night-primary': '#7B61FF',
-          'night-accent': '#12D6DF',
-          'light-bg': '#F7F9FF',
+          'night-bg': '#0A0A0F',
+          'night-card': '#FFFFFF',
+          'night-text': '#FFFFFF',
+          'night-muted': '#9CA3AF',
+          'night-primary': '#8B5CF6',
+          'night-accent': '#06B6D4',
+          'light-bg': '#F8FAFC',
           'light-card': '#FFFFFF',
-          'light-text': '#0F1220',
-          'light-muted': '#4A4F6A',
-          'light-primary': '#6C4DFF',
-          'light-accent': '#0FBED8',
+          'light-text': '#0F172A',
+          'light-muted': '#64748B',
+          'light-primary': '#7C3AED',
+          'light-accent': '#0891B2',
         }
       },
       borderRadius: {
@@ -84,18 +84,18 @@ export default {
         },
         "pulse-quantum": {
           "0%, 100%": {
-            boxShadow: "0 0 10px rgba(123, 97, 255, 0.3)",
+            boxShadow: "0 0 10px rgba(139, 92, 246, 0.3)",
           },
           "50%": {
-            boxShadow: "0 0 20px rgba(123, 97, 255, 0.6)",
+            boxShadow: "0 0 20px rgba(139, 92, 246, 0.6)",
           },
         },
         "pulse-quantum-light": {
           "0%, 100%": {
-            boxShadow: "0 0 10px rgba(108, 77, 255, 0.3)",
+            boxShadow: "0 0 10px rgba(124, 58, 237, 0.3)",
           },
           "50%": {
-            boxShadow: "0 0 20px rgba(108, 77, 255, 0.6)",
+            boxShadow: "0 0 20px rgba(124, 58, 237, 0.6)",
           },
         },
       },
