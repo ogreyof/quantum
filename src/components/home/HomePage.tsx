@@ -35,7 +35,7 @@ export const HomePage = (props: HomePageProps) => {
       
       <div className="px-6 pb-6">
         <h2 className="text-xl font-bold mb-4 text-white">
-          Início Rápido
+          {quickStartRecommendations ? "Recomendado para Você" : "Início Rápido"}
         </h2>
         <div className="grid grid-cols-2 gap-4">
           {displayPrograms.slice(0, 4).map((program) => (
