@@ -48,4 +48,4 @@ export const themes = {
 } as const;
 
 export type ThemeName = keyof typeof themes;
-export type Theme = typeof themes.night;
+export type Theme = typeof themes[ThemeName];

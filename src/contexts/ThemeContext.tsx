@@ -1,10 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { themes, ThemeName } from '@/lib/themes';
+import { themes, ThemeName, Theme } from '@/lib/themes';
 
 interface ThemeContextType {
-  theme: typeof themes.night | typeof themes.light;
+  theme: Theme;
   themeName: ThemeName;
   toggleTheme: () => void;
   setTheme: (themeName: ThemeName) => void;

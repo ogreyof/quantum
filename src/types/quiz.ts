@@ -25,7 +25,7 @@ export interface QuizRecommendations {
     id: string;
     title: string;
     duration: string;
-    category: Category;
+    category?: Category;
   }>;
   playlistSons: string[];
   horarioNotificacao: string;
