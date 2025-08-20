@@ -151,13 +151,13 @@ export default function Home() {
     }
 
     // Programas rápidos baseados no objetivo e regiões
-    const programasRapidos: Array<{id: string, title: string, duration: string, category: Category}> = [];
+    const programasRapidos: Array<{id: string, title: string, duration: string, category?: Category}> = [];
     
     if (objetivo === 'cervical' || regioes.includes('cervical')) {
       programasRapidos.push({
         id: 'alivio-cervical',
         title: 'Alívio Cervical',
-        duration: tempoDisponivel || '10min',
+        duration: tempoDisponivel ||'10min',
         category: 'coluna'
       });
     }

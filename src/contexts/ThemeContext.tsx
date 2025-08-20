@@ -3,11 +3,15 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { themes, ThemeName } from '@/lib/themes';
 
-// Definir o tipo Theme como union type explícito
-type Theme = typeof themes['night'] | typeof themes['light'];
+// Simplificar o tipo Theme para evitar problemas de inferência
+type ThemeType = {
+  name: string;
+  displayName: string;
+  colors: Record<string, string>;
+};
 
 interface ThemeContextType {
-  theme: Theme;
+  theme: ThemeType;
   themeName: ThemeName;
   toggleTheme: () => void;
   setTheme: (themeName: ThemeName) => void;
@@ -18,7 +22,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };
@@ -64,7 +68,7 @@ export const ThemeProvider = ({ children, defaultTheme = 'night' }: ThemeProvide
   };
 
   const value: ThemeContextType = {
-    theme: themes[themeName] as Theme,
+    theme: themes[themeName] as ThemeType,
     themeName,
     toggleTheme,
     setTheme,
