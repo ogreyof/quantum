@@ -30,7 +30,6 @@ export const HomePage = ({
   userProgress,
   quickStartRecommendations 
 }: HomePageProps) => {
-  // Usar recomendações personalizadas se disponíveis, senão usar padrão
   const displayPrograms = quickStartRecommendations || quickStartPrograms;
 
   return (
@@ -38,7 +37,6 @@ export const HomePage = ({
       <Header onAction={onAction} />
       <StreakCard />
       
-      {/* Início Rápido Personalizado */}
       <div className="px-6 pb-6">
         <h2 className="text-xl font-bold mb-4 text-white">
           {quickStartRecommendations ? 'Recomendado para Você' : 'Início Rápido'}
@@ -55,7 +53,6 @@ export const HomePage = ({
         </div>
       </div>
 
-      {/* Categorias Principais */}
       <div className="px-6 pb-6">
         <h2 className="text-xl font-bold mb-4 text-white">Programas Completos</h2>
         <div className="space-y-3">

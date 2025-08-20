@@ -21,7 +21,7 @@ export const ProgressSection = ({ userProgress }: ProgressSectionProps) => {
     points: 1250
   };
 
-  const levelProgress = (progress.points % 1000) / 10; // Progresso para próximo nível
+  const levelProgress = (progress.points % 1000) / 10;
 
   return (
     <div className="px-6 pb-6">
@@ -32,7 +32,6 @@ export const ProgressSection = ({ userProgress }: ProgressSectionProps) => {
         </Badge>
       </div>
       
-      {/* Barra de Nível */}
       <div className="mb-4">
         <div className="flex justify-between text-sm text-gray-400 mb-2">
           <span>Nível {progress.level}</span>
