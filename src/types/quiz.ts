@@ -23,7 +23,7 @@ export interface QuizRecommendations {
     id: string;
     title: string;
     duration: string;
-    category?: string; // Mudando para string opcional para compatibilidade
+    category: string; // Mudado de Category para string
   }>;
   playlistSons: string[];
   horarioNotificacao: string;

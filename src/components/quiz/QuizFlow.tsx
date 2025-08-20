@@ -174,8 +174,8 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
     return <QuizWelcome onStart={() => setCurrentStep(1)} />;
   }
 
-  // Garantir que escalaDor nunca seja undefined
-  const escalaDor = responses.escalaDor ?? 0;
+  // Valor seguro para escalaDor
+  const escalaDorValue = responses.escalaDor ?? 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -251,18 +251,18 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
           <div className="space-y-6">
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">
-                {escalaDor}
+                {escalaDorValue}
               </div>
               <p className="text-sm text-muted-foreground">
-                {escalaDor === 0 && "Sem dor"}
-                {escalaDor >= 1 && escalaDor <= 3 && "Dor leve"}
-                {escalaDor >= 4 && escalaDor <= 6 && "Dor moderada"}
-                {escalaDor >= 7 && escalaDor <= 8 && "Dor intensa"}
-                {escalaDor >= 9 && "Dor muito intensa"}
+                {escalaDorValue === 0 && "Sem dor"}
+                {escalaDorValue >= 1 && escalaDorValue <= 3 && "Dor leve"}
+                {escalaDorValue >= 4 && escalaDorValue <= 6 && "Dor moderada"}
+                {escalaDorValue >= 7 && escalaDorValue <= 8 && "Dor intensa"}
+                {escalaDorValue >= 9 && "Dor muito intensa"}
               </p>
             </div>
             <Slider
-              value={[escalaDor]}
+              value={[escalaDorValue]}
               onValueChange={(value) => updateResponse('escalaDor', value[0])}
               max={10}
               step={1}

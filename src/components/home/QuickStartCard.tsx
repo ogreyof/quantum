@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Play } from "lucide-react";
@@ -10,7 +11,7 @@ interface QuickStartProgram {
   duration: string;
   icon?: any;
   color?: string;
-  category?: Category;
+  category?: string; // Mudado de Category para string
 }
 
 interface QuickStartCardProps {
@@ -19,17 +20,32 @@ interface QuickStartCardProps {
   onNavigate?: (category: Category) => void;
 }
 
-export const QuickStartCard: React.FC<QuickStartCardProps> = ({ 
-  program, 
-  onStart, 
-  onNavigate 
-}) => {
+export const QuickStartCard = (props: QuickStartCardProps) => {
+  const { program, onStart, onNavigate } = props;
+
   const handleClick = () => {
+    // Converter string para Category se necessário
     if (program.category && onNavigate) {
-      onNavigate(program.category);
-    } else {
-      onStart(program.id);
+      const categoryMap: Record<string, Category> = {
+        'coluna': 'coluna',
+        'articulacoes': 'articulacoes',
+        'drenagem': 'drenagem',
+        'sono': 'sono',
+        'estetica': 'estetica',
+        'cabelos': 'cabelos',
+        'emagrecimento': 'emagrecimento',
+        'performance': 'performance',
+        'bem-estar': 'bem-estar'
+      };
+      
+      const mappedCategory = categoryMap[program.category];
+      if (mappedCategory) {
+        onNavigate(mappedCategory);
+        return;
+      }
     }
+    
+    onStart(program.id);
   };
 
   return (
