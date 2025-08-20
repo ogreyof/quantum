@@ -175,8 +175,8 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
     return <QuizWelcome onStart={() => setCurrentStep(1)} />;
   }
 
-  // Valor seguro para escalaDor - usar em todos os lugares
-  const escalaDorValue = responses.escalaDor ?? 0;
+  // Valor seguro para escalaDor com verificação explícita
+  const escalaDorValue = typeof responses.escalaDor === 'number' ? responses.escalaDor : 0;
 
   return (
     <div className="min-h-screen bg-background">

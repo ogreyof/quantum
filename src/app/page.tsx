@@ -105,7 +105,7 @@ export default function Home() {
   };
 
   const handleForgotPassword = async (email: string) => {
-    // Simular envio de email - em produção seria uma chamada à API
+    // Simular env io de email - em produção seria uma chamada à API
     console.log('Email de recuperação enviado para:', email);
   };
 
@@ -157,7 +157,7 @@ export default function Home() {
       programasRapidos.push({
         id: 'alivio-cervical',
         title: 'Alívio Cervical',
-        duration: tempoDisponivel ||'10min',
+        duration: tempoDisponivel || '10min',
         category: 'coluna'
       });
     }

@@ -16,7 +16,6 @@ export const themes = {
       success: '#10B981',
       warning: '#F59E0B',
       error: '#EF4444',
-      // Estados específicos
       cardHover: '#151A28',
       textSecondary: '#B9C0FF',
       textTertiary: '#8B92B0',
@@ -39,7 +38,6 @@ export const themes = {
       success: '#059669',
       warning: '#D97706',
       error: '#DC2626',
-      // Estados específicos
       cardHover: '#F8FAFF',
       textSecondary: '#4A4F6A',
       textTertiary: '#6B7280',
@@ -48,4 +46,8 @@ export const themes = {
 } as const;
 
 export type ThemeName = keyof typeof themes;
-export type Theme = typeof themes[ThemeName]; // Union type correto
+
+// Definir Theme como union type explícito
+export type Theme = 
+  | typeof themes.night
+  | typeof themes.light;

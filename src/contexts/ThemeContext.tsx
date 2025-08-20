@@ -1,17 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { themes, ThemeName } from '@/lib/themes';
-
-// Simplificar o tipo Theme para evitar problemas de inferência
-type ThemeType = {
-  name: string;
-  displayName: string;
-  colors: Record<string, string>;
-};
+import { themes, ThemeName, Theme } from '@/lib/themes';
 
 interface ThemeContextType {
-  theme: ThemeType;
+  theme: Theme;
   themeName: ThemeName;
   toggleTheme: () => void;
   setTheme: (themeName: ThemeName) => void;
@@ -22,7 +15,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new error('useTheme must be used within a ThemeProvider');
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };
@@ -67,8 +60,11 @@ export const ThemeProvider = ({ children, defaultTheme = 'night' }: ThemeProvide
     setThemeName(newTheme);
   };
 
+  // Obter o tema atual de forma type-safe
+  const currentTheme: Theme = themes[themeName];
+
   const value: ThemeContextType = {
-    theme: themes[themeName] as ThemeType,
+    theme: currentTheme,
     themeName,
     toggleTheme,
     setTheme,
