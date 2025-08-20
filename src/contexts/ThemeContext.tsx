@@ -3,11 +3,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { themes, ThemeName } from '@/lib/themes';
 
-// Tipo genérico para qualquer tema
-type AnyTheme = typeof themes[ThemeName];
-
 interface ThemeContextType {
-  theme: AnyTheme;
+  theme: typeof themes[ThemeName];
   themeName: ThemeName;
   toggleTheme: () => void;
   setTheme: (themeName: ThemeName) => void;
