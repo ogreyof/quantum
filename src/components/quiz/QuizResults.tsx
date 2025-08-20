@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Calendar, Play, Music, Clock } from "lucide-react";
 import { QuizRecommendations } from "@/types/quiz";
+import { quizOptions } from "@/data/quiz-options";
 
 interface QuizResultsProps {
   recommendations: QuizRecommendations;
@@ -117,6 +118,3 @@ export const QuizResults = ({ recommendations, onContinue }: QuizResultsProps) =
     </div>
   );
 };
-
-// Importar as opções do quiz para usar na exibição
-import { quizOptions } from "@/data/quiz-options";

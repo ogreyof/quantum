@@ -73,32 +73,3 @@ export const HomePage = ({
     </>
   );
 };
-</l
-
-<lasy-write path="src/components/home/StreakCard.tsx" description="Card de sequência atualizado">
-import { Card, CardContent } from "@/components/ui/card";
-import { Flame } from "lucide-react";
-
-interface StreakCardProps {
-  streak: number;
-}
-
-export const StreakCard = ({ streak }: StreakCardProps) => {
-  return (
-    <div className="p-6">
-      <Card className="bg-gradient-quantum border-0 text-white shadow-lg shadow-purple-500/25">
-        <CardContent className="p-6">
-          <div className="flex items-center gap-3">
-            <Flame className="h-8 w-8 text-white" />
-            <div>
-              <h3 className="text-xl font-bold">Sequência de {streak} dias! 🔥</h3>
-              <p className="text-white/80">
-                Continue assim para manter sua sequência
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
