@@ -34,7 +34,7 @@ export const HomePage = ({
   const displayPrograms = quickStartRecommendations || quickStartPrograms;
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
       <Header onAction={onAction} />
       <StreakCard />
       
@@ -70,6 +70,6 @@ export const HomePage = ({
       </div>
 
       <ProgressSection userProgress={userProgress} />
-    </>
+    </div>
   );
 };
