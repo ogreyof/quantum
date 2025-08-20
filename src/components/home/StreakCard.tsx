@@ -1,3 +1,4 @@
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Flame } from "lucide-react";
 
@@ -5,7 +6,7 @@ interface StreakCardProps {
   streak?: number;
 }
 
-export const StreakCard = ({ streak = 5 }: StreakCardProps) => {
+export const StreakCard: React.FC<StreakCardProps> = ({ streak = 5 }) => {
   return (
     <div className="p-6">
       <Card className="bg-gradient-to-r from-purple-600 via-blue-500 to-cyan-400 border-0 text-white shadow-lg shadow-purple-500/25">

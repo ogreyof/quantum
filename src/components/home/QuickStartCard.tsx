@@ -1,5 +1,4 @@
-"use client";
-
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Play } from "lucide-react";
@@ -20,9 +19,11 @@ interface QuickStartCardProps {
   onNavigate?: (category: Category) => void;
 }
 
-export const QuickStartCard = (props: QuickStartCardProps) => {
-  const { program, onStart, onNavigate } = props;
-
+export const QuickStartCard: React.FC<QuickStartCardProps> = ({ 
+  program, 
+  onStart, 
+  onNavigate 
+}) => {
   const handleClick = () => {
     if (program.category && onNavigate) {
       onNavigate(program.category);

@@ -1,3 +1,4 @@
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Flame, Trophy, Star } from "lucide-react";
@@ -12,7 +13,7 @@ interface ProgressSectionProps {
   };
 }
 
-export const ProgressSection = ({ userProgress }: ProgressSectionProps) => {
+export const ProgressSection: React.FC<ProgressSectionProps> = ({ userProgress }) => {
   const progress = userProgress || {
     totalMinutes: 245,
     streak: 5,
