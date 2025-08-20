@@ -1,5 +1,3 @@
-import { Category } from "./index";
-
 export interface QuizResponse {
   objetivo: string;
   regioes: string[];
@@ -25,7 +23,7 @@ export interface QuizRecommendations {
     id: string;
     title: string;
     duration: string;
-    category?: Category;
+    category?: string; // Mudando para string para compatibilidade
   }>;
   playlistSons: string[];
   horarioNotificacao: string;

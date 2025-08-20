@@ -20,13 +20,23 @@ interface HomePageProps {
     id: string;
     title: string;
     duration: string;
-    category?: Category;
+    category?: string; // Mudando para string para compatibilidade
   }>;
 }
 
-export const HomePage = (props: HomePageProps) => {
-  const { onAction, onNavigate, userProgress, quickStartRecommendations } = props;
-  const displayPrograms = quickStartRecommendations || quickStartPrograms;
+export const HomePage = ({ 
+  onAction, 
+  onNavigate, 
+  userProgress,
+  quickStartRecommendations 
+}: HomePageProps) => {
+  // Converter recomendações para o formato esperado
+  const convertedRecommendations = quickStartRecommendations?.map(rec => ({
+    ...rec,
+    category: rec.category as Category | undefined
+  }));
+
+  const displayPrograms = convertedRecommendations || quickStartPrograms;
 
   return (
     <div className="min-h-screen bg-background">
@@ -35,7 +45,7 @@ export const HomePage = (props: HomePageProps) => {
       
       <div className="px-6 pb-6">
         <h2 className="text-xl font-bold mb-4 text-white">
-          Início Rápido
+          {quickStartRecommendations ? 'Recomendado para Você' : 'Início Rápido'}
         </h2>
         <div className="grid grid-cols-2 gap-4">
           {displayPrograms.slice(0, 4).map((program) => (

@@ -1,6 +1,6 @@
 export const themes = {
   night: {
-    name: 'night',
+    name: 'night' as const,
     displayName: 'Noite',
     colors: {
       background: '#0B0E1A',
@@ -23,7 +23,7 @@ export const themes = {
     }
   },
   light: {
-    name: 'light',
+    name: 'light' as const,
     displayName: 'Dia',
     colors: {
       background: '#F7F9FF',
