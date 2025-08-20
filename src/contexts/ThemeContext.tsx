@@ -3,8 +3,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { themes, ThemeName } from '@/lib/themes';
 
-// Definindo o tipo Theme como union type
-type Theme = typeof themes[ThemeName];
+// Definir o tipo Theme como union type explícito
+type Theme = typeof themes['night'] | typeof themes['light'];
 
 interface ThemeContextType {
   theme: Theme;
@@ -18,7 +18,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new error('useTheme must be used within a ThemeProvider');
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
   return context;
 };
