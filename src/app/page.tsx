@@ -19,6 +19,7 @@ import { useNavigation } from "@/hooks/useNavigation";
 import { programsByCategory } from "@/data/programs";
 import { corePrograms } from "@/data/programs-complete";
 import { QuizResponse, QuizRecommendations, UserProfile } from "@/types/quiz";
+import { Category } from "@/types";
 
 type AppState = 'auth' | 'quiz' | 'quiz-results' | 'navigation' | 'session' | 'completion';
 type AuthState = 'login' | 'register' | 'forgot-password';
@@ -106,6 +107,101 @@ export default function Home() {
   const handleForgotPassword = async (email: string) => {
     // Simular envio de email - em produção seria uma chamada à API
     console.log('Email de recuperação enviado para:', email);
+  };
+
+  const generateRecommendations = (response: QuizResponse): QuizRecommendations => {
+    // Lógica de recomendação baseada nas respostas
+    const { objetivo, regioes, tempoDisponivel, preferenciaSom, horarioPreferido } = response;
+
+    // Plano recomendado baseado no objetivo
+    let planoRecomendado;
+    switch (objetivo) {
+      case 'cervical':
+      case 'lombar':
+        planoRecomendado = {
+          id: 'plano-14-postura',
+          title: '14D Postura de Ferro',
+          duration: '14 dias',
+          description: 'Programa intensivo para alívio e fortalecimento da coluna'
+        };
+        break;
+      case 'drenagem':
+        planoRecomendado = {
+          id: 'plano-7-pernas',
+          title: '7D Pernas Leves',
+          duration: '7 dias',
+          description: 'Programa focado em drenagem e circulação'
+        };
+        break;
+      case 'estetica':
+        planoRecomendado = {
+          id: 'plano-15-rejuvenescimento',
+          title: '15D Rejuvenescimento Facial',
+          duration: '15 dias',
+          description: 'Transformação facial completa'
+        };
+        break;
+      default:
+        planoRecomendado = {
+          id: 'plano-7-iniciante',
+          title: '7D Introdução',
+          duration: '7 dias',
+          description: 'Introdução completa ao Quantum'
+        };
+    }
+
+    // Programas rápidos baseados no objetivo e regiões
+    const programasRapidos: Array<{id: string, title: string, duration: string, category: Category}> = [];
+    
+    if (objetivo === 'cervical' || regioes.includes('cervical')) {
+      programasRapidos.push({
+        id: 'alivio-cervical',
+        title: 'Alívio Cervical',
+        duration: tempoDisponivel || '10min',
+        category: 'coluna'
+      });
+    }
+    if (objetivo === 'drenagem' || regioes.includes('pernas')) {
+      programasRapidos.push({
+        id: 'drenagem-pernas',
+        title: 'Drenagem Pernas Leves',
+        duration: '15min',
+        category: 'drenagem'
+      });
+    }
+    if (objetivo === 'sono') {
+      programasRapidos.push({
+        id: 'sono-profundo',
+        title: 'Sono Profundo',
+        duration: '12min',
+        category: 'sono'
+      });
+    }
+    if (objetivo === 'performance') {
+      programasRapidos.push({
+        id: 'pos-treino',
+        title: 'Pós-Treino Express',
+        duration: '12min',
+        category: 'performance'
+      });
+    }
+
+    // Garantir pelo menos 3 programas
+    while (programasRapidos.length < 3) {
+      programasRapidos.push({
+        id: 'relax-total',
+        title: 'Relax Total',
+        duration: '8min',
+        category: 'bem-estar'
+      });
+    }
+
+    return {
+      planoRecomendado,
+      programasRapidos: programasRapidos.slice(0, 3),
+      playlistSons: preferenciaSom,
+      horarioNotificacao: horarioPreferido
+    };
   };
 
   const handleQuizComplete = (response: QuizResponse, recommendations: QuizRecommendations) => {

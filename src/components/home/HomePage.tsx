@@ -1,4 +1,3 @@
-import React from "react";
 import { Header } from "./Header";
 import { StreakCard } from "./StreakCard";
 import { QuickStartCard } from "./QuickStartCard";
@@ -25,12 +24,12 @@ interface HomePageProps {
   }>;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ 
+export const HomePage = ({ 
   onAction, 
   onNavigate, 
   userProgress,
   quickStartRecommendations 
-}) => {
+}: HomePageProps) => {
   const displayPrograms = quickStartRecommendations || quickStartPrograms;
 
   return (
@@ -40,7 +39,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       
       <div className="px-6 pb-6">
         <h2 className="text-xl font-bold mb-4 text-white">
-          {quickStartRecommendations ? "Recomendado para Você" : "Início Rápido"}
+          {quickStartRecommendations ? 'Recomendado para Você' : 'Início Rápido'}
         </h2>
         <div className="grid grid-cols-2 gap-4">
           {displayPrograms.slice(0, 4).map((program) => (
