@@ -11,6 +11,7 @@ import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 import { quizOptions, contraindicacoesText, lgpdText } from "@/data/quiz-options";
 import { QuizResponse, QuizRecommendations } from "@/types/quiz";
+import { Category } from "@/types";
 
 interface QuizFlowProps {
   onComplete: (response: QuizResponse, recommendations: QuizRecommendations) => void;
@@ -90,7 +91,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'alivio-cervical',
         title: 'Alívio Cervical',
         duration: tempoDisponivel || '10min',
-        category: 'coluna'
+        category: 'coluna' as Category
       });
     }
     if (objetivo === 'drenagem' || regioes.includes('pernas')) {
@@ -98,7 +99,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'drenagem-pernas',
         title: 'Drenagem Pernas Leves',
         duration: '15min',
-        category: 'drenagem'
+        category: 'drenagem' as Category
       });
     }
     if (objetivo === 'sono') {
@@ -106,7 +107,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'sono-profundo',
         title: 'Sono Profundo',
         duration: '12min',
-        category: 'sono'
+        category: 'sono' as Category
       });
     }
     if (objetivo === 'performance') {
@@ -114,7 +115,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'pos-treino',
         title: 'Pós-Treino Express',
         duration: '12min',
-        category: 'performance'
+        category: 'performance' as Category
       });
     }
 
@@ -124,7 +125,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'relax-total',
         title: 'Relax Total',
         duration: '8min',
-        category: 'bem-estar'
+        category: 'bem-estar' as Category
       });
     }
 
@@ -158,7 +159,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
     switch (currentStep) {
       case 1: return !!responses.objetivo;
       case 2: return (responses.regioes?.length || 0) > 0;
-      case 3: return responses.escalaDor !== undefined;
+      case 3: return responses.escalaDor !== undefined && responses.escalaDor !== null;
       case 4: return (responses.condicoes?.length || 0) >= 0; // Opcional
       case 5: return (responses.aparelhos?.length || 0) > 0;
       case 6: return !!responses.tempoDisponivel;
@@ -248,18 +249,18 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
           <div className="space-y-6">
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">
-                {responses.escalaDor}
+                {responses.escalaDor ?? 0}
               </div>
               <p className="text-sm text-muted-foreground">
-                {responses.escalaDor === 0 && "Sem dor"}
-                {responses.escalaDor >= 1 && responses.escalaDor <= 3 && "Dor leve"}
-                {responses.escalaDor >= 4 && responses.escalaDor <= 6 && "Dor moderada"}
-                {responses.escalaDor >= 7 && responses.escalaDor <= 8 && "Dor intensa"}
-                {responses.escalaDor >= 9 && "Dor muito intensa"}
+                {(responses.escalaDor ?? 0) === 0 && "Sem dor"}
+                {(responses.escalaDor ?? 0) >= 1 && (responses.escalaDor ?? 0) <= 3 && "Dor leve"}
+                {(responses.escalaDor ?? 0) >= 4 && (responses.escalaDor ?? 0) <= 6 && "Dor moderada"}
+                {(responses.escalaDor ?? 0) >= 7 && (responses.escalaDor ?? 0) <= 8 && "Dor intensa"}
+                {(responses.escalaDor ?? 0) >= 9 && "Dor muito intensa"}
               </p>
             </div>
             <Slider
-              value={[responses.escalaDor || 0]}
+              value={[responses.escalaDor ?? 0]}
               onValueChange={(value) => updateResponse('escalaDor', value[0])}
               max={10}
               step={1}
