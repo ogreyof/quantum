@@ -159,7 +159,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
     switch (currentStep) {
       case 1: return !!responses.objetivo;
       case 2: return (responses.regioes?.length || 0) > 0;
-      case 3: return responses.escalaDor !== undefined && responses.escalaDor !== null;
+      case 3: return responses.escalaDor !== undefined;
       case 4: return (responses.condicoes?.length || 0) >= 0; // Opcional
       case 5: return (responses.aparelhos?.length || 0) > 0;
       case 6: return !!responses.tempoDisponivel;
@@ -174,6 +174,8 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
   if (currentStep === 0) {
     return <QuizWelcome onStart={() => setCurrentStep(1)} />;
   }
+
+  const escalaDor = responses.escalaDor ?? 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -249,18 +251,18 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
           <div className="space-y-6">
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">
-                {responses.escalaDor ?? 0}
+                {escalaDor}
               </div>
               <p className="text-sm text-muted-foreground">
-                {(responses.escalaDor ?? 0) === 0 && "Sem dor"}
-                {(responses.escalaDor ?? 0) >= 1 && (responses.escalaDor ?? 0) <= 3 && "Dor leve"}
-                {(responses.escalaDor ?? 0) >= 4 && (responses.escalaDor ?? 0) <= 6 && "Dor moderada"}
-                {(responses.escalaDor ?? 0) >= 7 && (responses.escalaDor ?? 0) <= 8 && "Dor intensa"}
-                {(responses.escalaDor ?? 0) >= 9 && "Dor muito intensa"}
+                {escalaDor === 0 && "Sem dor"}
+                {escalaDor >= 1 && escalaDor <= 3 && "Dor leve"}
+                {escalaDor >= 4 && escalaDor <= 6 && "Dor moderada"}
+                {escalaDor >= 7 && escalaDor <= 8 && "Dor intensa"}
+                {escalaDor >= 9 && "Dor muito intensa"}
               </p>
             </div>
             <Slider
-              value={[responses.escalaDor ?? 0]}
+              value={[escalaDor]}
               onValueChange={(value) => updateResponse('escalaDor', value[0])}
               max={10}
               step={1}
