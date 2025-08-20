@@ -1,5 +1,3 @@
-"use client";
-
 import { Header } from "./Header";
 import { StreakCard } from "./StreakCard";
 import { QuickStartCard } from "./QuickStartCard";
@@ -34,14 +32,9 @@ export const HomePage = ({
 }: HomePageProps) => {
   const displayPrograms = quickStartRecommendations || quickStartPrograms;
 
-  const handleProgramStart = (programId: string) => {
-    onAction(programId);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Header onAction={onAction} />
-      
       <StreakCard streak={userProgress?.streak} />
       
       <div className="px-6 pb-6">
@@ -53,7 +46,7 @@ export const HomePage = ({
             <QuickStartCard 
               key={program.id} 
               program={program} 
-              onStart={handleProgramStart}
+              onStart={onAction}
               onNavigate={onNavigate}
             />
           ))}
