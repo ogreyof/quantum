@@ -155,11 +155,14 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
     setCurrentStep(prev => prev - 1);
   };
 
+  // Valor seguro para escalaDor - usar em todas as referências
+  const escalaDorValue = responses.escalaDor ?? 0;
+
   const canProceed = () => {
     switch (currentStep) {
       case 1: return !!responses.objetivo;
       case 2: return (responses.regioes?.length || 0) > 0;
-      case 3: return responses.escalaDor !== undefined;
+      case 3: return escalaDorValue !== undefined;
       case 4: return (responses.condicoes?.length || 0) >= 0; // Opcional
       case 5: return (responses.aparelhos?.length || 0) > 0;
       case 6: return !!responses.tempoDisponivel;
@@ -174,9 +177,6 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
   if (currentStep === 0) {
     return <QuizWelcome onStart={() => setCurrentStep(1)} />;
   }
-
-  // Valor seguro para escalaDor com verificação explícita
-  const escalaDorValue = typeof responses.escalaDor === 'number' ? responses.escalaDor : 0;
 
   return (
     <div className="min-h-screen bg-background">
