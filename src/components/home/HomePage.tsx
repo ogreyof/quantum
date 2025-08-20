@@ -35,7 +35,7 @@ export const HomePage = ({
   return (
     <div className="min-h-screen bg-background">
       <Header onAction={onAction} />
-      <StreakCard />
+      <StreakCard streak={userProgress?.streak} />
       
       <div className="px-6 pb-6">
         <h2 className="text-xl font-bold mb-4 text-white">

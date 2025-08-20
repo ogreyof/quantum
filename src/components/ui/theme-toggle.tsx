@@ -8,27 +8,26 @@ interface ThemeToggleProps {
   showLabel?: boolean;
 }
 
-export function ThemeToggle({ showLabel = false }: ThemeToggleProps) {
+export const ThemeToggle = ({ showLabel = false }: ThemeToggleProps) => {
   const { themeName, toggleTheme } = useTheme();
 
   return (
     <Button
-      variant="outline"
-      size={showLabel ? "default" : "icon"}
+      variant="ghost"
+      size="icon"
       onClick={toggleTheme}
-      className="hover:bg-primary/20 transition-colors"
+      className="hover:bg-primary/20"
     >
       {themeName === 'night' ? (
-        <>
-          <Sun className="h-4 w-4" />
-          {showLabel && <span className="ml-2">Modo Claro</span>}
-        </>
+        <Sun className="h-5 w-5" />
       ) : (
-        <>
-          <Moon className="h-4 w-4" />
-          {showLabel && <span className="ml-2">Modo Noite</span>}
-        </>
+        <Moon className="h-5 w-5" />
+      )}
+      {showLabel && (
+        <span className="ml-2">
+          {themeName === 'night' ? 'Modo Claro' : 'Modo Noite'}
+        </span>
       )}
     </Button>
   );
-}
+};

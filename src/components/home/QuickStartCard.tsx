@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Play } from "lucide-react";
-import { QuickStartProgram, Category } from "@/types";
+import { Category } from "@/types";
+
+interface QuickStartProgram {
+  id: string;
+  title: string;
+  duration: string;
+  icon?: any;
+  color?: string;
+  category?: Category;
+}
 
 interface QuickStartCardProps {
   program: QuickStartProgram;
@@ -10,8 +19,6 @@ interface QuickStartCardProps {
 }
 
 export const QuickStartCard = ({ program, onStart, onNavigate }: QuickStartCardProps) => {
-  const IconComponent = program.icon;
-
   const handleClick = () => {
     if (program.category && onNavigate) {
       onNavigate(program.category);
@@ -24,7 +31,9 @@ export const QuickStartCard = ({ program, onStart, onNavigate }: QuickStartCardP
     <Card className="bg-gray-100 border border-purple-500/30 rounded-2xl hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
       <CardContent className="p-4">
         <div className="flex items-center gap-2 mb-3">
-          <IconComponent className={`h-5 w-5 ${program.color}`} />
+          <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm">⚡</span>
+          </div>
           <div>
             <h3 className="font-semibold text-black">{program.title}</h3>
             <p className="text-sm text-gray-600">{program.duration}</p>
