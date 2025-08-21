@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    /* Apenas tema claro - cores bem visíveis */
-    --background: #FFFFFF;
-    --foreground: #0F172A;
+    /* Esquema de cores das imagens - Fundo escuro com cards brancos */
+    --background: #1A1A2E;
+    --foreground: #FFFFFF;
     
-    --card: #F8FAFC;
+    --card: #FFFFFF;
     --card-foreground: #0F172A;
     
     --popover: #FFFFFF;
@@ -17,11 +17,11 @@
     --primary: #8B5CF6;
     --primary-foreground: #FFFFFF;
     
-    --secondary: #F1F5F9;
-    --secondary-foreground: #475569;
+    --secondary: #2D2D44;
+    --secondary-foreground: #E5E7EB;
     
-    --muted: #F1F5F9;
-    --muted-foreground: #64748B;
+    --muted: #374151;
+    --muted-foreground: #9CA3AF;
     
     --accent: #06B6D4;
     --accent-foreground: #FFFFFF;
@@ -30,7 +30,7 @@
     --destructive-foreground: #FFFFFF;
     
     --border: rgba(139, 92, 246, 0.2);
-    --input: #FFFFFF;
+    --input: #2D2D44;
     --ring: #8B5CF6;
     
     --radius: 1rem;
@@ -48,8 +48,8 @@
   
   body {
     @apply bg-background text-foreground font-sans;
-    background-color: #FFFFFF !important;
-    color: #0F172A !important;
+    background-color: #1A1A2E !important;
+    color: #FFFFFF !important;
   }
   
   /* Gradientes Quantum */
@@ -61,19 +61,19 @@
     background: var(--quantum-gradient-subtle);
   }
   
-  /* Cards premium */
+  /* Cards premium - Brancos no fundo escuro */
   .card-quantum {
-    background: #F8FAFC;
+    background: #FFFFFF;
     border: 1px solid rgba(139, 92, 246, 0.2);
     border-radius: var(--radius);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     color: #0F172A;
   }
   
   .card-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
   }
   
   /* Botões Quantum */
@@ -92,17 +92,17 @@
     color: white !important;
   }
   
-  /* Forçar cores claras em todos os elementos */
+  /* Forçar cores corretas */
   .bg-background {
-    background-color: #FFFFFF !important;
+    background-color: #1A1A2E !important;
   }
   
   .text-foreground {
-    color: #0F172A !important;
+    color: #FFFFFF !important;
   }
   
   .bg-card {
-    background-color: #F8FAFC !important;
+    background-color: #FFFFFF !important;
   }
   
   .text-card-foreground {
@@ -110,15 +110,33 @@
   }
   
   .text-muted-foreground {
-    color: #64748B !important;
+    color: #9CA3AF !important;
   }
   
   .bg-muted {
-    background-color: #F1F5F9 !important;
+    background-color: #374151 !important;
   }
   
   .border-border {
     border-color: rgba(139, 92, 246, 0.2) !important;
+  }
+  
+  /* Cards específicos */
+  .bg-card {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+  }
+  
+  /* Navegação inferior escura */
+  .bottom-nav {
+    background-color: #2D2D44 !important;
+    border-top: 1px solid rgba(139, 92, 246, 0.3);
+  }
+  
+  /* Header escuro */
+  .header-dark {
+    background-color: #1A1A2E !important;
+    color: #FFFFFF !important;
   }
 }
 
@@ -128,7 +146,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #2D2D44;
 }
 
 ::-webkit-scrollbar-thumb {
