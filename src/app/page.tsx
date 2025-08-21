@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Play, Calendar, Music, User, Bell, Search, Zap, Clock, Trophy, Target, Flame, ChevronRight, Star, Volume2, Pause, SkipForward, SkipBack, X, Settings, Moon, Sun, Palette } from "lucide-react";
+import { Sparkles, Play, Calendar, Music, User, Bell, Search, Zap, Clock, Trophy, Target, Flame, ChevronRight, Star, Volume2, Pause, SkipForward, SkipBack, X, Settings, Moon, Sun, Palette, Droplets, Scissors, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -30,81 +30,81 @@ const mockUserProgress = {
 
 const quickStartPrograms = [
   { id: '1', title: 'Cervical', duration: '10min', icon: '🦴', category: 'coluna' as Category },
-  { id: '3', title: 'Drenagem Pernas', duration: '15min', icon: '🦵', category: 'drenagem' as Category },
+  { id: '3', title: 'Drenagem', duration: '15min', icon: '💧', category: 'drenagem' as Category },
   { id: '5', title: 'Sono', duration: '12min', icon: '😴', category: 'sono' as Category },
-  { id: '4', title: 'Relax', duration: '8min', icon: '🧘', category: 'bem-estar' as Category }
+  { id: '4', title: 'Estética', duration: '8min', icon: '✨', category: 'estetica' as Category }
 ];
 
 const mockPrograms = [
   {
     id: '1',
-    title: 'Alívio Cervical',
-    duration: '10min',
-    description: 'Programa focado em aliviar tensões na região cervical e pescoço',
-    category: 'coluna' as Category,
+    title: 'Drenagem de Pernas',
+    duration: '15min',
+    description: 'Reduz inchaço e melhora circulação nas pernas',
+    category: 'drenagem' as Category,
     difficulty: 'iniciante' as const,
     thumbnail: '/api/placeholder/300/200',
-    benefits: ['Reduz dor no pescoço', 'Melhora postura', 'Relaxa músculos tensos'],
+    benefits: ['Reduz inchaço', 'Melhora circulação', 'Sensação de leveza'],
     rating: 4.8,
     completions: 1250
   },
   {
     id: '2',
-    title: 'Alívio Lombar',
+    title: 'Relaxamento Profundo',
     duration: '12min',
-    description: 'Massagem terapêutica para região lombar e coluna',
-    category: 'coluna' as Category,
+    description: 'Libera tensões e prepara para o descanso',
+    category: 'sono' as Category,
     difficulty: 'iniciante' as const,
     thumbnail: '/api/placeholder/300/200',
-    benefits: ['Alivia dor nas costas', 'Melhora flexibilidade', 'Reduz rigidez'],
+    benefits: ['Reduz ansiedade', 'Melhora sono', 'Relaxa músculos'],
     rating: 4.9,
     completions: 980
   },
   {
     id: '3',
-    title: 'Drenagem Pernas Leves',
-    duration: '15min',
-    description: 'Drenagem linfática para reduzir inchaço e melhorar circulação',
-    category: 'drenagem' as Category,
+    title: 'Redução de Papada',
+    duration: '12min',
+    description: 'Tonifica músculos do pescoço e reduz papada',
+    category: 'estetica' as Category,
     difficulty: 'intermediario' as const,
     thumbnail: '/api/placeholder/300/200',
-    benefits: ['Reduz inchaço', 'Melhora circulação', 'Sensação de leveza'],
+    benefits: ['Reduz papada', 'Tonifica pescoço', 'Melhora contorno'],
     rating: 4.7,
     completions: 750
   },
   {
     id: '4',
-    title: 'Relax Total',
-    duration: '8min',
-    description: 'Programa de relaxamento completo para corpo e mente',
-    category: 'bem-estar' as Category,
+    title: 'Fortalecimento Capilar',
+    duration: '15min',
+    description: 'Fortalece folículos e raízes capilares',
+    category: 'cabelos' as Category,
     difficulty: 'iniciante' as const,
     thumbnail: '/api/placeholder/300/200',
-    benefits: ['Reduz estresse', 'Promove relaxamento', 'Melhora bem-estar'],
+    benefits: ['Fortalece cabelos', 'Previne queda', 'Estimula crescimento'],
     rating: 4.6,
     completions: 1100
   },
   {
     id: '5',
-    title: 'Sono Profundo',
-    duration: '12min',
-    description: 'Massagem relaxante para preparar o corpo para o sono',
-    category: 'sono' as Category,
-    difficulty: 'iniciante' as const,
+    title: 'Queima Localizada',
+    duration: '25min',
+    description: 'Queima gordura em áreas específicas',
+    category: 'emagrecimento' as Category,
+    difficulty: 'intermediario' as const,
     thumbnail: '/api/placeholder/300/200',
-    benefits: ['Melhora qualidade do sono', 'Reduz ansiedade', 'Relaxa músculos'],
+    benefits: ['Queima gordura', 'Tonifica músculos', 'Modela corpo'],
     rating: 4.8,
     completions: 890
   },
   {
     id: '6',
-    title: 'Pré-treino',
-    duration: '8min',
-    description: 'Aquecimento muscular antes dos exercícios',
-    category: 'performance' as Category,
-    difficulty: 'intermediario' as const,
+    title: 'Alívio Cervical',
+    duration: '10min',
+    description: 'Alívio de tensões na região cervical',
+    category: 'coluna' as Category,
+    difficulty: 'iniciante' as const,
     thumbnail: '/api/placeholder/300/200',
-    benefits: ['Aquece músculos', 'Previne lesões', 'Melhora performance'],
+    benefits: ['Alivia dor', 'Melhora postura', 'Relaxa músculos'],
     rating: 4.5,
     completions: 650
   }
@@ -115,8 +115,8 @@ const mockPlans = [
     id: '1',
     title: '7 Dias - Pernas Leves',
     duration: '7 dias',
-    description: 'Plano focado em melhorar circulação e reduzir inchaço nas pernas',
-    programs: ['3'],
+    description: 'Plano focado em drenagem e circulação das pernas',
+    programs: ['1'],
     benefits: ['Reduz inchaço', 'Melhora circulação', 'Alívio imediato'],
     difficulty: 'iniciante' as const,
     price: 'Incluído na assinatura',
@@ -124,23 +124,23 @@ const mockPlans = [
   },
   {
     id: '2',
-    title: '14 Dias - Postura de Ferro',
+    title: '14 Dias - Rejuvenescimento Facial',
     duration: '14 dias',
-    description: 'Fortalecimento e correção postural completa',
-    programs: ['1', '2'],
-    benefits: ['Melhora postura', 'Fortalece core', 'Reduz dores'],
+    description: 'Programa completo de estética facial',
+    programs: ['3'],
+    benefits: ['Reduz papada', 'Suaviza rugas', 'Rejuvenesce'],
     difficulty: 'intermediario' as const,
     price: 'Incluído na assinatura',
     progress: 35
   },
   {
     id: '3',
-    title: '30 Dias - Lombar Seguro',
-    duration: '30 dias',
-    description: 'Programa completo para saúde da coluna lombar',
-    programs: ['2', '4', '5'],
-    benefits: ['Fortalece lombar', 'Previne lesões', 'Melhora qualidade de vida'],
-    difficulty: 'avancado' as const,
+    title: '21 Dias - Cabelos Fortes',
+    duration: '21 dias',
+    description: 'Fortalecimento e crescimento capilar',
+    programs: ['4'],
+    benefits: ['Fortalece cabelos', 'Previne queda', 'Estimula crescimento'],
+    difficulty: 'intermediario' as const,
     price: 'Incluído na assinatura',
     progress: 0
   }
@@ -191,6 +191,45 @@ const mockSounds = [
     description: 'Técnica de respiração para relaxamento',
     thumbnail: '/api/placeholder/200/200',
     isPlaying: false
+  }
+];
+
+// Categorias principais atualizadas
+const mainCategories = [
+  {
+    id: 'drenagem',
+    title: 'Drenagem & Circulação',
+    subtitle: 'Pernas, linfática, varizes',
+    icon: Droplets,
+    color: 'text-blue-500'
+  },
+  {
+    id: 'sono',
+    title: 'Sono & Relaxamento',
+    subtitle: 'Ansiedade, estresse, descanso',
+    icon: Moon,
+    color: 'text-purple-600'
+  },
+  {
+    id: 'estetica',
+    title: 'Estética Facial',
+    subtitle: 'Papada, rugas, rejuvenescimento',
+    icon: Sparkles,
+    color: 'text-cyan-400'
+  },
+  {
+    id: 'cabelos',
+    title: 'Cabelos',
+    subtitle: 'Fortalecimento, queda, crescimento',
+    icon: Scissors,
+    color: 'text-green-500'
+  },
+  {
+    id: 'emagrecimento',
+    title: 'Emagrecimento & Tonificação',
+    subtitle: 'Queima localizada, firmeza',
+    icon: TrendingUp,
+    color: 'text-orange-500'
   }
 ];
 
@@ -308,6 +347,7 @@ export default function QuantumExperience() {
             {!quizCompleted && (
               <Card className="border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10">
                 <CardContent className="p-4">
+                  
                   <div className="flex items-center gap-3">
                     <Sparkles className="text-primary" size={24} />
                     <div className="flex-1">
@@ -412,6 +452,30 @@ export default function QuantumExperience() {
                     </CardContent>
                   </Card>
                 ))}
+              </div>
+            </div>
+
+            {/* Categorias Principais */}
+            <div className="space-y-4">
+              <h2 className="text-xl font-bold text-white">Programas Completos</h2>
+              <div className="space-y-3">
+                {mainCategories.map((category) => {
+                  const IconComponent = category.icon;
+                  return (
+                    <Card key={category.id} className="cursor-pointer hover:bg-gray-50 transition-colors">
+                      <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                          <IconComponent className={`h-6 w-6 ${category.color}`} />
+                          <div className="flex-1">
+                            <h3 className="font-semibold text-black">{category.title}</h3>
+                            <p className="text-sm text-gray-600">{category.subtitle}</p>
+                          </div>
+                          <ChevronRight size={16} className="text-gray-400" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
               </div>
             </div>
 
