@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    /* Tema Noite (padrão) - Cores ajustadas para roxo-azul-ciano */
-    --background: #0A0A0F;
-    --foreground: #FFFFFF;
+    /* Tema Noite (mais claro e visível) */
+    --background: #F1F5F9;
+    --foreground: #0F172A;
     
     --card: #FFFFFF;
-    --card-foreground: #000000;
+    --card-foreground: #0F172A;
     
-    --popover: #1A1A2E;
-    --popover-foreground: #FFFFFF;
+    --popover: #FFFFFF;
+    --popover-foreground: #0F172A;
     
     --primary: #8B5CF6;
     --primary-foreground: #FFFFFF;
     
-    --secondary: #1A1A2E;
-    --secondary-foreground: #E5E7EB;
+    --secondary: #F8FAFC;
+    --secondary-foreground: #475569;
     
-    --muted: #374151;
-    --muted-foreground: #9CA3AF;
+    --muted: #F8FAFC;
+    --muted-foreground: #64748B;
     
     --accent: #06B6D4;
     --accent-foreground: #FFFFFF;
@@ -30,7 +30,7 @@
     --destructive-foreground: #FFFFFF;
     
     --border: rgba(139, 92, 246, 0.2);
-    --input: #1F2937;
+    --input: #FFFFFF;
     --ring: #8B5CF6;
     
     --radius: 1rem;
@@ -73,6 +73,37 @@
     /* Cores customizadas Quantum - Tema Claro */
     --quantum-gradient: linear-gradient(135deg, #7C3AED 0%, #2563EB 50%, #0891B2 100%);
     --quantum-gradient-subtle: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(37, 99, 235, 0.1) 50%, rgba(8, 145, 178, 0.1) 100%);
+  }
+
+  /* Tema Escuro (para quando quiser usar) */
+  .theme-night {
+    --background: #1E293B;
+    --foreground: #F8FAFC;
+    
+    --card: #334155;
+    --card-foreground: #F8FAFC;
+    
+    --popover: #334155;
+    --popover-foreground: #F8FAFC;
+    
+    --primary: #8B5CF6;
+    --primary-foreground: #FFFFFF;
+    
+    --secondary: #475569;
+    --secondary-foreground: #E2E8F0;
+    
+    --muted: #475569;
+    --muted-foreground: #94A3B8;
+    
+    --accent: #06B6D4;
+    --accent-foreground: #FFFFFF;
+    
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    
+    --border: rgba(139, 92, 246, 0.3);
+    --input: #475569;
+    --ring: #8B5CF6;
   }
 }
 
