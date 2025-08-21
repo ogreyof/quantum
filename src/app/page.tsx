@@ -16,8 +16,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { QuizFlow } from "@/components/quiz/QuizFlow";
 import { QuizResponse, QuizRecommendations } from "@/types/quiz";
 import { Category } from "@/types";
-import { useTheme } from "@/contexts/ThemeContext";
-import { ThemeName } from "@/lib/themes";
 
 // Mock data
 const mockUserProgress = {
@@ -210,7 +208,6 @@ export default function QuantumExperience() {
   const [showSettings, setShowSettings] = useState(false);
   const [notifications, setNotifications] = useState(true);
   const [autoPlay, setAutoPlay] = useState(false);
-  const { theme, themeName, toggleTheme, setTheme } = useTheme();
 
   // Timer effect
   useEffect(() => {
@@ -227,7 +224,6 @@ export default function QuantumExperience() {
     setRecommendations(recs);
     setQuizCompleted(true);
     setShowQuiz(false);
-    // Aqui você salvaria as respostas no backend
     console.log('Quiz completed:', response, recs);
   };
 
@@ -294,7 +290,7 @@ export default function QuantumExperience() {
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-bold">Olá, Maria! 👋</h1>
+                <h1 className="text-2xl font-bold text-foreground">Olá, Maria! 👋</h1>
                 <p className="text-muted-foreground">Pronta para sua sessão de hoje?</p>
               </div>
               <div className="flex gap-3">
@@ -405,7 +401,7 @@ export default function QuantumExperience() {
                         <p className="text-xs text-muted-foreground">{program.duration}</p>
                         <Button 
                           size="sm" 
-                          className="w-full"
+                          className="w-full btn-quantum"
                           onClick={() => handleProgramPlay(program.id)}
                         >
                           <Play size={14} className="mr-1" />
@@ -525,6 +521,7 @@ export default function QuantumExperience() {
                         </div>
                         <Button 
                           size="sm"
+                          className="btn-quantum"
                           onClick={() => handleProgramPlay(program.id)}
                         >
                           <Play size={14} className="mr-1" />
@@ -576,7 +573,7 @@ export default function QuantumExperience() {
                       </div>
                     )}
 
-                    <Button className="w-full">
+                    <Button className="w-full btn-quantum">
                       {plan.progress > 0 ? 'Continuar Plano' : 'Iniciar Plano'}
                     </Button>
                   </CardContent>
@@ -726,24 +723,6 @@ export default function QuantumExperience() {
                 </CardContent>
               </Card>
 
-              <Card 
-                className="cursor-pointer hover:bg-muted/50 transition-colors"
-                onClick={() => setShowSettings(true)}
-              >
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Palette size={20} />
-                      <span>Tema</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-muted-foreground capitalize">{themeName}</span>
-                      <ChevronRight size={16} />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
               <Card className="cursor-pointer hover:bg-muted/50 transition-colors">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
@@ -771,7 +750,7 @@ export default function QuantumExperience() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF', color: '#0F172A' }}>
       {/* Player fixo no topo quando ativo */}
       <AnimatePresence>
         {currentlyPlaying && (
@@ -808,87 +787,6 @@ export default function QuantumExperience() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Settings Modal */}
-      <AnimatePresence>
-        {showSettings && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-            onClick={() => setShowSettings(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-card rounded-lg p-6 w-full max-w-sm"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold">Configurações</h3>
-                <Button variant="ghost" size="icon" onClick={() => setShowSettings(false)}>
-                  <X size={16} />
-                </Button>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="notifications">Notificações</Label>
-                  <Switch
-                    id="notifications"
-                    checked={notifications}
-                    onCheckedChange={setNotifications}
-                  />
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <Label htmlFor="autoplay">Auto-play</Label>
-                  <Switch
-                    id="autoplay"
-                    checked={autoPlay}
-                    onCheckedChange={setAutoPlay}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Tema</Label>
-                  <Select value={themeName} onValueChange={(value: ThemeName) => setTheme(value)}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="night">
-                        <div className="flex items-center gap-2">
-                          <Moon size={16} />
-                          Noturno
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="light">
-                        <div className="flex items-center gap-2">
-                          <Sun size={16} />
-                          Claro
-                        </div>
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Volume Padrão</Label>
-                  <Slider
-                    value={[volume]}
-                    onValueChange={(value) => setVolume(value[0])}
-                    max={100}
-                    step={1}
-                  />
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

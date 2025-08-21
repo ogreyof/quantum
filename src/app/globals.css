@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    /* Tema Noite (mais claro e visível) */
-    --background: #F1F5F9;
+    /* Apenas tema claro - cores bem visíveis */
+    --background: #FFFFFF;
     --foreground: #0F172A;
     
-    --card: #FFFFFF;
+    --card: #F8FAFC;
     --card-foreground: #0F172A;
     
     --popover: #FFFFFF;
@@ -17,10 +17,10 @@
     --primary: #8B5CF6;
     --primary-foreground: #FFFFFF;
     
-    --secondary: #F8FAFC;
+    --secondary: #F1F5F9;
     --secondary-foreground: #475569;
     
-    --muted: #F8FAFC;
+    --muted: #F1F5F9;
     --muted-foreground: #64748B;
     
     --accent: #06B6D4;
@@ -35,75 +35,9 @@
     
     --radius: 1rem;
     
-    /* Cores customizadas Quantum - Roxo-Azul-Ciano */
+    /* Gradiente Quantum - Roxo-Azul-Ciano */
     --quantum-gradient: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%);
     --quantum-gradient-subtle: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%);
-  }
-
-  /* Tema Claro */
-  .theme-light {
-    --background: #F8FAFC;
-    --foreground: #0F172A;
-    
-    --card: #FFFFFF;
-    --card-foreground: #0F172A;
-    
-    --popover: #FFFFFF;
-    --popover-foreground: #0F172A;
-    
-    --primary: #7C3AED;
-    --primary-foreground: #FFFFFF;
-    
-    --secondary: #F1F5F9;
-    --secondary-foreground: #475569;
-    
-    --muted: #F1F5F9;
-    --muted-foreground: #64748B;
-    
-    --accent: #0891B2;
-    --accent-foreground: #FFFFFF;
-    
-    --destructive: #DC2626;
-    --destructive-foreground: #FFFFFF;
-    
-    --border: rgba(124, 58, 237, 0.2);
-    --input: #F1F5F9;
-    --ring: #7C3AED;
-    
-    /* Cores customizadas Quantum - Tema Claro */
-    --quantum-gradient: linear-gradient(135deg, #7C3AED 0%, #2563EB 50%, #0891B2 100%);
-    --quantum-gradient-subtle: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(37, 99, 235, 0.1) 50%, rgba(8, 145, 178, 0.1) 100%);
-  }
-
-  /* Tema Escuro (para quando quiser usar) */
-  .theme-night {
-    --background: #1E293B;
-    --foreground: #F8FAFC;
-    
-    --card: #334155;
-    --card-foreground: #F8FAFC;
-    
-    --popover: #334155;
-    --popover-foreground: #F8FAFC;
-    
-    --primary: #8B5CF6;
-    --primary-foreground: #FFFFFF;
-    
-    --secondary: #475569;
-    --secondary-foreground: #E2E8F0;
-    
-    --muted: #475569;
-    --muted-foreground: #94A3B8;
-    
-    --accent: #06B6D4;
-    --accent-foreground: #FFFFFF;
-    
-    --destructive: #EF4444;
-    --destructive-foreground: #FFFFFF;
-    
-    --border: rgba(139, 92, 246, 0.3);
-    --input: #475569;
-    --ring: #8B5CF6;
   }
 }
 
@@ -114,7 +48,8 @@
   
   body {
     @apply bg-background text-foreground font-sans;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
   }
   
   /* Gradientes Quantum */
@@ -126,26 +61,14 @@
     background: var(--quantum-gradient-subtle);
   }
   
-  /* Efeitos visuais */
-  .quantum-glow {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-  }
-  
-  .theme-light .quantum-glow {
-    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
-  }
-  
-  .quantum-border {
-    border: 1px solid var(--border);
-  }
-  
   /* Cards premium */
   .card-quantum {
-    background: hsl(var(--card));
-    border: 1px solid var(--border);
+    background: #F8FAFC;
+    border: 1px solid rgba(139, 92, 246, 0.2);
     border-radius: var(--radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    color: #0F172A;
   }
   
   .card-quantum:hover {
@@ -153,16 +76,12 @@
     box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
   }
   
-  .theme-light .card-quantum:hover {
-    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.2);
-  }
-  
   /* Botões Quantum */
   .btn-quantum {
     background: var(--quantum-gradient);
     border: none;
     border-radius: calc(var(--radius) - 4px);
-    color: white;
+    color: white !important;
     font-weight: 600;
     transition: all 0.3s ease;
   }
@@ -170,33 +89,36 @@
   .btn-quantum:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+    color: white !important;
   }
   
-  /* Animações */
-  .pulse-quantum {
-    animation: pulse-quantum 2s ease-in-out infinite alternate;
+  /* Forçar cores claras em todos os elementos */
+  .bg-background {
+    background-color: #FFFFFF !important;
   }
   
-  @keyframes pulse-quantum {
-    from {
-      box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
-    }
-    to {
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
-    }
+  .text-foreground {
+    color: #0F172A !important;
   }
   
-  .theme-light .pulse-quantum {
-    animation: pulse-quantum-light 2s ease-in-out infinite alternate;
+  .bg-card {
+    background-color: #F8FAFC !important;
   }
   
-  @keyframes pulse-quantum-light {
-    from {
-      box-shadow: 0 0 10px rgba(124, 58, 237, 0.3);
-    }
-    to {
-      box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
-    }
+  .text-card-foreground {
+    color: #0F172A !important;
+  }
+  
+  .text-muted-foreground {
+    color: #64748B !important;
+  }
+  
+  .bg-muted {
+    background-color: #F1F5F9 !important;
+  }
+  
+  .border-border {
+    border-color: rgba(139, 92, 246, 0.2) !important;
   }
 }
 
@@ -206,14 +128,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary));
+  background: #8B5CF6;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--accent));
+  background: #06B6D4;
 }
