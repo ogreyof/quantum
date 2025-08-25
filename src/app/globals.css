@@ -4,39 +4,35 @@
 
 @layer base {
   :root {
-    /* Tema Escuro (padrão) */
-    --quantum-background: #0B0E1A;
-    --quantum-card: #0F1220;
-    --quantum-text: #F5F7FF;
-    --quantum-muted: #B9C0FF;
-    --quantum-primary: #7B61FF;
-    --quantum-accent: #12D6DF;
-    --quantum-gradient: linear-gradient(135deg, #7B61FF 0%, #12D6DF 100%);
-    --quantum-border: rgba(123, 97, 255, 0.2);
-    --quantum-input: #0F1220;
-    --quantum-ring: #7B61FF;
+    /* Tema Escuro - Melhor contraste */
+    --quantum-background: #1A1A2E;
+    --quantum-card: #FFFFFF;
+    --quantum-text: #FFFFFF;
+    --quantum-text-card: #000000;
+    --quantum-muted: #9CA3AF;
+    --quantum-primary: #8B5CF6;
+    --quantum-accent: #06B6D4;
+    --quantum-gradient: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%);
+    --quantum-border: rgba(139, 92, 246, 0.3);
+    --quantum-input: #2D2D44;
+    --quantum-ring: #8B5CF6;
     --quantum-success: #10B981;
     --quantum-warning: #F59E0B;
     --quantum-error: #EF4444;
-    --quantum-cardHover: #1A1F2E;
-    --quantum-textSecondary: #B9C0FF;
-    --quantum-textTertiary: #8B92B0;
-    --quantum-sliderThumb: #7B61FF;
-    --quantum-sliderTrack: #1A1F2E;
     
     /* Variáveis CSS padrão */
     --background: var(--quantum-background);
     --foreground: var(--quantum-text);
     --card: var(--quantum-card);
-    --card-foreground: var(--quantum-text);
+    --card-foreground: var(--quantum-text-card);
     --popover: var(--quantum-card);
-    --popover-foreground: var(--quantum-text);
+    --popover-foreground: var(--quantum-text-card);
     --primary: var(--quantum-primary);
     --primary-foreground: #FFFFFF;
-    --secondary: var(--quantum-card);
-    --secondary-foreground: var(--quantum-text);
-    --muted: var(--quantum-muted);
-    --muted-foreground: var(--quantum-textSecondary);
+    --secondary: #374151;
+    --secondary-foreground: #FFFFFF;
+    --muted: #374151;
+    --muted-foreground: var(--quantum-muted);
     --accent: var(--quantum-accent);
     --accent-foreground: #FFFFFF;
     --destructive: var(--quantum-error);
@@ -49,24 +45,20 @@
 
   /* Tema Claro */
   .theme-light {
-    --quantum-background: #F7F9FF;
+    --quantum-background: #F8FAFC;
     --quantum-card: #FFFFFF;
-    --quantum-text: #0F1220;
-    --quantum-muted: #4A4F6A;
-    --quantum-primary: #6C4DFF;
-    --quantum-accent: #0FBED8;
-    --quantum-gradient: linear-gradient(135deg, #6C4DFF 0%, #0FBED8 100%);
-    --quantum-border: rgba(108, 77, 255, 0.2);
+    --quantum-text: #000000;
+    --quantum-text-card: #000000;
+    --quantum-muted: #64748B;
+    --quantum-primary: #7C3AED;
+    --quantum-accent: #0891B2;
+    --quantum-gradient: linear-gradient(135deg, #7C3AED 0%, #3B82F6 50%, #0891B2 100%);
+    --quantum-border: rgba(124, 58, 237, 0.2);
     --quantum-input: #FFFFFF;
-    --quantum-ring: #6C4DFF;
+    --quantum-ring: #7C3AED;
     --quantum-success: #059669;
     --quantum-warning: #D97706;
     --quantum-error: #DC2626;
-    --quantum-cardHover: #F1F5F9;
-    --quantum-textSecondary: #4A4F6A;
-    --quantum-textTertiary: #6B7280;
-    --quantum-sliderThumb: #6C4DFF;
-    --quantum-sliderTrack: #E2E8F0;
   }
 }
 
@@ -76,30 +68,30 @@
   }
   
   body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: var(--quantum-background);
-    color: var(--quantum-text);
+    @apply font-sans;
+    background-color: var(--quantum-background) !important;
+    color: var(--quantum-text) !important;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
-  /* Componentes Quantum */
+  /* Cards com contraste alto */
   .card-quantum {
-    background: var(--quantum-card);
+    background: var(--quantum-card) !important;
     border: 1px solid var(--quantum-border);
     border-radius: var(--radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    color: var(--quantum-text);
+    color: var(--quantum-text-card) !important;
   }
   
   .card-quantum:hover {
     transform: translateY(-2px);
-    background: var(--quantum-cardHover);
-    box-shadow: 0 8px 30px rgba(123, 97, 255, 0.2);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
   }
   
+  /* Botões Quantum */
   .btn-quantum {
-    background: var(--quantum-gradient);
+    background: var(--quantum-gradient) !important;
     border: none;
     border-radius: calc(var(--radius) - 4px);
     color: white !important;
@@ -109,95 +101,131 @@
   
   .btn-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(123, 97, 255, 0.4);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
     color: white !important;
   }
   
-  /* Slider customizado */
+  /* Texto sempre legível */
+  .text-foreground {
+    color: var(--quantum-text) !important;
+  }
+  
+  .text-card-foreground {
+    color: var(--quantum-text-card) !important;
+  }
+  
+  .text-muted-foreground {
+    color: var(--quantum-muted) !important;
+  }
+  
+  /* Cards específicos */
+  .bg-card {
+    background-color: var(--quantum-card) !important;
+    color: var(--quantum-text-card) !important;
+  }
+  
+  /* Navegação inferior */
+  .bottom-nav {
+    background-color: var(--quantum-card) !important;
+    border-top: 1px solid var(--quantum-border);
+    color: var(--quantum-text-card) !important;
+  }
+  
+  /* Inputs com melhor contraste */
+  .quantum-input {
+    background: var(--quantum-input) !important;
+    border: 1px solid var(--quantum-border) !important;
+    color: var(--quantum-text) !important;
+  }
+  
+  .quantum-input:focus {
+    border-color: var(--quantum-primary) !important;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) !important;
+  }
+  
+  /* Slider com melhor visibilidade */
   .quantum-slider {
     position: relative;
     width: 100%;
-    height: 6px;
-    background: var(--quantum-sliderTrack);
-    border-radius: 3px;
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 4px;
     outline: none;
     cursor: pointer;
   }
   
+  .theme-dark .quantum-slider {
+    background: #374151;
+  }
+  
   .quantum-slider::-webkit-slider-thumb {
     appearance: none;
-    width: 20px;
-    height: 20px;
-    background: var(--quantum-sliderThumb);
+    width: 24px;
+    height: 24px;
+    background: var(--quantum-primary);
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
   }
   
   .quantum-slider::-webkit-slider-thumb:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
   }
   
   .quantum-slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: var(--quantum-sliderThumb);
+    width: 24px;
+    height: 24px;
+    background: var(--quantum-primary);
     border-radius: 50%;
     cursor: pointer;
     border: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
   
-  /* Labels do slider */
+  /* Labels do slider sempre visíveis */
   .slider-labels {
-    color: var(--quantum-text);
-    font-weight: 500;
+    color: var(--quantum-text) !important;
+    font-weight: 600;
+    font-size: 14px;
   }
   
-  /* Navegação inferior */
-  .bottom-nav {
-    background-color: var(--quantum-card);
-    border-top: 1px solid var(--quantum-border);
-    backdrop-filter: blur(10px);
+  /* Forçar cores corretas em elementos específicos */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--quantum-text) !important;
   }
   
-  /* Inputs */
-  .quantum-input {
-    background: var(--quantum-input);
-    border: 1px solid var(--quantum-border);
-    color: var(--quantum-text);
+  .card-quantum h1, 
+  .card-quantum h2, 
+  .card-quantum h3, 
+  .card-quantum h4, 
+  .card-quantum h5, 
+  .card-quantum h6 {
+    color: var(--quantum-text-card) !important;
   }
   
-  .quantum-input:focus {
-    border-color: var(--quantum-primary);
-    box-shadow: 0 0 0 2px rgba(123, 97, 255, 0.2);
+  .card-quantum p {
+    color: var(--quantum-text-card) !important;
   }
   
-  /* Contraste para acessibilidade */
-  .theme-dark .text-contrast {
-    color: #F5F7FF;
+  .card-quantum span {
+    color: var(--quantum-text-card) !important;
   }
   
-  .theme-light .text-contrast {
-    color: #0F1220;
+  /* Badges e labels */
+  .badge {
+    background: var(--quantum-primary) !important;
+    color: white !important;
   }
   
-  /* Estados de loading */
-  .loading-quantum {
-    background: var(--quantum-gradient);
-    background-size: 200% 200%;
-    animation: quantum-pulse 2s ease-in-out infinite;
+  /* Botões de navegação */
+  .nav-button {
+    color: var(--quantum-text) !important;
   }
   
-  @keyframes quantum-pulse {
-    0%, 100% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
+  .nav-button.active {
+    color: var(--quantum-primary) !important;
   }
 }
 

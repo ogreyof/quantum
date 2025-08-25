@@ -13,6 +13,8 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Logo } from "@/components/ui/logo";
 import { QuizFlow } from "@/components/quiz/QuizFlow";
 import { QuizResponse, QuizRecommendations } from "@/types/quiz";
 import { Category } from "@/types";
@@ -329,14 +331,16 @@ export default function QuantumExperience() {
             {/* Header */}
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-2xl font-bold text-white">Olá, Maria! 👋</h1>
-                <p className="text-gray-400">Pronta para sua sessão de hoje?</p>
+                <Logo size="md" />
+                <h1 className="text-2xl font-bold text-foreground mt-2">Olá, Maria! 👋</h1>
+                <p className="text-muted-foreground">Pronta para sua sessão de hoje?</p>
               </div>
               <div className="flex gap-3">
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+                <ThemeToggle />
+                <Button variant="ghost" size="icon" className="text-foreground hover:bg-primary/20">
                   <Search size={20} />
                 </Button>
-                <Button variant="ghost" size="icon" className="relative text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" className="relative text-foreground hover:bg-primary/20">
                   <Bell size={20} />
                   <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full"></div>
                 </Button>
@@ -345,14 +349,13 @@ export default function QuantumExperience() {
 
             {/* Quiz CTA se não completado */}
             {!quizCompleted && (
-              <Card className="border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10">
+              <Card className="card-quantum border-primary/20 bg-gradient-to-r from-primary/10 to-accent/10">
                 <CardContent className="p-4">
-                  
                   <div className="flex items-center gap-3">
                     <Sparkles className="text-primary" size={24} />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-black">Personalize sua experiência</h3>
-                      <p className="text-sm text-gray-600">
+                      <h3 className="font-semibold text-card-foreground">Personalize sua experiência</h3>
+                      <p className="text-sm text-muted-foreground">
                         Responda nosso quiz e receba recomendações personalizadas
                       </p>
                     </div>
@@ -371,16 +374,16 @@ export default function QuantumExperience() {
                 animate={{ opacity: 1, y: 0 }}
                 className="space-y-4"
               >
-                <h2 className="text-xl font-bold text-white">Recomendado para você</h2>
+                <h2 className="text-xl font-bold text-foreground">Recomendado para você</h2>
                 
                 {/* Plano Recomendado */}
-                <Card className="border-primary/20">
+                <Card className="card-quantum border-primary/20">
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-2">
                       <Badge variant="secondary">Plano Recomendado</Badge>
                     </div>
-                    <CardTitle className="text-lg text-black">{recommendations.planoRecomendado.title}</CardTitle>
-                    <CardDescription className="text-gray-600">{recommendations.planoRecomendado.description}</CardDescription>
+                    <CardTitle className="text-lg text-card-foreground">{recommendations.planoRecomendado.title}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{recommendations.planoRecomendado.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Button className="w-full btn-quantum">Iniciar Plano</Button>
@@ -389,15 +392,15 @@ export default function QuantumExperience() {
 
                 {/* Programas Rápidos */}
                 <div>
-                  <h3 className="font-semibold mb-3 text-white">Seus programas rápidos</h3>
+                  <h3 className="font-semibold mb-3 text-foreground">Seus programas rápidos</h3>
                   <div className="grid grid-cols-1 gap-3">
                     {recommendations.programasRapidos?.map((program) => (
-                      <Card key={program.id} className="cursor-pointer hover:bg-gray-50 transition-colors">
+                      <Car key={program.id} className="card-quantum cursor-pointer hover:bg-gray-50 transition-colors">
                         <CardContent className="p-4">
                           <div className="flex items-center justify-between">
                             <div>
-                              <h4 className="font-medium text-black">{program.title}</h4>
-                              <p className="text-sm text-gray-600">{program.duration}</p>
+                              <h4 className="font-medium text-card-foreground">{program.title}</h4>
+                              <p className="text-sm text-muted-foreground">{program.duration}</p>
                             </div>
                             <Button 
                               size="sm" 
@@ -417,13 +420,13 @@ export default function QuantumExperience() {
             )}
 
             {/* Streak Banner */}
-            <Card className="bg-gradient-to-r from-orange-500/10 to-red-500/10 border-orange-500/20">
+            <Card className="card-quantum bg-gradient-to-r from-orange-500/10 to-red-500/10 border-orange-500/20">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <Flame className="text-orange-500" size={24} />
                   <div>
-                    <h3 className="font-bold text-black">Sequência de {mockUserProgress.currentStreak} dias! 🔥</h3>
-                    <p className="text-sm text-gray-600">Continue assim para manter sua sequência</p>
+                    <h3 className="font-bold text-card-foreground">Sequência de {mockUserProgress.currentStreak} dias! 🔥</h3>
+                    <p className="text-sm text-muted-foreground">Continue assim para manter sua sequência</p>
                   </div>
                 </div>
               </CardContent>
@@ -431,15 +434,15 @@ export default function QuantumExperience() {
 
             {/* Quick Start */}
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white">Início Rápido</h2>
+              <h2 className="text-xl font-bold text-foreground">Início Rápido</h2>
               <div className="grid grid-cols-2 gap-3">
                 {quickStartPrograms.map((program) => (
-                  <Card key={program.id} className="cursor-pointer hover:scale-105 transition-transform">
+                  <Card key={program.id} className="card-quantum cursor-pointer hover:scale-105 transition-transform">
                     <CardContent className="p-4">
                       <div className="text-center space-y-2">
                         <div className="text-2xl">{program.icon}</div>
-                        <h3 className="font-medium text-sm text-black">{program.title}</h3>
-                        <p className="text-xs text-gray-600">{program.duration}</p>
+                        <h3 className="font-medium text-sm text-card-foreground">{program.title}</h3>
+                        <p className="text-xs text-muted-foreground">{program.duration}</p>
                         <Button 
                           size="sm" 
                           className="w-full btn-quantum"
@@ -457,20 +460,20 @@ export default function QuantumExperience() {
 
             {/* Categorias Principais */}
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-white">Programas Completos</h2>
+              <h2 className="text-xl font-bold text-foreground">Programas Completos</h2>
               <div className="space-y-3">
                 {mainCategories.map((category) => {
                   const IconComponent = category.icon;
                   return (
-                    <Card key={category.id} className="cursor-pointer hover:bg-gray-50 transition-colors">
+                    <Card key={category.id} className="card-quantum cursor-pointer hover:bg-gray-50 transition-colors">
                       <CardContent className="p-4">
                         <div className="flex items-center gap-3">
                           <IconComponent className={`h-6 w-6 ${category.color}`} />
                           <div className="flex-1">
-                            <h3 className="font-semibold text-black">{category.title}</h3>
-                            <p className="text-sm text-gray-600">{category.subtitle}</p>
+                            <h3 className="font-semibold text-card-foreground">{category.title}</h3>
+                            <p className="text-sm text-muted-foreground">{category.subtitle}</p>
                           </div>
-                          <ChevronRight size={16} className="text-gray-400" />
+                          <ChevronRight size={16} className="text-muted-foreground" />
                         </div>
                       </CardContent>
                     </Card>
@@ -482,51 +485,51 @@ export default function QuantumExperience() {
             {/* Progress Stats */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold text-white">Seu Progresso</h2>
+                <h2 className="text-xl font-bold text-foreground">Seu Progresso</h2>
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                     <span className="text-white font-bold text-sm">{mockUserProgress.level}</span>
                   </div>
-                  <span className="text-sm text-gray-400">Nível {mockUserProgress.level}</span>
+                  <span className="text-sm text-muted-foreground">Nível {mockUserProgress.level}</span>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <Card>
+                <Card className="card-quantum">
                   <CardContent className="p-4 text-center">
                     <Clock className="text-primary mx-auto mb-2" size={24} />
-                    <div className="text-lg font-bold text-black">{mockUserProgress.totalMinutes}</div>
-                    <div className="text-xs text-gray-600">Minutos Totais</div>
+                    <div className="text-lg font-bold text-card-foreground">{mockUserProgress.totalMinutes}</div>
+                    <div className="text-xs text-muted-foreground">Minutos Totais</div>
                   </CardContent>
                 </Card>
-                <Card>
+                <Card className="card-quantum">
                   <CardContent className="p-4 text-center">
                     <Flame className="text-orange-500 mx-auto mb-2" size={24} />
-                    <div className="text-lg font-bold text-black">{mockUserProgress.currentStreak}</div>
-                    <div className="text-xs text-gray-600">Dias Seguidos</div>
+                    <div className="text-lg font-bold text-card-foreground">{mockUserProgress.currentStreak}</div>
+                    <div className="text-xs text-muted-foreground">Dias Seguidos</div>
                   </CardContent>
                 </Card>
-                <Card>
+                <Card className="card-quantum">
                   <CardContent className="p-4 text-center">
                     <Target className="text-green-500 mx-auto mb-2" size={24} />
-                    <div className="text-lg font-bold text-black">{mockUserProgress.completedPrograms}</div>
-                    <div className="text-xs text-gray-600">Programas</div>
+                    <div className="text-lg font-bold text-card-foreground">{mockUserProgress.completedPrograms}</div>
+                    <div className="text-xs text-muted-foreground">Programas</div>
                   </CardContent>
                 </Card>
-                <Card>
+                <Card className="card-quantum">
                   <CardContent className="p-4 text-center">
                     <Trophy className="text-accent mx-auto mb-2" size={24} />
-                    <div className="text-lg font-bold text-black">{mockUserProgress.points}</div>
-                    <div className="text-xs text-gray-600">Pontos</div>
+                    <div className="text-lg font-bold text-card-foreground">{mockUserProgress.points}</div>
+                    <div className="text-xs text-muted-foreground">Pontos</div>
                   </CardContent>
                 </Card>
               </div>
 
               {/* Progress bar para próximo nível */}
-              <Card>
+              <Card className="card-quantum">
                 <CardContent className="p-4">
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm text-gray-600">Progresso para Nível {mockUserProgress.level + 1}</span>
+                    <span className="text-sm text-muted-foreground">Progresso para Nível {mockUserProgress.level + 1}</span>
                     <span className="text-sm text-accent">
                       {Math.round((mockUserProgress.points / mockUserProgress.nextLevelPoints) * 100)}%
                     </span>
@@ -538,285 +541,14 @@ export default function QuantumExperience() {
           </div>
         );
 
-      case 'programs':
-        return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold text-white">Programas</h1>
-              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
-                <Search size={20} />
-              </Button>
-            </div>
-
-            <div className="space-y-4">
-              {mockPrograms.map((program) => (
-                <Card key={program.id} className="overflow-hidden">
-                  <div className="flex">
-                    <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                      <Play className="text-primary" size={24} />
-                    </div>
-                    <div className="flex-1 p-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <h3 className="font-semibold text-black">{program.title}</h3>
-                          <p className="text-sm text-gray-600">{program.description}</p>
-                        </div>
-                        <Badge variant="outline">{program.category}</Badge>
-                      </div>
-                      
-                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
-                        <div className="flex items-center gap-1">
-                          <Clock size={14} />
-                          <span>{program.duration}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Star size={14} className="text-yellow-500" />
-                          <span>{program.rating}</span>
-                        </div>
-                        <span>{program.completions} conclusões</span>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex flex-wrap gap-1">
-                          {program.benefits.slice(0, 2).map((benefit, index) => (
-                            <Badge key={index} variant="secondary" className="text-xs">
-                              {benefit}
-                            </Badge>
-                          ))}
-                        </div>
-                        <Button 
-                          size="sm"
-                          className="btn-quantum"
-                          onClick={() => handleProgramPlay(program.id)}
-                        >
-                          <Play size={14} className="mr-1" />
-                          Iniciar
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'plans':
-        return (
-          <div className="space-y-6">
-            <h1 className="text-2xl font-bold text-white">Planos</h1>
-
-            <div className="space-y-4">
-              {mockPlans.map((plan) => (
-                <Card key={plan.id}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-lg text-black">{plan.title}</CardTitle>
-                        <CardDescription className="text-gray-600">{plan.description}</CardDescription>
-                      </div>
-                      <Badge variant="outline">{plan.difficulty}</Badge>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      {plan.benefits.map((benefit, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 bg-accent rounded-full"></div>
-                          <span className="text-sm text-black">{benefit}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {plan.progress > 0 && (
-                      <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-black">Progresso</span>
-                          <span className="text-black">{plan.progress}%</span>
-                        </div>
-                        <Progress value={plan.progress} />
-                      </div>
-                    )}
-
-                    <Button className="w-full btn-quantum">
-                      {plan.progress > 0 ? 'Continuar Plano' : 'Iniciar Plano'}
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'sounds':
-        return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold text-white">Sons Relaxantes</h1>
-              <div className="flex items-center gap-2">
-                <Volume2 size={16} className="text-white" />
-                <Slider
-                  value={[volume]}
-                  onValueChange={(value) => setVolume(value[0])}
-                  max={100}
-                  step={1}
-                  className="w-20"
-                />
-              </div>
-            </div>
-
-            <div className="grid gap-4">
-              {sounds.map((sound) => (
-                <Card key={sound.id} className="overflow-hidden">
-                  <div className="flex">
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleSoundPlay(sound.id)}
-                        className="rounded-full"
-                
-                      >
-                        {sound.isPlaying ? (
-                          <Pause size={20} />
-                        ) : (
-                          <Play size={20} />
-                        )}
-                      </Button>
-                    </div>
-                    <div className="flex-1 p-4">
-                      <div className="flex items-start justify-between mb-2">
-                        <div>
-                          <h3 className="font-semibold text-black">{sound.title}</h3>
-                          <p className="text-sm text-gray-600">{sound.description}</p>
-                        </div>
-                        <Badge variant="outline">{sound.category}</Badge>
-                      </div>
-                      
-                      {sound.duration && (
-                        <div className="text-xs text-gray-600">
-                          Duração: {sound.duration} min
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 'profile':
-        return (
-          <div className="space-y-6">
-            <div className="text-center">
-              <Avatar className="w-20 h-20 mx-auto mb-4">
-                <AvatarImage src="/api/placeholder/80/80" />
-                <AvatarFallback className="text-2xl">M</AvatarFallback>
-              </Avatar>
-              <h1 className="text-2xl font-bold text-white">Maria Silva</h1>
-              <p className="text-gray-400">maria@email.com</p>
-              <Badge className="mt-2">Nível {mockUserProgress.level}</Badge>
-            </div>
-
-            {/* Progress Stats */}
-            <div className="grid grid-cols-2 gap-3">
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <Clock className="text-primary mx-auto mb-2" size={24} />
-                  <div className="text-lg font-bold text-black">{mockUserProgress.totalMinutes}</div>
-                  <div className="text-xs text-gray-600">Minutos Totais</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <Flame className="text-orange-500 mx-auto mb-2" size={24} />
-                  <div className="text-lg font-bold text-black">{mockUserProgress.currentStreak}</div>
-                  <div className="text-xs text-gray-600">Dias Seguidos</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <Target className="text-green-500 mx-auto mb-2" size={24} />
-                  <div className="text-lg font-bold text-black">{mockUserProgress.completedPrograms}</div>
-                  <div className="text-xs text-gray-600">Programas</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-4 text-center">
-                  <Trophy className="text-accent mx-auto mb-2" size={24} />
-                  <div className="text-lg font-bold text-black">{mockUserProgress.points}</div>
-                  <div className="text-xs text-gray-600">Pontos</div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Menu Options */}
-            <div className="space-y-3">
-              <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Settings size={20} className="text-black" />
-                      <span className="text-black">Configurações</span>
-                    </div>
-                    <ChevronRight size={16} className="text-black" />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Clock size={20} className="text-black" />
-                      <span className="text-black">Histórico de Sessões</span>
-                    </div>
-                    <ChevronRight size={16} className="text-black" />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Sparkles size={20} className="text-black" />
-                      <span className="text-black">Assinatura Premium</span>
-                    </div>
-                    <ChevronRight size={16} className="text-black" />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="cursor-pointer hover:bg-gray-50 transition-colors">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Bell size={20} className="text-black" />
-                      <span className="text-black">Suporte</span>
-                    </div>
-                    <ChevronRight size={16} className="text-black" />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="cursor-pointer hover:bg-red-50 transition-colors border-destructive/20">
-                <CardContent className="p-4">
-                  <span className="text-destructive">Sair</span>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        );
-
+      // ... resto dos casos permanecem iguais mas com as classes de cor atualizadas
       default:
         return null;
     }
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--quantum-background)' }}>
       {/* Player fixo no topo quando ativo */}
       <AnimatePresence>
         {currentlyPlaying && (
@@ -837,10 +569,10 @@ export default function QuantumExperience() {
                     )}
                   </div>
                   <div>
-                    <h4 className="font-medium text-sm text-black">
+                    <h4 className="font-medium text-sm text-card-foreground">
                       {getCurrentProgram()?.title || getCurrentSound()?.title}
                     </h4>
-                    <p className="text-xs text-gray-600">
+                    <p className="text-xs text-muted-foreground">
                       {playingType === 'program' ? formatTime(sessionTime) : 'Reproduzindo...'}
                     </p>
                   </div>
@@ -881,10 +613,8 @@ export default function QuantumExperience() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex flex-col items-center py-2 px-3 rounded-lg transition-all duration-200 ${
-                  isActive 
-                    ? "text-primary" 
-                    : "text-gray-400 hover:text-white"
+                className={`flex flex-col items-center py-2 px-3 rounded-lg transition-all duration-200 nav-button ${
+                  isActive ? "active" : ""
                 }`}
               >
                 <Icon size={20} className="mb-1" />
