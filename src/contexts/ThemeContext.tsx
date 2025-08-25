@@ -25,7 +25,7 @@ interface ThemeProviderProps {
   defaultTheme?: ThemeName;
 }
 
-export const ThemeProvider = ({ children, defaultTheme = 'night' }: ThemeProviderProps) => {
+export const ThemeProvider = ({ children, defaultTheme = 'dark' }: ThemeProviderProps) => {
   const [themeName, setThemeName] = useState<ThemeName>(defaultTheme);
 
   useEffect(() => {
@@ -50,17 +50,18 @@ export const ThemeProvider = ({ children, defaultTheme = 'night' }: ThemeProvide
 
     // Aplicar classe do tema no body
     document.body.className = `theme-${themeName}`;
+    document.body.style.backgroundColor = theme.colors.background;
+    document.body.style.color = theme.colors.text;
   }, [themeName]);
 
   const toggleTheme = () => {
-    setThemeName(prev => prev === 'night' ? 'light' : 'night');
+    setThemeName(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
   const setTheme = (newTheme: ThemeName) => {
     setThemeName(newTheme);
   };
 
-  // Obter o tema atual de forma type-safe
   const currentTheme: Theme = themes[themeName];
 
   const value: ThemeContextType = {

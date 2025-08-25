@@ -1,53 +1,53 @@
 export const themes = {
-  night: {
-    name: 'night' as const,
-    displayName: 'Claro',
+  dark: {
+    name: 'dark' as const,
+    displayName: 'Escuro',
     colors: {
-      background: '#F1F5F9',
-      card: '#FFFFFF',
-      text: '#0F172A',
-      muted: '#64748B',
-      primary: '#8B5CF6',
-      accent: '#06B6D4',
-      gradient: 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%)',
-      border: 'rgba(139, 92, 246, 0.2)',
-      input: '#FFFFFF',
-      ring: '#8B5CF6',
+      background: '#0B0E1A',
+      card: '#0F1220',
+      text: '#F5F7FF',
+      muted: '#B9C0FF',
+      primary: '#7B61FF',
+      accent: '#12D6DF',
+      gradient: 'linear-gradient(135deg, #7B61FF 0%, #12D6DF 100%)',
+      border: 'rgba(123, 97, 255, 0.2)',
+      input: '#0F1220',
+      ring: '#7B61FF',
       success: '#10B981',
       warning: '#F59E0B',
       error: '#EF4444',
-      cardHover: '#F9FAFB',
-      textSecondary: '#475569',
-      textTertiary: '#64748B',
+      cardHover: '#1A1F2E',
+      textSecondary: '#B9C0FF',
+      textTertiary: '#8B92B0',
+      sliderThumb: '#7B61FF',
+      sliderTrack: '#1A1F2E'
     }
   },
   light: {
     name: 'light' as const,
-    displayName: 'Escuro',
+    displayName: 'Claro',
     colors: {
-      background: '#1E293B',
-      card: '#334155',
-      text: '#F8FAFC',
-      muted: '#94A3B8',
-      primary: '#8B5CF6',
-      accent: '#06B6D4',
-      gradient: 'linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%)',
-      border: 'rgba(139, 92, 246, 0.3)',
-      input: '#475569',
-      ring: '#8B5CF6',
-      success: '#10B981',
-      warning: '#F59E0B',
-      error: '#EF4444',
-      cardHover: '#475569',
-      textSecondary: '#E2E8F0',
-      textTertiary: '#94A3B8',
+      background: '#F7F9FF',
+      card: '#FFFFFF',
+      text: '#0F1220',
+      muted: '#4A4F6A',
+      primary: '#6C4DFF',
+      accent: '#0FBED8',
+      gradient: 'linear-gradient(135deg, #6C4DFF 0%, #0FBED8 100%)',
+      border: 'rgba(108, 77, 255, 0.2)',
+      input: '#FFFFFF',
+      ring: '#6C4DFF',
+      success: '#059669',
+      warning: '#D97706',
+      error: '#DC2626',
+      cardHover: '#F1F5F9',
+      textSecondary: '#4A4F6A',
+      textTertiary: '#6B7280',
+      sliderThumb: '#6C4DFF',
+      sliderTrack: '#E2E8F0'
     }
   }
 } as const;
 
 export type ThemeName = keyof typeof themes;
-
-// Definir Theme como union type explícito
-export type Theme = 
-  | typeof themes.night
-  | typeof themes.light;
+export type Theme = typeof themes.dark | typeof themes.light;

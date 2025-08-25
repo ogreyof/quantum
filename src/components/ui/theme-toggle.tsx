@@ -1,51 +1,37 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface ThemeToggleProps {
   showLabel?: boolean;
+  variant?: "default" | "ghost" | "outline";
+  size?: "default" | "sm" | "lg" | "icon";
 }
 
-export const ThemeToggle = ({ showLabel = false }: ThemeToggleProps) => {
-  const [isDark, setIsDark] = useState(true); // Começar com modo escuro
-
-  useEffect(() => {
-    // Carregar tema salvo
-    const savedTheme = localStorage.getItem('quantum-theme');
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-    }
-  }, []);
-
-  useEffect(() => {
-    // Aplicar tema
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      document.body.style.backgroundColor = '#1A1A2E';
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.style.backgroundColor = '#F8FAFC';
-    }
-    
-    // Salvar preferência
-    localStorage.setItem('quantum-theme', isDark ? 'dark' : 'light');
-  }, [isDark]);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
+export const ThemeToggle = ({ 
+  showLabel = false, 
+  variant = "ghost", 
+  size = "icon" 
+}: ThemeToggleProps) => {
+  const { themeName, toggleTheme } = useTheme();
+  const isDark = themeName === 'dark';
 
   if (showLabel) {
     return (
       <div className="flex items-center gap-3">
-        <span className="text-sm text-black">Tema</span>
+        <span className="text-sm" style={{ color: 'var(--quantum-text)' }}>Tema</span>
         <Button
           variant="outline"
           size="sm"
           onClick={toggleTheme}
           className="flex items-center gap-2"
+          style={{
+            borderColor: 'var(--quantum-border)',
+            backgroundColor: 'var(--quantum-card)',
+            color: 'var(--quantum-text)'
+          }}
         >
           {isDark ? (
             <>
@@ -65,17 +51,20 @@ export const ThemeToggle = ({ showLabel = false }: ThemeToggleProps) => {
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
+      variant={variant}
+      size={size}
       onClick={toggleTheme}
-      className="hover:bg-primary/20"
+      className="hover:bg-opacity-20"
+      style={{
+        color: 'var(--quantum-text)',
+        backgroundColor: variant === 'ghost' ? 'transparent' : 'var(--quantum-card)'
+      }}
     >
       {isDark ? (
-        <Sun className="h-5 w-5 text-white" />
+        <Sun className="h-5 w-5" />
       ) : (
-        <Moon className="h-5 w-5 text-black" />
+        <Moon className="h-5 w-5" />
       )}
-    
     </Button>
   );
 };
