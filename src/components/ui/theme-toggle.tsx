@@ -17,55 +17,45 @@ export const ThemeToggle = ({ showLabel = false }: ThemeToggleProps) => {
     if (savedTheme) {
       setIsDark(savedTheme === 'dark');
     }
-    
-    // Aplicar tema inicial
-    applyTheme(savedTheme === 'light' ? false : true);
   }, []);
 
-  const applyTheme = (dark: boolean) => {
-    const root = document.documentElement;
-    
-    if (dark) {
-      root.classList.remove('light');
-      root.classList.add('dark');
+  useEffect(() => {
+    // Aplicar tema
+    if (isDark) {
+      document.documentElement.classList.add('dark');
       document.body.style.backgroundColor = '#1A1A2E';
-      document.body.style.color = '#FFFFFF';
     } else {
-      root.classList.remove('dark');
-      root.classList.add('light');
+      document.documentElement.classList.remove('dark');
       document.body.style.backgroundColor = '#F8FAFC';
-      document.body.style.color = '#0F172A';
     }
-  };
-
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    applyTheme(newTheme);
     
     // Salvar preferência
-    localStorage.setItem('quantum-theme', newTheme ? 'dark' : 'light');
+    localStorage.setItem('quantum-theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
   };
 
   if (showLabel) {
     return (
       <div className="flex items-center gap-3">
-        <span className="text-sm font-medium">Tema</span>
+        <span className="text-sm text-black">Tema</span>
         <Button
           variant="outline"
           size="sm"
           onClick={toggleTheme}
-          className="flex items-center gap-2 min-w-[100px] justify-start"
+          className="flex items-center gap-2"
         >
           {isDark ? (
             <>
               <Moon className="h-4 w-4" />
-              <span>Escuro</span>
+              Escuro
             </>
           ) : (
             <>
               <Sun className="h-4 w-4" />
-              <span>Claro</span>
+              Claro
             </>
           )}
         </Button>
@@ -78,14 +68,14 @@ export const ThemeToggle = ({ showLabel = false }: ThemeToggleProps) => {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="hover:bg-primary/20 transition-colors"
-      title={isDark ? "Mudar para modo claro" : "Mudar para modo escuro"}
+      className="hover:bg-primary/20"
     >
       {isDark ? (
-        <Sun className="h-5 w-5" />
+        <Sun className="h-5 w-5 text-white" />
       ) : (
-        <Moon className="h-5 w-5" />
+        <Moon className="h-5 w-5 text-black" />
       )}
+    
     </Button>
   );
 };
