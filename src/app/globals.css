@@ -18,7 +18,7 @@
     --primary-foreground: #FFFFFF;
     
     --secondary: #2D2D44;
-    --secondary-foreground: #E5E7EB;
+    --secondary-foreground: #FFFFFF;
     
     --muted: #374151;
     --muted-foreground: #9CA3AF;
@@ -39,6 +39,37 @@
     --quantum-gradient: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%);
     --quantum-gradient-subtle: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(6, 182, 212, 0.1) 100%);
   }
+
+  /* Modo claro */
+  .light {
+    --background: #F8FAFC;
+    --foreground: #0F172A;
+    
+    --card: #FFFFFF;
+    --card-foreground: #0F172A;
+    
+    --popover: #FFFFFF;
+    --popover-foreground: #0F172A;
+    
+    --primary: #8B5CF6;
+    --primary-foreground: #FFFFFF;
+    
+    --secondary: #F1F5F9;
+    --secondary-foreground: #0F172A;
+    
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+    
+    --accent: #06B6D4;
+    --accent-foreground: #FFFFFF;
+    
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    
+    --border: rgba(139, 92, 246, 0.2);
+    --input: #FFFFFF;
+    --ring: #8B5CF6;
+  }
 }
 
 @layer base {
@@ -48,8 +79,7 @@
   
   body {
     @apply bg-background text-foreground font-sans;
-    background-color: #1A1A2E !important;
-    color: #FFFFFF !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   /* Gradientes Quantum */
@@ -63,17 +93,17 @@
   
   /* Cards premium - Brancos no fundo escuro */
   .card-quantum {
-    background: #FFFFFF;
+    background: hsl(var(--card));
     border: 1px solid rgba(139, 92, 246, 0.2);
     border-radius: var(--radius);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    color: #0F172A;
+    color: hsl(var(--card-foreground));
   }
   
   .card-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
   }
   
   /* Botões Quantum */
@@ -91,52 +121,141 @@
     box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
     color: white !important;
   }
+
+  /* Botões com melhor contraste */
+  .btn-outline {
+    background: transparent;
+    border: 2px solid hsl(var(--primary));
+    color: hsl(var(--primary)) !important;
+  }
+
+  .btn-outline:hover {
+    background: hsl(var(--primary));
+    color: white !important;
+  }
+
+  /* Botões secundários */
+  .btn-secondary {
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground)) !important;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .btn-secondary:hover {
+    background: hsl(var(--muted));
+    color: hsl(var(--foreground)) !important;
+  }
   
   /* Forçar cores corretas */
   .bg-background {
-    background-color: #1A1A2E !important;
+    background-color: hsl(var(--background)) !important;
   }
   
   .text-foreground {
-    color: #FFFFFF !important;
+    color: hsl(var(--foreground)) !important;
   }
   
   .bg-card {
-    background-color: #FFFFFF !important;
+    background-color: hsl(var(--card)) !important;
   }
   
   .text-card-foreground {
-    color: #0F172A !important;
+    color: hsl(var(--card-foreground)) !important;
   }
   
   .text-muted-foreground {
-    color: #9CA3AF !important;
+    color: hsl(var(--muted-foreground)) !important;
   }
   
   .bg-muted {
-    background-color: #374151 !important;
+    background-color: hsl(var(--muted)) !important;
   }
   
   .border-border {
-    border-color: rgba(139, 92, 246, 0.2) !important;
+    border-color: hsl(var(--border)) !important;
   }
   
-  /* Cards específicos */
-  .bg-card {
-    background-color: #FFFFFF !important;
+  /* Navegação inferior */
+  .bottom-nav {
+    background-color: hsl(var(--card)) !important;
+    border-top: 1px solid hsl(var(--border));
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Header */
+  .header-dark {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Inputs com melhor contraste */
+  input, textarea, select {
+    background-color: hsl(var(--input)) !important;
+    color: hsl(var(--foreground)) !important;
+    border: 1px solid hsl(var(--border)) !important;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  /* Badges com melhor contraste */
+  .badge-outline {
+    background: transparent;
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .badge-secondary {
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground)) !important;
+  }
+
+  /* Tabs com melhor contraste */
+  .tabs-trigger {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  .tabs-trigger[data-state="active"] {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    background: hsl(var(--muted));
+  }
+
+  .progress-indicator {
+    background: var(--quantum-gradient);
+  }
+
+  /* Melhor contraste para texto em botões escuros */
+  button[class*="bg-"] {
+    color: white !important;
+  }
+
+  button[class*="bg-white"], button[class*="bg-gray-100"] {
     color: #0F172A !important;
   }
-  
-  /* Navegação inferior escura */
-  .bottom-nav {
-    background-color: #2D2D44 !important;
-    border-top: 1px solid rgba(139, 92, 246, 0.3);
+
+  /* Garantir que texto em cards seja sempre visível */
+  .card-quantum * {
+    color: hsl(var(--card-foreground)) !important;
   }
-  
-  /* Header escuro */
-  .header-dark {
-    background-color: #1A1A2E !important;
-    color: #FFFFFF !important;
+
+  .card-quantum .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  /* Botões de navegação inferior */
+  .bottom-nav button {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  .bottom-nav button.active,
+  .bottom-nav button[aria-selected="true"] {
+    color: hsl(var(--primary)) !important;
   }
 }
 
@@ -146,14 +265,19 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #2D2D44;
+  background: hsl(var(--muted));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8B5CF6;
+  background: hsl(var(--primary));
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #06B6D4;
+  background: hsl(var(--accent));
+}
+
+/* Transições suaves para mudança de tema */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
