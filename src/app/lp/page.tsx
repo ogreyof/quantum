@@ -90,6 +90,25 @@ export default function LandingPage() {
     }
   ];
 
+  const handleCTA = (action: string) => {
+    switch (action) {
+      case 'trial':
+        alert('Redirecionando para ativação do trial de 30 dias...');
+        break;
+      case 'download':
+        alert('Redirecionando para download do app...');
+        break;
+      case 'plans':
+        document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      case 'subscribe':
+        alert('Redirecionando para assinatura...');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -128,19 +147,19 @@ export default function LandingPage() {
             <Button 
               size="lg" 
               className="btn-quantum text-lg px-8 py-4"
-              onClick={() => document.getElementById('planos')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => handleCTA('trial')}
             >
-              Começar Agora - 51% OFF
+              Ativar 30 Dias Grátis
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
               className="text-lg px-8 py-4"
-              onClick={() => setShowVideo(true)}
+              onClick={() => handleCTA('download')}
             >
               <Play className="mr-2 h-5 w-5" />
-              Ver Demonstração
+              Baixar App
             </Button>
           </div>
 
@@ -179,7 +198,7 @@ export default function LandingPage() {
               { problema: "Gordura localizada", icon: "⚖️", cor: "text-orange-400" }
             ].map((item, index) => (
               <Card key={index} className="card-quantum text-center p-6">
-                <div className="text-4xl mb-4">{item.problema}</div>
+                <div className="text-4xl mb-4">{item.icon}</div>
                 <h3 className={`font-semibold ${item.cor} mb-2`}>{item.problema}</h3>
                 <p className="text-sm text-gray-600">
                   Quantum tem a solução específica para você
@@ -281,7 +300,7 @@ export default function LandingPage() {
               🔥 OFERTA LIMITADA - Apenas hoje!
             </Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Escolha Seu Plano
+              Ver Planos
             </h2>
             <p className="text-xl text-gray-400">
               Preços promocionais por tempo limitado
@@ -311,14 +330,17 @@ export default function LandingPage() {
                   <div className="space-y-3 mb-8">
                     {plano.beneficios.map((beneficio, idx) => (
                       <div key={idx} className="flex items-center gap-3">
-                        <CheckCircle className="h-5 w-5 text-green-500" />
-                        <span className="text-black">{beneficio}</span>
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <span className="text-sm text-black">{beneficio}</span>
                       </div>
                     ))}
                   </div>
                   
-                  <Button className={`w-full py-3 ${plano.popular ? 'btn-quantum' : ''}`}>
-                    Começar Agora
+                  <Button 
+                    className={`w-full py-3 ${plano.popular ? 'btn-quantum' : ''}`}
+                    onClick={() => handleCTA('subscribe')}
+                  >
+                    Assinar Agora
                   </Button>
                 </CardContent>
               </Card>
@@ -353,7 +375,12 @@ export default function LandingPage() {
               onChange={(e) => setEmail(e.target.value)}
               className="max-w-sm"
             />
-            <Button size="lg" variant="secondary" className="px-8">
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="px-8"
+              onClick={() => handleCTA('trial')}
+            >
               Garantir Meu Desconto
             </Button>
           </div>
