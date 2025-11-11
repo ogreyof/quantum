@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Play, Calendar, Music, User, Bell, Search, Zap, Clock, Trophy, Target, Flame, ChevronRight, Star, Volume2, Pause, SkipForward, SkipBack, X, Settings, Moon, Sun, Palette, Droplets, Scissors, TrendingUp, ExternalLink, Users, DollarSign } from "lucide-react";
+import { Sparkles, Play, Calendar, Music, User, Bell, Search, Zap, Clock, Trophy, Target, Flame, ChevronRight, Star, Volume2, Pause, SkipForward, SkipBack, X, Settings, Moon, Sun, Palette, Droplets, Scissors, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,7 +21,6 @@ import { ForgotPasswordScreen } from "@/components/auth/ForgotPasswordScreen";
 import { QuizFlow } from "@/components/quiz/QuizFlow";
 import { QuizResponse, QuizRecommendations } from "@/types/auth";
 import { Category } from "@/types";
-import Link from "next/link";
 
 // Mock data
 const mockUserProgress = {
@@ -141,10 +140,10 @@ const mainCategories = [
 ];
 
 export default function QuantumExperience() {
-  const [authState, setAuthState] = useState<'login' | 'register' | 'forgot' | 'authenticated'>('authenticated'); // Mudei para authenticated para facilitar teste
+  const [authState, setAuthState] = useState<'login' | 'register' | 'forgot' | 'authenticated'>('login');
   const [activeTab, setActiveTab] = useState('home');
   const [showQuiz, setShowQuiz] = useState(false);
-  const [quizCompleted, setQuizCompleted] = useState(true); // Mudei para true para facilitar teste
+  const [quizCompleted, setQuizCompleted] = useState(false);
   const [recommendations, setRecommendations] = useState<QuizRecommendations | null>(null);
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
   const [playingType, setPlayingType] = useState<'program' | 'sound' | null>(null);
@@ -303,43 +302,6 @@ export default function QuantumExperience() {
                 </Button>
               </div>
             </div>
-
-            {/* Links de Acesso Rápido - NOVO */}
-            <Card className="card-quantum border-primary/20">
-              <CardHeader>
-                <CardTitle className="text-lg text-card-foreground">🔗 Acesso Rápido</CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Links para todas as páginas do sistema
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="grid grid-cols-1 gap-3">
-                  <Link href="/admin">
-                    <Button variant="outline" className="w-full justify-start">
-                      <Users className="h-4 w-4 mr-2" />
-                      Painel Administrativo
-                      <ExternalLink className="h-4 w-4 ml-auto" />
-                    </Button>
-                  </Link>
-                  
-                  <Link href="/vendedor">
-                    <Button variant="outline" className="w-full justify-start">
-                      <DollarSign className="h-4 w-4 mr-2" />
-                      Painel do Vendedor
-                      <ExternalLink className="h-4 w-4 ml-auto" />
-                    </Button>
-                  </Link>
-                  
-                  <Link href="/lp">
-                    <Button variant="outline" className="w-full justify-start">
-                      <Sparkles className="h-4 w-4 mr-2" />
-                      Landing Page
-                      <ExternalLink className="h-4 w-4 ml-auto" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
 
             {/* Quiz CTA se não completado */}
             {!quizCompleted && (
