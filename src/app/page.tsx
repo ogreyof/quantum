@@ -2,25 +2,29 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Play, Calendar, Music, User, Bell, Search, Zap, Clock, Trophy, Target, Flame, ChevronRight, Star, Volume2, Pause, SkipForward, SkipBack, X, Settings, Moon, Sun, Palette, Droplets, Scissors, TrendingUp } from "lucide-react";
+import { 
+  Sparkles, Play, Calendar, Music, User, Bell, Search, Clock, 
+  Trophy, Target, Flame, ChevronRight, Star, X, ArrowLeft,
+  Droplets, Scissors, TrendingUp, Shield, Activity, Moon,
+  Heart, Coffee, Zap, Award, Users, BarChart3, Settings
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Logo } from "@/components/ui/logo";
 import { LoginScreen } from "@/components/auth/LoginScreen";
 import { RegisterScreen } from "@/components/auth/RegisterScreen";
 import { ForgotPasswordScreen } from "@/components/auth/ForgotPasswordScreen";
 import { QuizFlow } from "@/components/quiz/QuizFlow";
+import { ProgramsView } from "@/components/programs/ProgramsView";
+import { PlansView } from "@/components/plans/PlansView";
+import { SoundsView } from "@/components/sounds/SoundsView";
+import { ProfileView } from "@/components/profile/ProfileView";
+import { SessionView } from "@/components/session/SessionView";
+import { CompletionView } from "@/components/session/CompletionView";
 import { QuizResponse, QuizRecommendations } from "@/types/auth";
-import { Category } from "@/types";
 
 // Mock data
 const mockUserProgress = {
@@ -34,73 +38,12 @@ const mockUserProgress = {
 };
 
 const quickStartPrograms = [
-  { id: '1', title: 'Cervical', duration: '10min', icon: '🦴', category: 'coluna' as Category },
-  { id: '3', title: 'Drenagem', duration: '15min', icon: '💧', category: 'drenagem' as Category },
-  { id: '5', title: 'Sono', duration: '12min', icon: '😴', category: 'sono' as Category },
-  { id: '4', title: 'Estética', duration: '8min', icon: '✨', category: 'estetica' as Category }
+  { id: 'cervical-rapido', title: 'Cervical', duration: '10min', icon: '🦴', category: 'coluna' },
+  { id: 'drenagem-rapido', title: 'Drenagem', duration: '15min', icon: '💧', category: 'drenagem' },
+  { id: 'sono-rapido', title: 'Sono', duration: '12min', icon: '😴', category: 'sono' },
+  { id: 'estetica-rapido', title: 'Estética', duration: '8min', icon: '✨', category: 'estetica' }
 ];
 
-const mockPrograms = [
-  {
-    id: '1',
-    title: 'Drenagem de Pernas',
-    duration: '15min',
-    description: 'Reduz inchaço e melhora circulação nas pernas',
-    category: 'drenagem' as Category,
-    difficulty: 'iniciante' as const,
-    thumbnail: '/api/placeholder/300/200',
-    benefits: ['Reduz inchaço', 'Melhora circulação', 'Sensação de leveza'],
-    rating: 4.8,
-    completions: 1250
-  },
-  {
-    id: '2',
-    title: 'Relaxamento Profundo',
-    duration: '12min',
-    description: 'Libera tensões e prepara para o descanso',
-    category: 'sono' as Category,
-    difficulty: 'iniciante' as const,
-    thumbnail: '/api/placeholder/300/200',
-    benefits: ['Reduz ansiedade', 'Melhora sono', 'Relaxa músculos'],
-    rating: 4.9,
-    completions: 980
-  },
-  {
-    id: '3',
-    title: 'Redução de Papada',
-    duration: '12min',
-    description: 'Tonifica músculos do pescoço e reduz papada',
-    category: 'estetica' as Category,
-    difficulty: 'intermediario' as const,
-    thumbnail: '/api/placeholder/300/200',
-    benefits: ['Reduz papada', 'Tonifica pescoço', 'Melhora contorno'],
-    rating: 4.7,
-    completions: 750
-  }
-];
-
-const mockSounds = [
-  {
-    id: '1',
-    title: 'Spa Relaxante',
-    category: 'spa' as const,
-    description: 'Sons suaves de spa para relaxamento profundo',
-    duration: null,
-    thumbnail: '/api/placeholder/200/200',
-    isPlaying: false
-  },
-  {
-    id: '2',
-    title: 'Água Corrente',
-    category: 'natureza' as const,
-    description: 'Som relaxante de água corrente',
-    duration: null,
-    thumbnail: '/api/placeholder/200/200',
-    isPlaying: false
-  }
-];
-
-// Categorias principais atualizadas
 const mainCategories = [
   {
     id: 'drenagem',
@@ -141,50 +84,28 @@ const mainCategories = [
 
 export default function QuantumExperience() {
   const [authState, setAuthState] = useState<'login' | 'register' | 'forgot' | 'authenticated'>('login');
-  const [activeTab, setActiveTab] = useState('home');
+  const [currentView, setCurrentView] = useState('home');
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [recommendations, setRecommendations] = useState<QuizRecommendations | null>(null);
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
-  const [playingType, setPlayingType] = useState<'program' | 'sound' | null>(null);
-  const [sessionTime, setSessionTime] = useState(0);
-  const [isSessionActive, setIsSessionActive] = useState(false);
-  const [sounds, setSounds] = useState(mockSounds);
-  const [volume, setVolume] = useState(50);
-  const [showSettings, setShowSettings] = useState(false);
-  const [notifications, setNotifications] = useState(true);
-  const [autoPlay, setAutoPlay] = useState(false);
-
-  // Timer effect
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isSessionActive) {
-      interval = setInterval(() => {
-        setSessionTime(prev => prev + 1);
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [isSessionActive]);
+  const [currentSession, setCurrentSession] = useState<any>(null);
+  const [sessionCompleted, setSessionCompleted] = useState(false);
 
   const handleLogin = async (email: string, password: string) => {
-    // Simular login
     console.log('Login:', email, password);
     setAuthState('authenticated');
-    // Verificar se precisa fazer quiz
     if (!quizCompleted) {
       setShowQuiz(true);
     }
   };
 
   const handleRegister = async (name: string, email: string, password: string) => {
-    // Simular registro
     console.log('Register:', name, email, password);
     setAuthState('authenticated');
-    setShowQuiz(true); // Novo usuário sempre faz quiz
+    setShowQuiz(true);
   };
 
   const handleForgotPassword = async (email: string) => {
-    // Simular envio de email
     console.log('Forgot password:', email);
   };
 
@@ -195,54 +116,20 @@ export default function QuantumExperience() {
     console.log('Quiz completed:', response, recs);
   };
 
-  const handleProgramPlay = (programId: string) => {
-    setCurrentlyPlaying(programId);
-    setPlayingType('program');
-    setIsSessionActive(true);
-    setSessionTime(0);
+  const handleStartProgram = (programId: string, programTitle: string, duration: string) => {
+    setCurrentSession({ id: programId, title: programTitle, duration });
+    setCurrentView('session');
   };
 
-  const handleSoundPlay = (soundId: string) => {
-    setSounds(prev => prev.map(sound => ({
-      ...sound,
-      isPlaying: sound.id === soundId ? !sound.isPlaying : false
-    })));
-    
-    const sound = sounds.find(s => s.id === soundId);
-    if (sound && !sound.isPlaying) {
-      setCurrentlyPlaying(soundId);
-      setPlayingType('sound');
-    } else {
-      setCurrentlyPlaying(null);
-      setPlayingType(null);
-    }
+  const handleSessionComplete = () => {
+    setSessionCompleted(true);
+    setCurrentView('completion');
   };
 
-  const stopSession = () => {
-    setCurrentlyPlaying(null);
-    setPlayingType(null);
-    setIsSessionActive(false);
-    setSounds(prev => prev.map(sound => ({ ...sound, isPlaying: false })));
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const getCurrentProgram = () => {
-    if (playingType === 'program') {
-      return mockPrograms.find(p => p.id === currentlyPlaying);
-    }
-    return null;
-  };
-
-  const getCurrentSound = () => {
-    if (playingType === 'sound') {
-      return sounds.find(s => s.id === currentlyPlaying);
-    }
-    return null;
+  const handleBackToHome = () => {
+    setCurrentView('home');
+    setCurrentSession(null);
+    setSessionCompleted(false);
   };
 
   // Renderizar telas de autenticação
@@ -279,8 +166,31 @@ export default function QuantumExperience() {
     return <QuizFlow onComplete={handleQuizComplete} />;
   }
 
+  // Renderizar sessão ativa
+  if (currentView === 'session' && currentSession) {
+    return (
+      <SessionView
+        programTitle={currentSession.title}
+        duration={currentSession.duration}
+        onBack={handleBackToHome}
+        onComplete={handleSessionComplete}
+      />
+    );
+  }
+
+  // Renderizar tela de conclusão
+  if (currentView === 'completion' && currentSession) {
+    return (
+      <CompletionView
+        programTitle={currentSession.title}
+        onBack={handleBackToHome}
+        onHome={handleBackToHome}
+      />
+    );
+  }
+
   const renderContent = () => {
-    switch (activeTab) {
+    switch (currentView) {
       case 'home':
         return (
           <div className="space-y-6">
@@ -342,7 +252,12 @@ export default function QuantumExperience() {
                     <CardDescription className="text-muted-foreground">{recommendations.planoRecomendado.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button className="w-full btn-quantum">Iniciar Plano</Button>
+                    <Button 
+                      className="w-full btn-quantum"
+                      onClick={() => setCurrentView('plans')}
+                    >
+                      Iniciar Plano
+                    </Button>
                   </CardContent>
                 </Card>
 
@@ -361,7 +276,7 @@ export default function QuantumExperience() {
                             <Button 
                               size="sm" 
                               className="btn-quantum"
-                              onClick={() => handleProgramPlay(program.id)}
+                              onClick={() => handleStartProgram(program.id, program.title, program.duration)}
                             >
                               <Play size={16} className="mr-1" />
                               Iniciar
@@ -402,7 +317,7 @@ export default function QuantumExperience() {
                         <Button 
                           size="sm" 
                           className="w-full btn-quantum"
-                          onClick={() => handleProgramPlay(program.id)}
+                          onClick={() => handleStartProgram(program.id, program.title, program.duration)}
                         >
                           <Play size={14} className="mr-1" />
                           Iniciar
@@ -421,7 +336,11 @@ export default function QuantumExperience() {
                 {mainCategories.map((category) => {
                   const IconComponent = category.icon;
                   return (
-                    <Card key={category.id} className="card-quantum cursor-pointer hover:bg-gray-50 transition-colors">
+                    <Card 
+                      key={category.id} 
+                      className="card-quantum cursor-pointer hover:bg-gray-50 transition-colors"
+                      onClick={() => setCurrentView('programs')}
+                    >
                       <CardContent className="p-4">
                         <div className="flex items-center gap-3">
                           <IconComponent className={`h-6 w-6 ${category.color}`} />
@@ -497,10 +416,41 @@ export default function QuantumExperience() {
           </div>
         );
 
+      case 'programs':
+        return (
+          <ProgramsView 
+            onBack={() => setCurrentView('home')}
+            onStartProgram={handleStartProgram}
+          />
+        );
+
+      case 'plans':
+        return (
+          <PlansView 
+            onBack={() => setCurrentView('home')}
+            onStartPlan={(planId) => console.log('Starting plan:', planId)}
+          />
+        );
+
+      case 'sounds':
+        return (
+          <SoundsView 
+            onBack={() => setCurrentView('home')}
+          />
+        );
+
+      case 'profile':
+        return (
+          <ProfileView 
+            onBack={() => setCurrentView('home')}
+            onLogout={() => setAuthState('login')}
+          />
+        );
+
       default:
         return (
           <div className="flex items-center justify-center h-64">
-            <p className="text-muted-foreground">Em desenvolvimento...</p>
+            <p className="text-muted-foreground">Página não encontrada</p>
           </div>
         );
     }
@@ -508,48 +458,8 @@ export default function QuantumExperience() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--quantum-background)' }}>
-      {/* Player fixo no topo quando ativo */}
-      <AnimatePresence>
-        {currentlyPlaying && (
-          <motion.div
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            exit={{ y: -100 }}
-            className="fixed top-0 left-0 right-0 z-50 bg-card border-b shadow-lg"
-          >
-            <div className="max-w-md mx-auto p-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
-                    {playingType === 'program' ? (
-                      <Play size={20} className="text-primary" />
-                    ) : (
-                      <Music size={20} className="text-primary" />
-                    )}
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-sm text-card-foreground">
-                      {getCurrentProgram()?.title || getCurrentSound()?.title}
-                    </h4>
-                    <p className="text-xs text-muted-foreground">
-                      {playingType === 'program' ? formatTime(sessionTime) : 'Reproduzindo...'}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="icon" onClick={stopSession}>
-                    <X size={16} />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Container principal */}
-      <div className="max-w-md mx-auto pb-20" style={{ paddingTop: currentlyPlaying ? '80px' : '0' }}>
+      <div className="max-w-md mx-auto pb-20">
         <div className="p-4">
           {renderContent()}
         </div>
@@ -566,12 +476,12 @@ export default function QuantumExperience() {
             { id: 'profile', label: 'Perfil', icon: User },
           ].map((tab) => {
             const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
+            const isActive = currentView === tab.id;
             
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => setCurrentView(tab.id)}
                 className={`flex flex-col items-center py-2 px-3 rounded-lg transition-all duration-200 nav-button ${
                   isActive ? "active" : ""
                 }`}
