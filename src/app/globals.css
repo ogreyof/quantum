@@ -4,18 +4,18 @@
 
 @layer base {
   :root {
-    /* Tema Escuro - Melhor contraste */
-    --quantum-background: #1A1A2E;
-    --quantum-card: #FFFFFF;
-    --quantum-text: #FFFFFF;
-    --quantum-text-card: #000000;
-    --quantum-muted: #9CA3AF;
-    --quantum-primary: #8B5CF6;
-    --quantum-accent: #06B6D4;
-    --quantum-gradient: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 50%, #06B6D4 100%);
-    --quantum-border: rgba(139, 92, 246, 0.3);
-    --quantum-input: #2D2D44;
-    --quantum-ring: #8B5CF6;
+    /* Tema Escuro - Cores especificadas */
+    --quantum-background: #0B0E1A;
+    --quantum-card: #0F1220;
+    --quantum-text: #F5F7FF;
+    --quantum-text-card: #F5F7FF;
+    --quantum-muted: #B9C0FF;
+    --quantum-primary: #7B61FF;
+    --quantum-accent: #12D6DF;
+    --quantum-gradient: linear-gradient(135deg, #7B61FF 0%, #12D6DF 100%);
+    --quantum-border: rgba(123, 97, 255, 0.3);
+    --quantum-input: #1A1F2E;
+    --quantum-ring: #7B61FF;
     --quantum-success: #10B981;
     --quantum-warning: #F59E0B;
     --quantum-error: #EF4444;
@@ -45,17 +45,17 @@
 
   /* Tema Claro */
   .theme-light {
-    --quantum-background: #F8FAFC;
+    --quantum-background: #F7F9FF;
     --quantum-card: #FFFFFF;
-    --quantum-text: #000000;
-    --quantum-text-card: #000000;
-    --quantum-muted: #64748B;
-    --quantum-primary: #7C3AED;
-    --quantum-accent: #0891B2;
-    --quantum-gradient: linear-gradient(135deg, #7C3AED 0%, #3B82F6 50%, #0891B2 100%);
-    --quantum-border: rgba(124, 58, 237, 0.2);
+    --quantum-text: #0F1220;
+    --quantum-text-card: #0F1220;
+    --quantum-muted: #4A4F6A;
+    --quantum-primary: #6C4DFF;
+    --quantum-accent: #0FBED8;
+    --quantum-gradient: linear-gradient(135deg, #6C4DFF 0%, #0FBED8 100%);
+    --quantum-border: rgba(108, 77, 255, 0.2);
     --quantum-input: #FFFFFF;
-    --quantum-ring: #7C3AED;
+    --quantum-ring: #6C4DFF;
     --quantum-success: #059669;
     --quantum-warning: #D97706;
     --quantum-error: #DC2626;
@@ -86,7 +86,7 @@
   
   .card-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 8px 30px rgba(123, 97, 255, 0.2);
   }
   
   /* Botões Quantum */
@@ -101,7 +101,7 @@
   
   .btn-quantum:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 25px rgba(123, 97, 255, 0.4);
     color: white !important;
   }
   
@@ -140,10 +140,10 @@
   
   .quantum-input:focus {
     border-color: var(--quantum-primary) !important;
-    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) !important;
+    box-shadow: 0 0 0 2px rgba(123, 97, 255, 0.2) !important;
   }
   
-  /* Slider com melhor visibilidade */
+  /* Slider com melhor visibilidade - CORRIGIDO */
   .quantum-slider {
     position: relative;
     width: 100%;
@@ -171,7 +171,7 @@
   
   .quantum-slider::-webkit-slider-thumb:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.4);
   }
   
   .quantum-slider::-moz-range-thumb {
@@ -184,11 +184,15 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
   
-  /* Labels do slider sempre visíveis */
+  /* Labels do slider sempre visíveis - CORRIGIDO */
   .slider-labels {
     color: var(--quantum-text) !important;
     font-weight: 600;
     font-size: 14px;
+  }
+  
+  .theme-light .slider-labels {
+    color: var(--quantum-text) !important;
   }
   
   /* Forçar cores corretas em elementos específicos */
@@ -221,11 +225,61 @@
   
   /* Botões de navegação */
   .nav-button {
-    color: var(--quantum-text) !important;
+    color: var(--quantum-muted) !important;
   }
   
   .nav-button.active {
     color: var(--quantum-primary) !important;
+  }
+  
+  /* Slider específico do quiz - NOVO */
+  .quiz-slider {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: var(--quantum-muted);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+  }
+  
+  .quiz-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--quantum-primary);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.4);
+    transition: all 0.2s ease;
+  }
+  
+  .quiz-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(123, 97, 255, 0.6);
+  }
+  
+  .quiz-slider::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--quantum-primary);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 12px rgba(123, 97, 255, 0.4);
+  }
+  
+  /* Labels do quiz sempre visíveis */
+  .quiz-labels {
+    color: var(--quantum-text) !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .theme-light .quiz-labels {
+    color: var(--quantum-text) !important;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -252,4 +306,32 @@
   .card-quantum {
     border-radius: calc(var(--radius) - 2px);
   }
+}
+
+/* Gradientes específicos */
+.bg-gradient-quantum {
+  background: var(--quantum-gradient) !important;
+}
+
+.bg-gradient-quantum-subtle {
+  background: linear-gradient(135deg, rgba(123, 97, 255, 0.1) 0%, rgba(18, 214, 223, 0.1) 100%) !important;
+}
+
+/* Estados de foco melhorados */
+.focus\:ring-quantum:focus {
+  box-shadow: 0 0 0 3px rgba(123, 97, 255, 0.3) !important;
+}
+
+/* Animações suaves */
+.transition-quantum {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover states melhorados */
+.hover\:scale-quantum:hover {
+  transform: scale(1.02);
+}
+
+.hover\:glow-quantum:hover {
+  box-shadow: 0 8px 32px rgba(123, 97, 255, 0.3);
 }

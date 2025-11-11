@@ -15,8 +15,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Logo } from "@/components/ui/logo";
+import { LoginScreen } from "@/components/auth/LoginScreen";
+import { RegisterScreen } from "@/components/auth/RegisterScreen";
+import { ForgotPasswordScreen } from "@/components/auth/ForgotPasswordScreen";
 import { QuizFlow } from "@/components/quiz/QuizFlow";
-import { QuizResponse, QuizRecommendations } from "@/types/quiz";
+import { QuizResponse, QuizRecommendations } from "@/types/auth";
 import { Category } from "@/types";
 
 // Mock data
@@ -73,78 +76,6 @@ const mockPrograms = [
     benefits: ['Reduz papada', 'Tonifica pescoço', 'Melhora contorno'],
     rating: 4.7,
     completions: 750
-  },
-  {
-    id: '4',
-    title: 'Fortalecimento Capilar',
-    duration: '15min',
-    description: 'Fortalece folículos e raízes capilares',
-    category: 'cabelos' as Category,
-    difficulty: 'iniciante' as const,
-    thumbnail: '/api/placeholder/300/200',
-    benefits: ['Fortalece cabelos', 'Previne queda', 'Estimula crescimento'],
-    rating: 4.6,
-    completions: 1100
-  },
-  {
-    id: '5',
-    title: 'Queima Localizada',
-    duration: '25min',
-    description: 'Queima gordura em áreas específicas',
-    category: 'emagrecimento' as Category,
-    difficulty: 'intermediario' as const,
-    thumbnail: '/api/placeholder/300/200',
-    benefits: ['Queima gordura', 'Tonifica músculos', 'Modela corpo'],
-    rating: 4.8,
-    completions: 890
-  },
-  {
-    id: '6',
-    title: 'Alívio Cervical',
-    duration: '10min',
-    description: 'Alívio de tensões na região cervical',
-    category: 'coluna' as Category,
-    difficulty: 'iniciante' as const,
-    thumbnail: '/api/placeholder/300/200',
-    benefits: ['Alivia dor', 'Melhora postura', 'Relaxa músculos'],
-    rating: 4.5,
-    completions: 650
-  }
-];
-
-const mockPlans = [
-  {
-    id: '1',
-    title: '7 Dias - Pernas Leves',
-    duration: '7 dias',
-    description: 'Plano focado em drenagem e circulação das pernas',
-    programs: ['1'],
-    benefits: ['Reduz inchaço', 'Melhora circulação', 'Alívio imediato'],
-    difficulty: 'iniciante' as const,
-    price: 'Incluído na assinatura',
-    progress: 0
-  },
-  {
-    id: '2',
-    title: '14 Dias - Rejuvenescimento Facial',
-    duration: '14 dias',
-    description: 'Programa completo de estética facial',
-    programs: ['3'],
-    benefits: ['Reduz papada', 'Suaviza rugas', 'Rejuvenesce'],
-    difficulty: 'intermediario' as const,
-    price: 'Incluído na assinatura',
-    progress: 35
-  },
-  {
-    id: '3',
-    title: '21 Dias - Cabelos Fortes',
-    duration: '21 dias',
-    description: 'Fortalecimento e crescimento capilar',
-    programs: ['4'],
-    benefits: ['Fortalece cabelos', 'Previne queda', 'Estimula crescimento'],
-    difficulty: 'intermediario' as const,
-    price: 'Incluído na assinatura',
-    progress: 0
   }
 ];
 
@@ -164,33 +95,6 @@ const mockSounds = [
     category: 'natureza' as const,
     description: 'Som relaxante de água corrente',
     duration: null,
-    thumbnail: '/api/placeholder/200/200',
-    isPlaying: false
-  },
-  {
-    id: '3',
-    title: 'Chuva Suave',
-    category: 'natureza' as const,
-    description: 'Som de chuva leve para relaxamento',
-    duration: null,
-    thumbnail: '/api/placeholder/200/200',
-    isPlaying: false
-  },
-  {
-    id: '4',
-    title: 'Binaural - Sono',
-    category: 'binaural' as const,
-    description: 'Frequências binaurais para induzir sono profundo',
-    duration: 30,
-    thumbnail: '/api/placeholder/200/200',
-    isPlaying: false
-  },
-  {
-    id: '5',
-    title: 'Respiração 4-7-8',
-    category: 'respiracao' as const,
-    duration: 10,
-    description: 'Técnica de respiração para relaxamento',
     thumbnail: '/api/placeholder/200/200',
     isPlaying: false
   }
@@ -236,6 +140,7 @@ const mainCategories = [
 ];
 
 export default function QuantumExperience() {
+  const [authState, setAuthState] = useState<'login' | 'register' | 'forgot' | 'authenticated'>('login');
   const [activeTab, setActiveTab] = useState('home');
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
@@ -260,6 +165,28 @@ export default function QuantumExperience() {
     }
     return () => clearInterval(interval);
   }, [isSessionActive]);
+
+  const handleLogin = async (email: string, password: string) => {
+    // Simular login
+    console.log('Login:', email, password);
+    setAuthState('authenticated');
+    // Verificar se precisa fazer quiz
+    if (!quizCompleted) {
+      setShowQuiz(true);
+    }
+  };
+
+  const handleRegister = async (name: string, email: string, password: string) => {
+    // Simular registro
+    console.log('Register:', name, email, password);
+    setAuthState('authenticated');
+    setShowQuiz(true); // Novo usuário sempre faz quiz
+  };
+
+  const handleForgotPassword = async (email: string) => {
+    // Simular envio de email
+    console.log('Forgot password:', email);
+  };
 
   const handleQuizComplete = (response: QuizResponse, recs: QuizRecommendations) => {
     setRecommendations(recs);
@@ -317,6 +244,35 @@ export default function QuantumExperience() {
     }
     return null;
   };
+
+  // Renderizar telas de autenticação
+  if (authState === 'login') {
+    return (
+      <LoginScreen
+        onLogin={handleLogin}
+        onRegister={() => setAuthState('register')}
+        onForgotPassword={() => setAuthState('forgot')}
+      />
+    );
+  }
+
+  if (authState === 'register') {
+    return (
+      <RegisterScreen
+        onRegister={handleRegister}
+        onBackToLogin={() => setAuthState('login')}
+      />
+    );
+  }
+
+  if (authState === 'forgot') {
+    return (
+      <ForgotPasswordScreen
+        onSendReset={handleForgotPassword}
+        onBackToLogin={() => setAuthState('login')}
+      />
+    );
+  }
 
   // Mostrar quiz se não foi completado
   if (showQuiz) {
@@ -395,7 +351,7 @@ export default function QuantumExperience() {
                   <h3 className="font-semibold mb-3 text-foreground">Seus programas rápidos</h3>
                   <div className="grid grid-cols-1 gap-3">
                     {recommendations.programasRapidos?.map((program) => (
-                      <Car key={program.id} className="card-quantum cursor-pointer hover:bg-gray-50 transition-colors">
+                      <Card key={program.id} className="card-quantum cursor-pointer hover:bg-gray-50 transition-colors">
                         <CardContent className="p-4">
                           <div className="flex items-center justify-between">
                             <div>
@@ -541,9 +497,12 @@ export default function QuantumExperience() {
           </div>
         );
 
-      // ... resto dos casos permanecem iguais mas com as classes de cor atualizadas
       default:
-        return null;
+        return (
+          <div className="flex items-center justify-center h-64">
+            <p className="text-muted-foreground">Em desenvolvimento...</p>
+          </div>
+        );
     }
   };
 

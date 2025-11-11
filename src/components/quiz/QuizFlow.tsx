@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { QuizWelcome } from "./QuizWelcome";
 import { QuizStep } from "./QuizStep";
+import { QuizResults } from "./QuizResults";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -10,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 import { quizOptions, contraindicacoesText, lgpdText } from "@/data/quiz-options";
-import { QuizResponse, QuizRecommendations } from "@/types/quiz";
+import { QuizResponse, QuizRecommendations } from "@/types/auth";
 import { Category } from "@/types";
 
 interface QuizFlowProps {
@@ -91,7 +92,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'alivio-cervical',
         title: 'Alívio Cervical',
         duration: tempoDisponivel || '10min',
-        category: 'coluna' as Category
+        category: 'coluna'
       });
     }
     if (objetivo === 'drenagem' || regioes.includes('pernas')) {
@@ -99,7 +100,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'drenagem-pernas',
         title: 'Drenagem Pernas Leves',
         duration: '15min',
-        category: 'drenagem' as Category
+        category: 'drenagem'
       });
     }
     if (objetivo === 'sono') {
@@ -107,7 +108,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'sono-profundo',
         title: 'Sono Profundo',
         duration: '12min',
-        category: 'sono' as Category
+        category: 'sono'
       });
     }
     if (objetivo === 'performance') {
@@ -115,7 +116,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'pos-treino',
         title: 'Pós-Treino Express',
         duration: '12min',
-        category: 'performance' as Category
+        category: 'performance'
       });
     }
 
@@ -125,7 +126,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         id: 'relax-total',
         title: 'Relax Total',
         duration: '8min',
-        category: 'bem-estar' as Category
+        category: 'bem-estar'
       });
     }
 
@@ -179,7 +180,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--quantum-background)' }}>
       {/* Passo 1: Objetivo Principal */}
       {currentStep === 1 && (
         <QuizStep
@@ -229,7 +230,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
                   checked={responses.regioes?.includes(regiao.id)}
                   onCheckedChange={() => toggleArrayItem('regioes', regiao.id)}
                 />
-                <Label htmlFor={regiao.id} className="text-sm font-medium">
+                <Label htmlFor={regiao.id} className="text-sm font-medium text-foreground">
                   {regiao.label}
                 </Label>
               </div>
@@ -238,7 +239,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         </QuizStep>
       )}
 
-      {/* Passo 3: Escala de Dor */}
+      {/* Passo 3: Escala de Dor - CORRIGIDO */}
       {currentStep === 3 && (
         <QuizStep
           title="Qual seu nível de dor/desconforto?"
@@ -251,7 +252,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         >
           <div className="space-y-6">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">
+              <div className="text-4xl font-bold mb-2" style={{ color: 'var(--quantum-primary)' }}>
                 {escalaDorValue}
               </div>
               <p className="text-sm text-muted-foreground">
@@ -262,14 +263,17 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
                 {escalaDorValue >= 9 && "Dor muito intensa"}
               </p>
             </div>
-            <Slider
-              value={[escalaDorValue]}
-              onValueChange={(value) => updateResponse('escalaDor', value[0])}
-              max={10}
-              step={1}
-              className="w-full"
-            />
-            <div className="flex justify-between text-xs text-muted-foreground">
+            <div className="px-4">
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value={escalaDorValue}
+                onChange={(e) => updateResponse('escalaDor', parseInt(e.target.value))}
+                className="quiz-slider w-full"
+              />
+            </div>
+            <div className="flex justify-between text-sm quiz-labels px-4">
               <span>0</span>
               <span>5</span>
               <span>10</span>
@@ -297,7 +301,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
                   checked={responses.condicoes?.includes(condicao.id)}
                   onCheckedChange={() => toggleArrayItem('condicoes', condicao.id)}
                 />
-                <Label htmlFor={condicao.id} className="text-sm">
+                <Label htmlFor={condicao.id} className="text-sm text-foreground">
                   {condicao.label}
                 </Label>
               </div>
@@ -306,7 +310,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
         </QuizStep>
       )}
 
-      {/* Passo 5: Aparelhos */}
+      {/* Passo 5: Aparelhos - ATUALIZADO */}
       {currentStep === 5 && (
         <QuizStep
           title="Quais aparelhos Quantum você possui?"
@@ -317,17 +321,23 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
           onPrev={handlePrev}
           canProceed={canProceed()}
         >
-          <div className="grid grid-cols-1 gap-2 max-h-60 overflow-y-auto">
+          <div className="grid grid-cols-1 gap-3 max-h-60 overflow-y-auto">
             {quizOptions.aparelhos.map((aparelho) => (
-              <div key={aparelho.id} className="flex items-center space-x-2">
+              <div key={aparelho.id} className="flex items-start space-x-3 p-3 border rounded-lg hover:bg-muted/50 transition-colors">
                 <Checkbox
                   id={aparelho.id}
                   checked={responses.aparelhos?.includes(aparelho.id)}
                   onCheckedChange={() => toggleArrayItem('aparelhos', aparelho.id)}
                 />
-                <Label htmlFor={aparelho.id} className="text-sm">
-                  {aparelho.label}
-                </Label>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-lg">{aparelho.icon}</span>
+                    <Label htmlFor={aparelho.id} className="text-sm font-medium text-foreground">
+                      {aparelho.label}
+                    </Label>
+                  </div>
+                  <p className="text-xs text-muted-foreground">{aparelho.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -352,7 +362,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
             {quizOptions.tempoDisponivel.map((tempo) => (
               <div key={tempo.id} className="flex items-center space-x-2">
                 <RadioGroupItem value={tempo.value} id={tempo.id} />
-                <Label htmlFor={tempo.id} className="text-sm font-medium">
+                <Label htmlFor={tempo.id} className="text-sm font-medium text-foreground">
                   {tempo.label}
                 </Label>
               </div>
@@ -410,7 +420,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
             {quizOptions.horarios.map((horario) => (
               <div key={horario.id} className="flex items-center space-x-2">
                 <RadioGroupItem value={horario.value} id={horario.id} />
-                <Label htmlFor={horario.id} className="text-sm font-medium">
+                <Label htmlFor={horario.id} className="text-sm font-medium text-foreground">
                   {horario.label}
                 </Label>
               </div>
@@ -435,6 +445,11 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
               value={contraindicacoesText}
               readOnly
               className="min-h-32 text-sm"
+              style={{
+                backgroundColor: 'var(--quantum-input)',
+                color: 'var(--quantum-text)',
+                border: '1px solid var(--quantum-border)'
+              }}
             />
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -442,7 +457,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
                 checked={responses.contraindicacoes}
                 onCheckedChange={(checked) => updateResponse('contraindicacoes', checked)}
               />
-              <Label htmlFor="contraindicacoes" className="text-sm">
+              <Label htmlFor="contraindicacoes" className="text-sm text-foreground">
                 Li e estou ciente das contraindicações acima
               </Label>
             </div>
@@ -467,6 +482,11 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
               value={lgpdText}
               readOnly
               className="min-h-20 text-sm"
+              style={{
+                backgroundColor: 'var(--quantum-input)',
+                color: 'var(--quantum-text)',
+                border: '1px solid var(--quantum-border)'
+              }}
             />
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -474,7 +494,7 @@ export const QuizFlow = ({ onComplete }: QuizFlowProps) => {
                 checked={responses.lgpdConsent}
                 onCheckedChange={(checked) => updateResponse('lgpdConsent', checked)}
               />
-              <Label htmlFor="lgpd" className="text-sm">
+              <Label htmlFor="lgpd" className="text-sm text-foreground">
                 Autorizo o uso dos meus dados conforme descrito
               </Label>
             </div>
