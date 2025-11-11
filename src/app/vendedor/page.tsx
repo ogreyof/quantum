@@ -55,23 +55,23 @@ export default function VendedorPanel() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--quantum-background)' }}>
       <div className="max-w-6xl mx-auto p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Link href="/">
               <Button variant="ghost" size="icon">
-                <ArrowLeft className="h-5 w-5 text-white" />
+                <ArrowLeft className="h-5 w-5" style={{ color: 'var(--quantum-text)' }} />
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-white">Painel do Vendedor</h1>
-              <p className="text-gray-400">Bem-vindo, {vendedorData.nome}!</p>
+              <h1 className="text-3xl font-bold" style={{ color: 'var(--quantum-text)' }}>Painel do Vendedor</h1>
+              <p style={{ color: 'var(--quantum-muted)' }}>Bem-vindo, {vendedorData.nome}!</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-sm text-gray-400">ID: {vendedorData.id}</p>
+            <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>ID: {vendedorData.id}</p>
             <Badge className="bg-gradient-quantum text-white">Vendedor Ativo</Badge>
           </div>
         </div>
@@ -89,45 +89,45 @@ export default function VendedorPanel() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Vendas Este Mês</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Vendas Este Mês</CardTitle>
                   <Users className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">{vendedorData.vendas}</div>
-                  <p className="text-xs text-gray-600">Meta: {vendedorData.meta}</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>{vendedorData.vendas}</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>Meta: {vendedorData.meta}</p>
                 </CardContent>
               </Card>
 
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Comissão Mensal</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Comissão Mensal</CardTitle>
                   <DollarSign className="h-4 w-4 text-green-500" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">R$ {vendedorData.comissao}</div>
-                  <p className="text-xs text-gray-600">+15% vs mês anterior</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>R$ {vendedorData.comissao}</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>+15% vs mês anterior</p>
                 </CardContent>
               </Card>
 
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Taxa de Conversão</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Taxa de Conversão</CardTitle>
                   <TrendingUp className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">{vendedorData.conversao}%</div>
-                  <p className="text-xs text-gray-600">Acima da média</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>{vendedorData.conversao}%</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>Acima da média</p>
                 </CardContent>
               </Card>
 
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Comissão Total</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Comissão Total</CardTitle>
                   <Target className="h-4 w-4 text-green-500" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">R$ {vendedorData.comissaoTotal.toLocaleString()}</div>
-                  <p className="text-xs text-gray-600">Acumulado</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>R$ {vendedorData.comissaoTotal.toLocaleString()}</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>Acumulado</p>
                 </CardContent>
               </Card>
             </div>
@@ -135,13 +135,13 @@ export default function VendedorPanel() {
             {/* Meta Progress */}
             <Card className="card-quantum">
               <CardHeader>
-                <CardTitle className="text-black">Progresso da Meta Mensal</CardTitle>
+                <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Progresso da Meta Mensal</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-black">Meta: {metas.mensal} vendas</span>
-                    <span className="text-black">{metas.atual}/{metas.mensal}</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Meta: {metas.mensal} vendas</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>{metas.atual}/{metas.mensal}</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-4">
                     <div 
@@ -149,7 +149,7 @@ export default function VendedorPanel() {
                       style={{ width: `${(metas.atual / metas.mensal) * 100}%` }}
                     />
                   </div>
-                  <div className="flex justify-between text-sm text-gray-600">
+                  <div className="flex justify-between text-sm" style={{ color: 'var(--quantum-muted)' }}>
                     <span>Faltam {metas.faltam} vendas</span>
                     <span>{metas.diasRestantes} dias restantes</span>
                   </div>
@@ -160,16 +160,16 @@ export default function VendedorPanel() {
             {/* Vendas Recentes */}
             <Card className="card-quantum">
               <CardHeader>
-                <CardTitle className="text-black">Vendas Recentes</CardTitle>
+                <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Vendas Recentes</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {vendasRecentes.map((venda) => (
                     <div key={venda.id} className="flex items-center justify-between p-3 border rounded-lg">
                       <div>
-                        <p className="font-medium text-black">{venda.cliente}</p>
-                        <p className="text-sm text-gray-600">{venda.plano} - R$ {venda.valor}</p>
-                        <p className="text-xs text-gray-500">{venda.data}</p>
+                        <p className="font-medium" style={{ color: 'var(--quantum-text-card)' }}>{venda.cliente}</p>
+                        <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>{venda.plano} - R$ {venda.valor}</p>
+                        <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>{venda.data}</p>
                       </div>
                       <Badge variant={venda.status === 'ativa' ? 'default' : 'secondary'}>
                         {venda.status}
@@ -184,7 +184,7 @@ export default function VendedorPanel() {
           <TabsContent value="vendas" className="space-y-6">
             <Card className="card-quantum">
               <CardHeader>
-                <CardTitle className="text-black">Histórico de Vendas</CardTitle>
+                <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Histórico de Vendas</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -195,9 +195,9 @@ export default function VendedorPanel() {
                           <span className="text-white font-bold">{venda.cliente.charAt(0)}</span>
                         </div>
                         <div>
-                          <p className="font-medium text-black">{venda.cliente}</p>
-                          <p className="text-sm text-gray-600">{venda.plano}</p>
-                          <p className="text-xs text-gray-500">Vendido em: {venda.data}</p>
+                          <p className="font-medium" style={{ color: 'var(--quantum-text-card)' }}>{venda.cliente}</p>
+                          <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>{venda.plano}</p>
+                          <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>Vendido em: {venda.data}</p>
                         </div>
                       </div>
                       <div className="text-right">
@@ -223,7 +223,7 @@ export default function VendedorPanel() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Seu Link de Vendas</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Seu Link de Vendas</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex gap-2">
@@ -245,18 +245,18 @@ export default function VendedorPanel() {
 
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Criar Link Personalizado</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Criar Link Personalizado</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <Label htmlFor="link-personalizado" className="text-black">Nome do Link</Label>
+                    <Label htmlFor="link-personalizado" style={{ color: 'var(--quantum-text-card)' }}>Nome do Link</Label>
                     <Input 
                       id="link-personalizado"
                       placeholder="meu-link-personalizado"
                       value={linkPersonalizado}
                       onChange={(e) => setLinkPersonalizado(e.target.value)}
                     />
-                    <p className="text-xs text-gray-600 mt-1">
+                    <p className="text-xs mt-1" style={{ color: 'var(--quantum-muted)' }}>
                       Será: quantum.app/v/{linkPersonalizado}
                     </p>
                   </div>
@@ -274,21 +274,21 @@ export default function VendedorPanel() {
 
             <Card className="card-quantum">
               <CardHeader>
-                <CardTitle className="text-black">Estatísticas do Link</CardTitle>
+                <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Estatísticas do Link</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center p-4 border rounded-lg">
                     <div className="text-2xl font-bold text-primary">127</div>
-                    <p className="text-sm text-gray-600">Cliques este mês</p>
+                    <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>Cliques este mês</p>
                   </div>
                   <div className="text-center p-4 border rounded-lg">
                     <div className="text-2xl font-bold text-green-500">45</div>
-                    <p className="text-sm text-gray-600">Conversões</p>
+                    <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>Conversões</p>
                   </div>
                   <div className="text-center p-4 border rounded-lg">
                     <div className="text-2xl font-bold text-accent">35.4%</div>
-                    <p className="text-sm text-gray-600">Taxa de conversão</p>
+                    <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>Taxa de conversão</p>
                   </div>
                 </div>
               </CardContent>
@@ -299,24 +299,24 @@ export default function VendedorPanel() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Resumo de Comissões</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Resumo de Comissões</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between">
-                    <span className="text-black">Este mês:</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Este mês:</span>
                     <span className="font-bold text-green-600">R$ {vendedorData.comissao}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-black">Mês anterior:</span>
-                    <span className="font-bold text-black">R$ 1.950</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Mês anterior:</span>
+                    <span className="font-bold" style={{ color: 'var(--quantum-text-card)' }}>R$ 1.950</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-black">Total acumulado:</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Total acumulado:</span>
                     <span className="font-bold text-primary">R$ {vendedorData.comissaoTotal.toLocaleString()}</span>
                   </div>
                   <hr />
                   <div className="flex justify-between">
-                    <span className="text-black">Próximo pagamento:</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Próximo pagamento:</span>
                     <span className="font-bold text-accent">05/02/2024</span>
                   </div>
                 </CardContent>
@@ -324,23 +324,23 @@ export default function VendedorPanel() {
 
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Estrutura de Comissão</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Estrutura de Comissão</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-black">Plano Basic (R$ 47):</span>
-                    <span className="font-bold text-black">R$ 23,50 (50%)</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Plano Basic (R$ 47):</span>
+                    <span className="font-bold" style={{ color: 'var(--quantum-text-card)' }}>R$ 23,50 (50%)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-black">Plano Premium (R$ 97):</span>
-                    <span className="font-bold text-black">R$ 48,50 (50%)</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Plano Premium (R$ 97):</span>
+                    <span className="font-bold" style={{ color: 'var(--quantum-text-card)' }}>R$ 48,50 (50%)</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-black">Plano Anual (R$ 497):</span>
-                    <span className="font-bold text-black">R$ 248,50 (50%)</span>
+                    <span style={{ color: 'var(--quantum-text-card)' }}>Plano Anual (R$ 497):</span>
+                    <span className="font-bold" style={{ color: 'var(--quantum-text-card)' }}>R$ 248,50 (50%)</span>
                   </div>
                   <hr />
-                  <p className="text-xs text-gray-600">
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>
                     Comissões são pagas todo dia 5 do mês seguinte
                   </p>
                 </CardContent>
@@ -349,28 +349,28 @@ export default function VendedorPanel() {
 
             <Card className="card-quantum">
               <CardHeader>
-                <CardTitle className="text-black">Histórico de Pagamentos</CardTitle>
+                <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Histórico de Pagamentos</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center p-3 border rounded-lg">
                     <div>
-                      <p className="font-medium text-black">Janeiro 2024</p>
-                      <p className="text-sm text-gray-600">Pago em 05/01/2024</p>
+                      <p className="font-medium" style={{ color: 'var(--quantum-text-card)' }}>Janeiro 2024</p>
+                      <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>Pago em 05/01/2024</p>
                     </div>
                     <span className="font-bold text-green-600">R$ 1.950</span>
                   </div>
                   <div className="flex justify-between items-center p-3 border rounded-lg">
                     <div>
-                      <p className="font-medium text-black">Dezembro 2023</p>
-                      <p className="text-sm text-gray-600">Pago em 05/12/2023</p>
+                      <p className="font-medium" style={{ color: 'var(--quantum-text-card)' }}>Dezembro 2023</p>
+                      <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>Pago em 05/12/2023</p>
                     </div>
                     <span className="font-bold text-green-600">R$ 2.180</span>
                   </div>
                   <div className="flex justify-between items-center p-3 border rounded-lg">
                     <div>
-                      <p className="font-medium text-black">Novembro 2023</p>
-                      <p className="text-sm text-gray-600">Pago em 05/11/2023</p>
+                      <p className="font-medium" style={{ color: 'var(--quantum-text-card)' }}>Novembro 2023</p>
+                      <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>Pago em 05/11/2023</p>
                     </div>
                     <span className="font-bold text-green-600">R$ 1.875</span>
                   </div>

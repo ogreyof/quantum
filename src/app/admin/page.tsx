@@ -31,25 +31,25 @@ export default function AdminPanel() {
   ];
 
   const salesData = [
-    { vendedor: "Carlos Mendes", vendas: 45, comissao: 2250, meta: 50 },
+    { vendedor: "Carlos Mendes", vendas:  45, comissao: 2250, meta: 50 },
     { vendedor: "Lucia Ferreira", vendas: 38, comissao: 1900, meta: 40 },
     { vendedor: "Roberto Lima", vendas: 52, comissao: 2600, meta: 50 },
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--quantum-background)' }}>
       <div className="max-w-7xl mx-auto p-6">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Link href="/">
               <Button variant="ghost" size="icon">
-                <ArrowLeft className="h-5 w-5 text-white" />
+                <ArrowLeft className="h-5 w-5" style={{ color: 'var(--quantum-text)' }} />
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-white">Painel Administrativo</h1>
-              <p className="text-gray-400">Quantum Experience - Dashboard</p>
+              <h1 className="text-3xl font-bold" style={{ color: 'var(--quantum-text)' }}>Painel Administrativo</h1>
+              <p style={{ color: 'var(--quantum-muted)' }}>Quantum Experience - Dashboard</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -58,7 +58,7 @@ export default function AdminPanel() {
               Exportar Dados
             </Button>
             <Button variant="ghost" size="icon">
-              <Settings className="h-5 w-5 text-white" />
+              <Settings className="h-5 w-5" style={{ color: 'var(--quantum-text)' }} />
             </Button>
           </div>
         </div>
@@ -76,45 +76,45 @@ export default function AdminPanel() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Total de Usuários</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Total de Usuários</CardTitle>
                   <Users className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">{stats.totalUsers.toLocaleString()}</div>
-                  <p className="text-xs text-gray-600">+{stats.newUsersToday} hoje</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>{stats.totalUsers.toLocaleString()}</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>+{stats.newUsersToday} hoje</p>
                 </CardContent>
               </Card>
 
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Assinaturas Ativas</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Assinaturas Ativas</CardTitle>
                   <UserCheck className="h-4 w-4 text-green-500" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">{stats.activeSubscriptions.toLocaleString()}</div>
-                  <p className="text-xs text-gray-600">-{stats.canceledToday} cancelamentos hoje</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>{stats.activeSubscriptions.toLocaleString()}</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>-{stats.canceledToday} cancelamentos hoje</p>
                 </CardContent>
               </Card>
 
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Receita Mensal</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Receita Mensal</CardTitle>
                   <DollarSign className="h-4 w-4 text-green-500" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">R$ {stats.monthlyRevenue.toLocaleString()}</div>
-                  <p className="text-xs text-gray-600">+12% vs mês anterior</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>R$ {stats.monthlyRevenue.toLocaleString()}</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>+12% vs mês anterior</p>
                 </CardContent>
               </Card>
 
               <Card className="card-quantum">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-black">Taxa de Conversão</CardTitle>
+                  <CardTitle className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>Taxa de Conversão</CardTitle>
                   <TrendingUp className="h-4 w-4 text-primary" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-black">{stats.conversionRate}%</div>
-                  <p className="text-xs text-gray-600">+2.1% vs mês anterior</p>
+                  <div className="text-2xl font-bold" style={{ color: 'var(--quantum-text-card)' }}>{stats.conversionRate}%</div>
+                  <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>+2.1% vs mês anterior</p>
                 </CardContent>
               </Card>
             </div>
@@ -123,21 +123,21 @@ export default function AdminPanel() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Usuários Recentes</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Usuários Recentes</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {recentUsers.map((user) => (
                       <div key={user.id} className="flex items-center justify-between">
                         <div>
-                          <p className="font-medium text-black">{user.name}</p>
-                          <p className="text-sm text-gray-600">{user.email}</p>
+                          <p className="font-medium" style={{ color: 'var(--quantum-text-card)' }}>{user.name}</p>
+                          <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>{user.email}</p>
                         </div>
                         <div className="text-right">
                           <Badge variant={user.status === 'ativa' ? 'default' : 'destructive'}>
                             {user.status}
                           </Badge>
-                          <p className="text-xs text-gray-600 mt-1">{user.plan}</p>
+                          <p className="text-xs mt-1" style={{ color: 'var(--quantum-muted)' }}>{user.plan}</p>
                         </div>
                       </div>
                     ))}
@@ -147,15 +147,15 @@ export default function AdminPanel() {
 
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Performance de Vendas</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Performance de Vendas</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {salesData.map((seller, index) => (
                       <div key={index} className="space-y-2">
                         <div className="flex justify-between">
-                          <span className="text-sm font-medium text-black">{seller.vendedor}</span>
-                          <span className="text-sm text-gray-600">{seller.vendas}/{seller.meta}</span>
+                          <span className="text-sm font-medium" style={{ color: 'var(--quantum-text-card)' }}>{seller.vendedor}</span>
+                          <span className="text-sm" style={{ color: 'var(--quantum-muted)' }}>{seller.vendas}/{seller.meta}</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
@@ -163,7 +163,7 @@ export default function AdminPanel() {
                             style={{ width: `${(seller.vendas / seller.meta) * 100}%` }}
                           />
                         </div>
-                        <p className="text-xs text-gray-600">Comissão: R$ {seller.comissao}</p>
+                        <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>Comissão: R$ {seller.comissao}</p>
                       </div>
                     ))}
                   </div>
@@ -175,7 +175,7 @@ export default function AdminPanel() {
           <TabsContent value="users" className="space-y-6">
             <Card className="card-quantum">
               <CardHeader>
-                <CardTitle className="text-black">Gerenciamento de Usuários</CardTitle>
+                <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Gerenciamento de Usuários</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -186,9 +186,9 @@ export default function AdminPanel() {
                           <span className="text-white font-bold">{user.name.charAt(0)}</span>
                         </div>
                         <div>
-                          <p className="font-medium text-black">{user.name}</p>
-                          <p className="text-sm text-gray-600">{user.email}</p>
-                          <p className="text-xs text-gray-500">Membro desde: {user.joined}</p>
+                          <p className="font-medium" style={{ color: 'var(--quantum-text-card)' }}>{user.name}</p>
+                          <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>{user.email}</p>
+                          <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>Membro desde: {user.joined}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
@@ -210,7 +210,7 @@ export default function AdminPanel() {
           <TabsContent value="sales" className="space-y-6">
             <Card className="card-quantum">
               <CardHeader>
-                <CardTitle className="text-black">Relatório de Vendas</CardTitle>
+                <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Relatório de Vendas</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -218,18 +218,18 @@ export default function AdminPanel() {
                     <div key={index} className="p-4 border rounded-lg">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="font-semibold text-black">{seller.vendedor}</h3>
-                          <p className="text-sm text-gray-600">Vendas este mês: {seller.vendas}</p>
+                          <h3 className="font-semibold" style={{ color: 'var(--quantum-text-card)' }}>{seller.vendedor}</h3>
+                          <p className="text-sm" style={{ color: 'var(--quantum-muted)' }}>Vendas este mês: {seller.vendas}</p>
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-green-600">R$ {seller.comissao}</p>
-                          <p className="text-xs text-gray-600">Comissão</p>
+                          <p className="text-xs" style={{ color: 'var(--quantum-muted)' }}>Comissão</p>
                         </div>
                       </div>
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                          <span className="text-black">Meta: {seller.meta}</span>
-                          <span className="text-black">{Math.round((seller.vendas / seller.meta) * 100)}%</span>
+                          <span style={{ color: 'var(--quantum-text-card)' }}>Meta: {seller.meta}</span>
+                          <span style={{ color: 'var(--quantum-text-card)' }}>{Math.round((seller.vendas / seller.meta) * 100)}%</span>
                         </div>
                         <div className="w-full bg-gray-200 rounded-full h-3">
                           <div 
@@ -249,7 +249,7 @@ export default function AdminPanel() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Relatórios Disponíveis</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Relatórios Disponíveis</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Button className="w-full justify-start" variant="outline">
@@ -273,7 +273,7 @@ export default function AdminPanel() {
 
               <Card className="card-quantum">
                 <CardHeader>
-                  <CardTitle className="text-black">Exportar Dados</CardTitle>
+                  <CardTitle style={{ color: 'var(--quantum-text-card)' }}>Exportar Dados</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
