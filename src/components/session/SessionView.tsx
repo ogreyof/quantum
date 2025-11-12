@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { CategoryHeader } from "@/components/shared/CategoryHeader";
+import { VideoPlayer } from "@/components/ui/video-player";
 import { Play, Pause, RotateCcw, Volume2, VolumeX } from "lucide-react";
 
 interface SessionViewProps {
@@ -62,6 +63,14 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
       />
       
       <div className="p-6 space-y-6">
+        {/* Vídeo Demonstrativo */}
+        <VideoPlayer 
+          videoUrl="https://youtu.be/oI2X5ZxREho"
+          title={`${programTitle} - Demonstração`}
+          autoplay={false}
+          showControls={true}
+        />
+
         {/* Timer Principal */}
         <Card className="bg-gradient-quantum border-0 text-white">
           <CardContent className="p-8 text-center">
@@ -125,15 +134,19 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">1</div>
-                <p>Posicione o massageador na área indicada</p>
+                <p>Assista ao vídeo demonstrativo acima para ver a técnica correta</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">2</div>
-                <p>Ajuste a intensidade conforme seu conforto</p>
+                <p>Posicione o massageador conforme mostrado no vídeo</p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">3</div>
-                <p>Relaxe e respire profundamente durante a sessão</p>
+                <p>Ajuste a intensidade conforme seu conforto</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">4</div>
+                <p>Relaxe e respire profundamente durante toda a sessão</p>
               </div>
             </div>
           </CardContent>
@@ -159,6 +172,9 @@ export const SessionView = ({ programTitle, duration, onBack, onComplete }: Sess
         <div className="text-center">
           <p className="text-muted-foreground">
             {isPlaying ? "🟢 Sessão em andamento..." : "⏸️ Sessão pausada"}
+          </p>
+          <p className="text-xs text-muted-foreground mt-1">
+            📹 Siga as instruções do vídeo para melhores resultados
           </p>
         </div>
       </div>
