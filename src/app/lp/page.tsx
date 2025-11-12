@@ -115,9 +115,11 @@ export default function LandingPage() {
       <header className="border-b border-primary/20 p-4">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-quantum rounded-full flex items-center justify-center">
-              <span className="text-white font-bold">Q</span>
-            </div>
+            <img 
+              src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+              alt="Quantum Logo"
+              className="w-10 h-auto"
+            />
             <span className="text-xl font-bold text-white">Quantum Experience</span>
           </div>
           <Link href="/">
@@ -185,15 +187,15 @@ export default function LandingPage() {
       <section className="py-20 px-4 bg-card/5">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
-            Você Sofre com Algum Desses Problemas?
+            Você Sofre com Algum D esses Problemas?
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { problema: "Dores no pescoço e ombros", icon: "😣", cor: "text-red-400" },
               { problema: "Insônia e estresse", icon: "😴", cor: "text-blue-400" },
-              { problema: "Papada e rugas faciais", icon: "😟", cor: "text-yellow-400" },
-              { problema: "Pernas inchadas", icon: "🦵", cor: "text-purple-400" },
+              { problema: "Papada e rugas faciais", icon: "😟", cor: "text-purple-400" },
+              { problema: "Pernas inchadas", icon: "🦵", cor: "text-cyan-400" },
               { problema: "Queda de cabelo", icon: "💇", cor: "text-green-400" },
               { problema: "Gordura localizada", icon: "⚖️", cor: "text-orange-400" }
             ].map((item, index) => (
@@ -239,7 +241,7 @@ export default function LandingPage() {
                 descricao: "Cabe na sua rotina corrida"
               },
               {
-                icon: <Award className="h-8 w-8 text-yellow-500" />,
+                icon: <Award className="h-8 w-8 text-accent" />,
                 titulo: "Garantia de 30 dias",
                 descricao: "Satisfação garantida ou seu dinheiro de volta"
               },
@@ -397,9 +399,11 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 bg-gradient-quantum rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold">Q</span>
-                </div>
+                <img 
+                  src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+                  alt="Quantum Logo"
+                  className="w-8 h-auto"
+                />
                 <span className="text-lg font-bold text-white">Quantum Experience</span>
               </div>
               <p className="text-gray-400">

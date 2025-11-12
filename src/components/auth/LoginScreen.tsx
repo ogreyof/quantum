@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Logo } from "@/components/ui/logo";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 
@@ -55,7 +54,11 @@ export const LoginScreen = ({ onLogin, onRegister, onForgotPassword }: LoginScre
         <CardHeader className="text-center space-y-4">
           {/* Logo Quantum */}
           <div className="flex justify-center">
-            <Logo size="lg" />
+            <img 
+              src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+              alt="Quantum Logo"
+              className="w-24 h-auto"
+            />
           </div>
           <CardTitle 
             className="text-2xl font-bold"

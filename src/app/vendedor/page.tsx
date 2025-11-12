@@ -65,6 +65,11 @@ export default function VendedorPanel() {
                 <ArrowLeft className="h-5 w-5 text-white" />
               </Button>
             </Link>
+            <img 
+              src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+              alt="Quantum Logo"
+              className="w-10 h-auto"
+            />
             <div>
               <h1 className="text-3xl font-bold text-white">Painel do Vendedor</h1>
               <p className="text-gray-400">Bem-vindo, {vendedorData.nome}!</p>

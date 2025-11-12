@@ -42,9 +42,11 @@ export const ForgotPasswordScreen = ({ onSendReset, onBackToLogin }: ForgotPassw
         <Card className="w-full max-w-md card-quantum">
           <CardHeader className="text-center space-y-4">
             <div className="flex justify-center">
-              <div className="w-20 h-20 bg-gradient-quantum rounded-full flex items-center justify-center">
-                <Mail className="h-8 w-8 text-white" />
-              </div>
+              <img 
+                src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+                alt="Quantum Logo"
+                className="w-20 h-auto"
+              />
             </div>
             <CardTitle className="text-2xl font-bold">
               E-mail Enviado! 📧
@@ -77,9 +79,11 @@ export const ForgotPasswordScreen = ({ onSendReset, onBackToLogin }: ForgotPassw
       <Card className="w-full max-w-md card-quantum">
         <CardHeader className="text-center space-y-4">
           <div className="flex justify-center">
-            <div className="w-20 h-20 bg-gradient-quantum rounded-full flex items-center justify-center">
-              <span className="text-3xl font-bold text-white">Q</span>
-            </div>
+            <img 
+              src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+              alt="Quantum Logo"
+              className="w-20 h-auto"
+            />
           </div>
           <CardTitle className="text-2xl font-bold">
             Esqueci minha senha
