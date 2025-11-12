@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Calendar, Play, Music, Clock } from "lucide-react";
-import { QuizRecommendations } from "@/types/quiz";
+import { QuizRecommendations } from "@/types/auth";
 import { quizOptions } from "@/data/quiz-options";
 
 interface QuizResultsProps {
@@ -18,9 +18,11 @@ export const QuizResults = ({ recommendations, onContinue }: QuizResultsProps) =
       <Card className="w-full max-w-2xl card-quantum">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-quantum rounded-full flex items-center justify-center">
-              <CheckCircle className="h-8 w-8 text-white" />
-            </div>
+            <img 
+              src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+              alt="Quantum Logo"
+              className="w-20 h-auto"
+            />
           </div>
           <CardTitle className="text-2xl font-bold">
             Personalização Concluída! 🎉

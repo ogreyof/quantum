@@ -13,9 +13,11 @@ export const QuizWelcome = ({ onStart }: QuizWelcomeProps) => {
       <Card className="w-full max-w-lg card-quantum text-center">
         <CardHeader className="pb-4">
           <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 bg-gradient-quantum rounded-full flex items-center justify-center">
-              <span className="text-4xl font-bold text-white">Q</span>
-            </div>
+            <img 
+              src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+              alt="Quantum Logo"
+              className="w-32 h-auto"
+            />
           </div>
           <h1 className="text-3xl font-bold mb-2">Bem-vindo ao Quantum!</h1>
           <p className="text-muted-foreground text-lg">

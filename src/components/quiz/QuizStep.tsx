@@ -33,9 +33,11 @@ export const QuizStep = ({
         <CardHeader className="text-center">
           <div className="mb-4">
             <div className="flex justify-center mb-2">
-              <div className="w-16 h-16 bg-gradient-quantum rounded-full flex items-center justify-center">
-                <span className="text-2xl font-bold text-white">Q</span>
-              </div>
+              <img 
+                src="https://syemidcnxudvvxljmily.supabase.co/storage/v1/object/public/media/app-1/images/1762905820356-7ycjwxrq1.png"
+                alt="Quantum Logo"
+                className="w-20 h-auto"
+              />
             </div>
             <div className="text-sm text-muted-foreground mb-2">
               Passo {currentStep} de {totalSteps}
